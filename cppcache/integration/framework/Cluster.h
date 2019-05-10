@@ -204,6 +204,11 @@ class Cluster {
     return locators_.begin()->getAddress().address + "[" +
            std::to_string(jmxManagerPort_) + "]";
   }
+  
+  std::string Cluster::getLocator() const {
+  return locators_.front().getAddress().address + "[" +
+         std::to_string(locators_.front().getAddress().port) + "]";
+}
 
   void start();
 
@@ -252,6 +257,7 @@ class Cluster {
 
  private:
   std::string name_;
+  std::string keyStore_, keyStorePassword_, trustStore_, trustStorePassword_;
 
   size_t initialLocators_;
   std::vector<Locator> locators_;
@@ -263,6 +269,8 @@ class Cluster {
   uint16_t jmxManagerPort_;
 
   GfshExecute gfsh_;
+
+  bool useSsl_ = false;
 
   void startLocators();
   void startServers();

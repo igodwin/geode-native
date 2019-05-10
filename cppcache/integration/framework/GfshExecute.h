@@ -81,6 +81,7 @@ class GfshExecute : public Gfsh {
     if (starts_with(command, std::string("connect"))) {
       connection_ = command;
     } else if (starts_with(command, std::string("start locator"))) {
+      if(command.find("--connect=false") == std::string::npos) {
       auto jmxManagerHost = std::string("localhost");
       auto jmxManagerPort = std::string("1099");
 
@@ -101,6 +102,7 @@ class GfshExecute : public Gfsh {
       connection_ = "connect --jmx-manager=" + jmxManagerHost + "[" +
                     jmxManagerPort + "]";
     }
+  }
   }
 
  private:

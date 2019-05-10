@@ -45,16 +45,12 @@ void Locator::start() {
       .withHttpServicePort(0)
       .execute();
 
-  //    std::cout << "locator: " << locatorAddress_.port << ": started"
-  //              << std::endl;
   started_ = true;
 }
 
 void Locator::stop() {
   cluster_.getGfsh().stop().locator().withDir(name_).execute();
 
-  //    std::cout << "locator: " << locatorAddress_.port << ": stopped"
-  //              << std::endl;
   started_ = false;
 }
 
@@ -62,7 +58,7 @@ void Server::start() {
   auto safeName = name_;
   std::replace(safeName.begin(), safeName.end(), '/', '_');
 
-  cluster_.getGfsh()
+  auto server = cluster_.getGfsh()
       .start()
       .server()
       .withDir(name_)
@@ -70,12 +66,18 @@ void Server::start() {
       .withBindAddress(serverAddress_.address)
       .withPort(serverAddress_.port)
       .withMaxHeap("1g")
-      .withLocators(locators_.front().getAddress().address + "[" +
-                    std::to_string(locators_.front().getAddress().port) + "]")
-      .execute();
+      .withLocators(cluster_.getLocator());
 
-  //    std::cout << "server: " << serverAddress_.port << ": started" <<
-  //    std::endl;
+  if (cluster_.useSsl_)
+  {
+    server.withSslEnableComponents("all")
+        .withSslKeyStore(cluster_.keyStore())
+        .withSslKeyStorePassword(cluster_.keyStorePassword())
+        .withSslTrustStore(cluster_.trustStore())
+        .withSslTrustStorePassword(cluster_.trustStorePassword());
+  }
+  server.execute();
+
   started_ = true;
 }
 
@@ -149,6 +151,5 @@ void Cluster::stop() {
     future.wait();
   }
 
-  //    std::cout << "cluster: " << jmxManagerPort_ << ": stopped" << std::endl;
   started_ = false;
 }

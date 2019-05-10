@@ -72,10 +72,10 @@ class Gfsh {
     explicit Start(Gfsh &gfsh) : gfsh_(gfsh) {}
 
     class Server;
-    Server server() { return Server{gfsh_}; };
+    Server server() { return Server{gfsh_}; }
 
     class Locator;
-    Locator locator() { return Locator{gfsh_}; };
+    Locator locator() { return Locator{gfsh_}; }
 
     class Locator : public Command<void> {
      public:
@@ -84,43 +84,79 @@ class Gfsh {
       Locator &withName(const std::string &name) {
         command_ += " --name=" + name;
         return *this;
-      };
+      }
 
       Locator &withDir(const std::string &dir) {
         command_ += " --dir=" + dir;
         return *this;
-      };
+      }
 
       Locator &withBindAddress(const std::string &bindAddress) {
         command_ += " --bind-address=" + bindAddress;
         return *this;
-      };
+      }
 
       Locator &withPort(uint16_t port) {
         command_ += " --port=" + std::to_string(port);
         return *this;
-      };
+      }
 
       Locator &withJmxManagerPort(uint16_t jmxManagerPort) {
         command_ +=
             " --J=-Dgemfire.jmx-manager-port=" + std::to_string(jmxManagerPort);
         return *this;
-      };
+      }
 
+      Locator &withJmxManagerStart(bool value) {
+        command_ += " --J=-Dgemfire.jmx-manager-start=";
+        command_ += (value ? "true" : "false");
+        return *this;
+      }
       Locator &withHttpServicePort(uint16_t httpServicePort) {
         command_ += " --http-service-port=" + std::to_string(httpServicePort);
         return *this;
-      };
+      }
 
       Locator &withLogLevel(const std::string logLevel) {
         command_ += " --log-level=" + logLevel;
         return *this;
-      };
+      }
 
       Locator &withMaxHeap(const std::string maxHeap) {
         command_ += " --max-heap=" + maxHeap;
         return *this;
-      };
+      }
+      Locator &withSslKeyStore(const std::string keyStore) {
+        command_ += " --J=-Dgemfire.ssl-keystore=" + keyStore;
+        return *this;
+      }
+      Locator &withSslKeyStorePassword(const std::string keyStorePassword) {
+        command_ += " --J=-Dgemfire.ssl-keystore-password=" + keyStorePassword;
+        return *this;
+      }
+      Locator &withSslTrustStore(const std::string trustStore) {
+        command_ += " --J=-Dgemfire.ssl-truststore=" + trustStore;
+        return *this;
+      }
+      Locator &withSslTrustStorePassword(const std::string trustStorePassword) {
+        command_ += " --J=-Dgemfire.ssl-truststore-password=" + trustStorePassword;
+        return *this;
+      }
+      Locator &withSslEnableComponents(const std::string components) {
+        command_ += " --J=-Dgemfire.ssl-enabled-components=" + components;
+        return *this;
+      }
+      Locator &withSslReuireAuthentication(bool value) {
+        command_ += " --J=-Dgemfire.ssl-require-authentication=";
+        command_ += (value ? "true" : "false");
+        return *this;
+      }
+     Locator &withConnect(bool connect)
+      {
+        command_ += " --connect=";
+        command_ += (connect ? "true" : "false");
+        return *this;
+      }
     };
 
     class Server : public Command<void> {
@@ -130,37 +166,57 @@ class Gfsh {
       Server &withName(const std::string &name) {
         command_ += " --name=" + name;
         return *this;
-      };
+      }
 
       Server &withDir(const std::string &dir) {
         command_ += " --dir=" + dir;
         return *this;
-      };
+      }
 
       Server &withBindAddress(const std::string &bindAddress) {
         command_ += " --bind-address=" + bindAddress;
         return *this;
-      };
+      }
 
       Server &withPort(uint16_t serverPort) {
         command_ += " --server-port=" + std::to_string(serverPort);
         return *this;
-      };
+      }
 
       Server &withLocators(const std::string locators) {
         command_ += " --locators=" + locators;
         return *this;
-      };
+      }
 
       Server &withLogLevel(const std::string logLevel) {
         command_ += " --log-level=" + logLevel;
         return *this;
-      };
+      }
 
       Server &withMaxHeap(const std::string maxHeap) {
         command_ += " --max-heap=" + maxHeap;
         return *this;
-      };
+      }
+      Server &withSslKeyStore(const std::string keyStore) {
+        command_ += " --J=-Dgemfire.ssl-keystore=" + keyStore;
+        return *this;
+      }
+      Server &withSslKeyStorePassword(const std::string keyStorePassword) {
+        command_ += " --J=-Dgemfire.ssl-keystore-password=" + keyStorePassword;
+        return *this;
+      }
+      Server &withSslTrustStore(const std::string trustStore) {
+        command_ += " --J=-Dgemfire.ssl-truststore=" + trustStore;
+        return *this;
+      }
+      Server &withSslTrustStorePassword(const std::string trustStorePassword) {
+        command_ += " --J=-Dgemfire.ssl-truststore-password=" + trustStorePassword;
+        return *this;
+      }
+      Server &withSslEnableComponents(const std::string components) {
+        command_ += " --J=-Dgemfire.ssl-enabled-components=" + components;
+        return *this;
+      }
     };
 
    private:
@@ -241,7 +297,32 @@ class Gfsh {
     Connect &withJmxManager(const std::string &jmxManager) {
       command_ += " --jmx-manager=" + jmxManager;
       return *this;
-    };
+    }
+    Connect &withLocator(const std::string &locator) {
+      command_ += " --locator=" + locator;
+      return *this;
+    }
+    Connect &withUseSsl(bool enable) {
+      command_ += " --use-ssl=";
+      command_ += (enable ? "true" : "false");
+      return *this;
+    }
+    Connect &withKeyStore(const std::string keyStore) {
+      command_ += " --key-store=" + keyStore;
+      return *this;
+    }
+    Connect &withKeyStorePassword(const std::string keyStorePassword) {
+      command_ += " --key-store-password=" + keyStorePassword;
+      return *this;
+    }
+    Connect &withTrustStore(const std::string trustStore) {
+      command_ += " --trust-store=" + trustStore;
+      return *this;
+    }
+    Connect &withTrustStorePassword(const std::string trustStorePassword) {
+      command_ += " --trust-store-password=" + trustStorePassword;
+      return *this;
+    }
   };
 
   class Shutdown : public Command<void> {
