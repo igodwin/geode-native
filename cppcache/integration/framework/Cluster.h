@@ -205,10 +205,14 @@ class Cluster {
            std::to_string(jmxManagerPort_) + "]";
   }
   
-  std::string Cluster::getLocator() const {
+  std::string getLocator() const {
   return locators_.front().getAddress().address + "[" +
          std::to_string(locators_.front().getAddress().port) + "]";
-}
+  }
+
+  bool useSsl() const;
+
+  void useSsl(const bool);
 
   void start();
 

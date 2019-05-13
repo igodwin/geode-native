@@ -68,7 +68,7 @@ void Server::start() {
       .withMaxHeap("1g")
       .withLocators(cluster_.getLocator());
 
-  if (cluster_.useSsl_)
+  if (cluster_.useSsl())
   {
     server.withSslEnableComponents("all")
         .withSslKeyStore(cluster_.keyStore())
@@ -121,6 +121,14 @@ void Cluster::startServers() {
   for (auto &future : futures) {
     future.get();
   }
+}
+
+bool Cluster::useSsl() const {
+  return useSsl_;
+}
+
+void Cluster::useSsl(const bool useSsl) {
+  useSsl_ = useSsl;
 }
 
 void Cluster::startLocators() {
