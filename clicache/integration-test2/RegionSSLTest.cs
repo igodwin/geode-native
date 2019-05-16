@@ -25,23 +25,24 @@ namespace Apache.Geode.Client.IntegrationTests
     [Trait("Category", "Integration")]
     public class RegionSSLTest : TestBase, IDisposable
     {
-        private readonly Cache cache_;
-
         public RegionSSLTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
         {
-            var cacheFactory = new CacheFactory();
-            cacheFactory.Set("log-level", "none");
-            cacheFactory.Set("ssl-enabled", "true");
-            cacheFactory.Set("ssl-keystore", Environment.CurrentDirectory + @"\ClientSslKeys\client_keystore.password.pem");
-            cacheFactory.Set("ssl-keystore-password", "gemstone");
-            cacheFactory.Set("ssl-truststore", Environment.CurrentDirectory + @"\ClientSslKeys\client_truststore.pem");
-
-            cache_ = cacheFactory.Create();
         }
 
         public void Dispose()
         {
-            cache_.Close();
+        }
+
+        public Cache CreateCache(string keystore, string keystorePassword, string truststore)
+        {
+            var cacheFactory = new CacheFactory();
+            cacheFactory.Set("log-level", "none");
+            cacheFactory.Set("ssl-enabled", "true");
+            cacheFactory.Set("ssl-keystore", keystore);
+            cacheFactory.Set("ssl-keystore-password", keystorePassword);
+            cacheFactory.Set("ssl-truststore", truststore);
+
+            return cacheFactory.Create();
         }
 
         [Fact]
@@ -49,7 +50,10 @@ namespace Apache.Geode.Client.IntegrationTests
         {
             using (var cluster = new Cluster(output, CreateTestCaseDirectoryName(), 1, 1))
             {
-                cluster.UseSSL = true;
+                cluster.UseSsl(Environment.CurrentDirectory + @"\ServerSslKeys\server_keystore.jks",
+                    "gemstone",
+                    Environment.CurrentDirectory + @"\ServerSslKeys\server_truststore.jks",
+                    "gemstone");
                 Assert.True(cluster.Start());
                 Assert.Equal(0, cluster.Gfsh
                     .create()
@@ -58,9 +62,13 @@ namespace Apache.Geode.Client.IntegrationTests
                     .withType("PARTITION")
                     .execute());
 
-                cluster.ApplyLocators(cache_.GetPoolFactory()).Create("default");
+                var cache = CreateCache(Environment.CurrentDirectory + @"\ClientSslKeys\client_keystore.password.pem",
+                    "gemstone",
+                    Environment.CurrentDirectory + @"\ClientSslKeys\client_truststore.pem");
 
-                var regionFactory = cache_.CreateRegionFactory(RegionShortcut.PROXY)
+                cluster.ApplyLocators(cache.GetPoolFactory()).Create("default");
+
+                var regionFactory = cache.CreateRegionFactory(RegionShortcut.PROXY)
                             .SetPoolName("default");
 
                 var region = regionFactory.Create<string, string>("testRegion1");
@@ -72,6 +80,48 @@ namespace Apache.Geode.Client.IntegrationTests
                 var actualResult = region.Get(key);
 
                 Assert.Equal(expectedResult, actualResult);
+
+                cache.Close();
+            }
+        }
+
+        [Fact]
+        public void SslChainedCertificatePutGetTest()
+        {
+            using (var cluster = new Cluster(output, CreateTestCaseDirectoryName(), 1, 1))
+            {
+                cluster.UseSsl(Environment.CurrentDirectory + @"\ServerSslKeys\server_keystore_chained.p12",
+                    "apachegeode",
+                    Environment.CurrentDirectory + @"\ServerSslKeys\server_truststore_chained_root.jks",
+                    "apachegeode");
+                Assert.True(cluster.Start());
+                Assert.Equal(0, cluster.Gfsh
+                    .create()
+                    .region()
+                    .withName("testRegion1")
+                    .withType("PARTITION")
+                    .execute());
+
+                var cache = CreateCache(Environment.CurrentDirectory + @"\ClientSslKeys\client_keystore_chained.pem",
+                    "apachegeode",
+                    Environment.CurrentDirectory + @"\ClientSslKeys\client_truststore_chained_root.pem");
+
+                cluster.ApplyLocators(cache.GetPoolFactory()).Create("default");
+
+                var regionFactory = cache.CreateRegionFactory(RegionShortcut.PROXY)
+                            .SetPoolName("default");
+
+                var region = regionFactory.Create<string, string>("testRegion1");
+
+                const string key = "hello";
+                const string expectedResult = "dave";
+
+                region.Put(key, expectedResult);
+                var actualResult = region.Get(key);
+
+                Assert.Equal(expectedResult, actualResult);
+
+                cache.Close();
             }
         }
     }

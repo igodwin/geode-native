@@ -35,14 +35,14 @@ namespace Apache.Geode.Client.IntegrationTests
         private List<Server> servers_;
         private string name_;
         internal int jmxManagerPort = Framework.FreeTcpPort();
-        internal string keyStore_ = Environment.CurrentDirectory + "/ServerSslKeys/server_keystore.jks";
-        internal string keyStorePassword_ = "gemstone";
-        internal string trustStore_ = Environment.CurrentDirectory + "/ServerSslKeys/server_truststore.jks";
-        internal string trustStorePassword_ = "gemstone";
+        internal string keyStore_;
+        internal string keyStorePassword_;
+        internal string trustStore_;
+        internal string trustStorePassword_;
 
         public Gfsh Gfsh { get; private set; }
 
-        public bool UseSSL { get; set; }
+        public bool SslEnabled { get; set; }
 
         internal PoolFactory ApplyLocators(PoolFactory poolFactory)
         {
@@ -58,7 +58,7 @@ namespace Apache.Geode.Client.IntegrationTests
         {
             started_ = false;
             Gfsh = new GfshExecute(output);
-            UseSSL = false;
+            SslEnabled = false;
             name_ = name;
             locatorCount_ = locatorCount;
             serverCount_ = serverCount;
@@ -154,6 +154,14 @@ namespace Apache.Geode.Client.IntegrationTests
             return CreateCache(new Dictionary<string, string>());
         }
 
+        public void UseSsl(string keystore, string keystorePassword, string truststore, string truststorePassword)
+        {
+            this.SslEnabled = true;
+            this.keyStore_ = keystore;
+            this.keyStorePassword_ = keystorePassword;
+            this.trustStore_ = truststore;
+            this.trustStorePassword_ = truststorePassword;
+        }
     }
 
     public struct Address
@@ -198,7 +206,7 @@ namespace Apache.Geode.Client.IntegrationTests
                     .withJmxManagerPort(cluster_.jmxManagerPort)
                     .withJmxManagerStart(true)
                     .withHttpServicePort(0);
-                if (cluster_.UseSSL)
+                if (cluster_.SslEnabled)
                 {
                    locator
                         .withConnect(false)
@@ -210,7 +218,7 @@ namespace Apache.Geode.Client.IntegrationTests
                 }
                 result = locator.execute();
 
-                if (cluster_.UseSSL)
+                if (cluster_.SslEnabled)
                 {
                     cluster_.Gfsh.connect()
                         .withJmxManager(Address.address, cluster_.jmxManagerPort)
@@ -273,7 +281,7 @@ namespace Apache.Geode.Client.IntegrationTests
                     .withBindAddress(Address.address)
                     .withPort(Address.port)
                     .withMaxHeap("1g");
-                if (cluster_.UseSSL)
+                if (cluster_.SslEnabled)
                 {
                     server
                         .withSslEnableComponents("all")

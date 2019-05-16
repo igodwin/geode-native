@@ -49,8 +49,12 @@ add_library( ${PROJECT_NAME} SHARED
   SerializationTests.cs
   ClientSslKeys/client_keystore.password.pem
   ClientSslKeys/client_truststore.pem
+  ClientSslKeys/client_keystore_chained.pem
+  ClientSslKeys/client_truststore_chained_root.pem
   ServerSslKeys/server_keystore.jks
   ServerSslKeys/server_truststore.jks
+  ServerSslKeys/server_keystore_chained.p12
+  ServerSslKeys/server_truststore_chained_root.jks
 )
 
 set_source_files_properties(
@@ -60,8 +64,12 @@ set_source_files_properties(
   geode.properties
   ClientSslKeys/client_keystore.password.pem
   ClientSslKeys/client_truststore.pem
+  ClientSslKeys/client_keystore_chained.pem
+  ClientSslKeys/client_truststore_chained_root.pem
   ServerSslKeys/server_keystore.jks
   ServerSslKeys/server_truststore.jks
+  ServerSslKeys/server_keystore_chained.p12
+  ServerSslKeys/server_truststore_chained_root.jks
   PROPERTIES
     VS_COPY_TO_OUT_DIR Always
     VS_TOOL_OVERRIDE None

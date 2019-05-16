@@ -32,7 +32,6 @@ namespace Apache.Geode.Client.IntegrationTests
 
         public void Dispose()
         {
-
         }
 
         [Fact]
@@ -58,7 +57,10 @@ namespace Apache.Geode.Client.IntegrationTests
         {
             using (var cluster = new Cluster(output, CreateTestCaseDirectoryName(), 1, 1))
             {
-                cluster.UseSSL = true;
+                cluster.UseSsl(Environment.CurrentDirectory + @"\ServerSslKeys\server_keystore_chained.p12",
+                    "apachegeode",
+                    Environment.CurrentDirectory + @"\ServerSslKeys\server_truststore_chained_root.jks",
+                    "apachegeode");
 
                 Assert.True(cluster.Start());
             }
