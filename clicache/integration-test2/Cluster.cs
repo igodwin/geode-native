@@ -30,7 +30,6 @@ namespace Apache.Geode.Client.IntegrationTests
     {
         private int locatorCount_;
         private int serverCount_;
-        private bool started_;
         private List<Locator> locators_;
         private List<Server> servers_;
         private string name_;
@@ -42,7 +41,8 @@ namespace Apache.Geode.Client.IntegrationTests
 
         public Gfsh Gfsh { get; private set; }
 
-        public bool SslEnabled { get; set; }
+        public bool SslEnabled { get; private set; }
+        private bool ClusterStarted { get; set; }
 
         internal PoolFactory ApplyLocators(PoolFactory poolFactory)
         {
@@ -56,7 +56,7 @@ namespace Apache.Geode.Client.IntegrationTests
 
         public Cluster(ITestOutputHelper output, string name, int locatorCount, int serverCount)
         {
-            started_ = false;
+            ClusterStarted = false;
             Gfsh = new GfshExecute(output);
             SslEnabled = false;
             name_ = name;
@@ -108,19 +108,19 @@ namespace Apache.Geode.Client.IntegrationTests
 
         public bool Start()
         {
-            if (!started_)
+            if (!this.ClusterStarted)
             {
                 RemoveClusterDirectory();
                 var locatorSuccess = StartLocators();
                 var serverSuccess = StartServers();
-                started_ = (locatorSuccess && serverSuccess);
+                this.ClusterStarted = (locatorSuccess && serverSuccess);
             }
-            return (started_);
+            return (this.ClusterStarted);
         }
 
         public void Dispose()
         {
-            if (started_)
+            if (this.ClusterStarted)
             {
                 this.Gfsh
                     .shutdown()
