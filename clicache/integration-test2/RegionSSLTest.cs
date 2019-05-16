@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Xunit;
 using Xunit.Abstractions;
@@ -62,11 +63,10 @@ namespace Apache.Geode.Client.IntegrationTests
                     .withType("PARTITION")
                     .execute());
 
-                var cache = CreateCache(Environment.CurrentDirectory + @"\ClientSslKeys\client_keystore.password.pem",
-                    "gemstone",
-                    Environment.CurrentDirectory + @"\ClientSslKeys\client_truststore.pem");
-
-                cluster.ApplyLocators(cache.GetPoolFactory()).Create("default");
+                var cache = cluster.CreateCache(new Dictionary<string, string>(){ { "ssl-enabled", "true" },
+                    { "ssl-keystore", Environment.CurrentDirectory + @"\ClientSslKeys\client_keystore.password.pem" },
+                    { "ssl-keystore-password", "gemstone" },
+                    { "ssl-truststore", Environment.CurrentDirectory + @"\ClientSslKeys\client_keystore.password.pem" } });
 
                 var regionFactory = cache.CreateRegionFactory(RegionShortcut.PROXY)
                             .SetPoolName("default");
