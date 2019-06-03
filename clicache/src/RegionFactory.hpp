@@ -428,7 +428,7 @@ namespace Apache
       /// <returns>
       /// The managed wrapper object; null if the native pointer is null.
       /// </returns>
-      inline static RegionFactory^ Create(std::unique_ptr<native::RegionFactory>& nativeptr)
+      static RegionFactory^ Create(std::unique_ptr<native::RegionFactory>& nativeptr)
       {
           return __nullptr == nativeptr ? nullptr :
             gcnew RegionFactory( nativeptr );
@@ -445,7 +445,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-      inline RegionFactory(std::unique_ptr<native::RegionFactory>& nativeptr)
+      RegionFactory(std::unique_ptr<native::RegionFactory>& nativeptr)
       {
         m_nativeptr = gcnew native_conditional_unique_ptr<native::RegionFactory>(std::move(nativeptr));
       }

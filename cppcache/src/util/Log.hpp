@@ -585,35 +585,35 @@ class APACHE_GEODE_EXPORT LogVarargs {
   static void finer(const char* fmt, ...);
   static void finest(const char* fmt, ...);
 
-  inline static void debug(const std::string& message) {
+  static void debug(const std::string& message) {
     Log::put(LogLevel::Debug, message.c_str());
   }
 
-  inline static void error(const std::string& message) {
+  static void error(const std::string& message) {
     Log::put(LogLevel::Error, message.c_str());
   }
 
-  inline static void warn(const std::string& message) {
+  static void warn(const std::string& message) {
     Log::put(LogLevel::Warning, message.c_str());
   }
 
-  inline static void info(const std::string& message) {
+  static void info(const std::string& message) {
     Log::put(LogLevel::Info, message.c_str());
   }
 
-  inline static void config(const std::string& message) {
+  static void config(const std::string& message) {
     Log::put(LogLevel::Config, message.c_str());
   }
 
-  inline static void fine(const std::string& message) {
+  static void fine(const std::string& message) {
     Log::put(LogLevel::Fine, message.c_str());
   }
 
-  inline static void finer(const std::string& message) {
+  static void finer(const std::string& message) {
     Log::put(LogLevel::Finer, message.c_str());
   }
 
-  inline static void finest(const std::string& message) {
+  static void finest(const std::string& message) {
     Log::put(LogLevel::Finest, message.c_str());
   }
 };

@@ -26,20 +26,20 @@
 #include <openssl/evp.h>
 #include <openssl/x509.h>
 
-static inline void DH_get0_pqg(const DH *dh, const BIGNUM **p, const BIGNUM **q,
+static void DH_get0_pqg(const DH *dh, const BIGNUM **p, const BIGNUM **q,
                                const BIGNUM **g) {
   if (p) *p = dh->p;
   if (q) *q = dh->q;
   if (g) *g = dh->g;
 }
 
-static inline void DH_get0_key(const DH *dh, const BIGNUM **pub_key,
+static void DH_get0_key(const DH *dh, const BIGNUM **pub_key,
                                const BIGNUM **priv_key) {
   if (pub_key) *pub_key = dh->pub_key;
   if (priv_key) *priv_key = dh->priv_key;
 }
 
-static inline int DH_set0_key(DH *dh, BIGNUM *pub_key, BIGNUM *priv_key) {
+static int DH_set0_key(DH *dh, BIGNUM *pub_key, BIGNUM *priv_key) {
   if (!(dh->pub_key || pub_key)) {
     return 0;
   }
@@ -56,25 +56,25 @@ static inline int DH_set0_key(DH *dh, BIGNUM *pub_key, BIGNUM *priv_key) {
   return 1;
 }
 
-static inline int DH_set_length(DH *dh, long length) {
+static int DH_set_length(DH *dh, long length) {
   dh->length = length;
   return 1;
 }
 
-static inline EVP_MD_CTX *EVP_MD_CTX_new(void) {
+static EVP_MD_CTX *EVP_MD_CTX_new(void) {
   return reinterpret_cast<EVP_MD_CTX *>(OPENSSL_malloc(sizeof(EVP_MD_CTX)));
 }
 
-static inline void EVP_MD_CTX_free(EVP_MD_CTX *ctx) {
+static void EVP_MD_CTX_free(EVP_MD_CTX *ctx) {
   EVP_MD_CTX_cleanup(ctx);
   OPENSSL_free(ctx);
 }
 
-static inline int EVP_PKEY_up_ref(EVP_PKEY *pkey) {
+static int EVP_PKEY_up_ref(EVP_PKEY *pkey) {
   return CRYPTO_add(&pkey->references, 1, CRYPTO_LOCK_EVP_PKEY);
 }
 
-static inline void X509_ALGOR_get0(const ASN1_OBJECT **paobj, int *,
+static void X509_ALGOR_get0(const ASN1_OBJECT **paobj, int *,
                                    const void **, const X509_ALGOR *algor) {
   *paobj = algor->algorithm;
 }

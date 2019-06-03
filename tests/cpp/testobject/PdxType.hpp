@@ -57,7 +57,7 @@ class TESTOBJECT_EXPORT GrandParent {
   int32_t m_a;
   int32_t m_b;
 
-  inline void init() {
+  void init() {
     this->m_a = 1;
     this->m_b = 2;
   }
@@ -74,7 +74,7 @@ class TESTOBJECT_EXPORT Parent : public GrandParent {
   int32_t m_c;
   int32_t m_d;
 
-  inline void init() {
+  void init() {
     this->m_c = 3;
     this->m_d = 4;
   }
@@ -94,7 +94,7 @@ class TESTOBJECT_EXPORT Child : public Parent, public PdxSerializable {
   int32_t m_f;
 
  public:
-  inline void init() {
+  void init() {
     this->m_e = 5;
     this->m_f = 6;
   }
@@ -166,7 +166,7 @@ class TESTOBJECT_EXPORT CharTypes : public PdxSerializable {
   int32_t m_charArrayLen;
 
  public:
-  inline void init() {
+  void init() {
     m_ch = 'C';
 
     m_chArray = std::vector<char16_t>(2);
@@ -394,7 +394,7 @@ class TESTOBJECT_EXPORT PdxType : public PdxSerializable {
   int* lengthArr;
 
  public:
-  inline void init() {
+  void init() {
     m_char = 'C';
     m_bool = true;
     m_byte = 0x74;
@@ -614,7 +614,7 @@ class TESTOBJECT_EXPORT PdxType : public PdxSerializable {
 
   PdxType() { init(); }
 
-  inline bool compareBool(bool b, bool b2) {
+  bool compareBool(bool b, bool b2) {
     if (b == b2) return b;
     throw IllegalStateException("Not got expected value for bool type: ");
   }

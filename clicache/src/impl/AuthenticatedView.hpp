@@ -143,7 +143,7 @@ namespace Apache
         /// <returns>
         /// The managed wrapper object; null if the native pointer is null.
         /// </returns>
-        inline static AuthenticatedView^ Create(native::AuthenticatedView&& nativeAuthenticatedView)
+        static AuthenticatedView^ Create(native::AuthenticatedView&& nativeAuthenticatedView)
         {
            return gcnew AuthenticatedView(std::move(nativeAuthenticatedView));
         }
@@ -159,7 +159,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline AuthenticatedView(native::AuthenticatedView&& nativeAuthenticatedView)
+        AuthenticatedView(native::AuthenticatedView&& nativeAuthenticatedView)
         {
           m_nativeptr = gcnew native_unique_ptr<native::AuthenticatedView>(
               std::unique_ptr<native::AuthenticatedView>(

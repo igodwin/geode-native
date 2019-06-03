@@ -147,7 +147,7 @@ class ThinClientPoolDM
 
   virtual void sendUserCacheCloseMessage(bool keepAlive);
 
-  virtual inline PoolStats& getStats() { return *m_stats; }
+  virtual PoolStats& getStats() { return *m_stats; }
 
   size_t getNumberOfEndPoints() const override { return m_endpoints.size(); }
 
@@ -169,7 +169,7 @@ class ThinClientPoolDM
   GfErrType getConnectionToAnEndPoint(std::string epNameStr,
                                       TcrConnection*& conn);
 
-  virtual inline bool isSticky() { return m_sticky; }
+  virtual bool isSticky() { return m_sticky; }
   virtual TcrEndpoint* getEndPoint(
       const std::shared_ptr<BucketServerLocation>& serverLocation,
       int8_t& version, std::set<ServerLocation>& excludeServers);

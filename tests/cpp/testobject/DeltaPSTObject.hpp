@@ -76,7 +76,7 @@ class TESTOBJECT_EXPORT DeltaPSTObject : public DataSerializable, public Delta {
     timestamp = tusec * 1000;
   }
 
-  inline std::shared_ptr<Delta> clone() const override { return nullptr; }
+  std::shared_ptr<Delta> clone() const override { return nullptr; }
 
   static Serializable* createDeserializable() { return new DeltaPSTObject(); }
 };

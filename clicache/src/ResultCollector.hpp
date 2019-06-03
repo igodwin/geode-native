@@ -82,7 +82,7 @@ namespace Apache
         /// Internal constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline ResultCollector( std::shared_ptr<native::ResultCollector> nativeptr )
+        ResultCollector( std::shared_ptr<native::ResultCollector> nativeptr )
         {
            m_nativeptr = gcnew native_shared_ptr<native::ResultCollector>(nativeptr);
         }

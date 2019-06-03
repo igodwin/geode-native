@@ -38,29 +38,29 @@ namespace Apache
       {
       public:
         template <class _Duration>
-        inline static _Duration TimeSpanToDurationCeil(TimeSpan timeSpan)
+        static _Duration TimeSpanToDurationCeil(TimeSpan timeSpan)
         {
           return _ceil<_Duration>(TimeSpanToDuration(timeSpan));
         }
       
-        inline static ticks TimeSpanToDuration(TimeSpan timespan)
+        static ticks TimeSpanToDuration(TimeSpan timespan)
         {
           return ticks(timespan.Ticks);
         }
 
-        inline static TimeSpan DurationToTimeSpan(ticks duration)
+        static TimeSpan DurationToTimeSpan(ticks duration)
         {
           return TimeSpan::FromTicks(duration.count());
         }    
 
-        inline static DateTime TimePointToDateTime(std::chrono::system_clock::time_point timePoint) {
+        static DateTime TimePointToDateTime(std::chrono::system_clock::time_point timePoint) {
           using namespace std::chrono;
           auto t = duration_cast<ticks>(timePoint.time_since_epoch());
           t += epochDifference;
           return DateTime(t.count());
         }
 
-        inline static std::chrono::system_clock::time_point DateTimeToTimePoint(DateTime dateTime) {
+        static std::chrono::system_clock::time_point DateTimeToTimePoint(DateTime dateTime) {
           using namespace std::chrono;
           auto t = ticks(dateTime.Ticks);
           t -= epochDifference;

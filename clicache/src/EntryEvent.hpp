@@ -111,7 +111,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline EntryEvent<TKey, TValue>( const native::EntryEvent* nativeptr )
+        EntryEvent<TKey, TValue>( const native::EntryEvent* nativeptr )
           : m_nativeptr( nativeptr )
         {
         }

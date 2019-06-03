@@ -55,7 +55,7 @@ class CacheEventFlags {
   static const uint8_t GF_CACHE_CLOSE = 0x40;
   static const uint8_t GF_NOCACHEWRITER = 0x80;
 
-  inline explicit CacheEventFlags(const uint8_t flags) : m_flags(flags) {}
+  explicit CacheEventFlags(const uint8_t flags) : m_flags(flags) {}
 
  public:
   static const CacheEventFlags NORMAL;
@@ -67,61 +67,55 @@ class CacheEventFlags {
   static const CacheEventFlags CACHE_CLOSE;
   static const CacheEventFlags NOCACHEWRITER;
 
-  inline CacheEventFlags(const CacheEventFlags& flags) = default;
+  CacheEventFlags(const CacheEventFlags& flags) = default;
 
   CacheEventFlags() = delete;
   CacheEventFlags& operator=(const CacheEventFlags&) = delete;
 
-  inline CacheEventFlags operator|(const CacheEventFlags& flags) const {
+  CacheEventFlags operator|(const CacheEventFlags& flags) const {
     return CacheEventFlags(m_flags | flags.m_flags);
   }
 
-  inline uint32_t operator&(const CacheEventFlags& flags) const {
+  uint32_t operator&(const CacheEventFlags& flags) const {
     return (m_flags & flags.m_flags);
   }
 
-  inline bool operator==(const CacheEventFlags& flags) const {
+  bool operator==(const CacheEventFlags& flags) const {
     return (m_flags == flags.m_flags);
   }
 
-  inline bool isNormal() const {
-    return (m_flags & GF_NORMAL) > 0 ? true : false;
-  }
+  bool isNormal() const { return (m_flags & GF_NORMAL) > 0 ? true : false; }
 
-  inline bool isLocal() const {
-    return (m_flags & GF_LOCAL) > 0 ? true : false;
-  }
+  bool isLocal() const { return (m_flags & GF_LOCAL) > 0 ? true : false; }
 
-  inline bool isNotification() const {
+  bool isNotification() const {
     return (m_flags & GF_NOTIFICATION) > 0 ? true : false;
   }
 
-  inline bool isNotificationUpdate() const {
+  bool isNotificationUpdate() const {
     return (m_flags & GF_NOTIFICATION_UPDATE) > 0 ? true : false;
   }
 
-  inline bool isEviction() const {
-    return (m_flags & GF_EVICTION) > 0 ? true : false;
-  }
+  bool isEviction() const { return (m_flags & GF_EVICTION) > 0 ? true : false; }
 
-  inline bool isExpiration() const {
+  bool isExpiration() const {
     return (m_flags & GF_EXPIRATION) > 0 ? true : false;
   }
 
-  inline bool isCacheClose() const {
+  bool isCacheClose() const {
     return (m_flags & GF_CACHE_CLOSE) > 0 ? true : false;
   }
 
-  inline bool isNoCacheWriter() const {
+  bool isNoCacheWriter() const {
     return (m_flags & GF_NOCACHEWRITER) > 0 ? true : false;
   }
 
-  inline bool isEvictOrExpire() const {
+  bool isEvictOrExpire() const {
     return (m_flags & (GF_EVICTION | GF_EXPIRATION)) > 0 ? true : false;
   }
 
   // special optimized method for CacheWriter invocation condition
-  inline bool invokeCacheWriter() const {
+  bool invokeCacheWriter() const {
     return ((m_flags & (GF_NOTIFICATION | GF_EVICTION | GF_EXPIRATION |
                         GF_NOCACHEWRITER)) == 0x0);
   }
@@ -283,7 +277,7 @@ class RegionInternal : public Region {
                      const std::shared_ptr<Cacheable>& value,
                      const std::shared_ptr<Serializable>& callBack,
                      std::shared_ptr<VersionTag> versionTag);
-  inline bool isConcurrencyCheckEnabled() const {
+  bool isConcurrencyCheckEnabled() const {
     return m_regionAttributes.getConcurrencyChecksEnabled();
   }
   const std::shared_ptr<Pool>& getPool() const override = 0;
@@ -318,11 +312,11 @@ class RegionInternal : public Region {
 
   RegionAttributes m_regionAttributes;
 
-  inline bool entryExpiryEnabled() const {
+  bool entryExpiryEnabled() const {
     return m_regionAttributes.getEntryExpiryEnabled();
   }
 
-  inline bool regionExpiryEnabled() const {
+  bool regionExpiryEnabled() const {
     return m_regionAttributes.getRegionExpiryEnabled();
   }
 };

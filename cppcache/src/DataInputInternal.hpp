@@ -34,7 +34,7 @@ class DataInputInternal : public DataInput {
   DataInputInternal(const uint8_t* buffer, size_t len, const CacheImpl* cache)
       : DataInput(buffer, len, cache, nullptr) {}
 
-  inline static Pool* getPool(const DataInput& dataInput) {
+  static Pool* getPool(const DataInput& dataInput) {
     return dataInput.getPool();
   }
 };

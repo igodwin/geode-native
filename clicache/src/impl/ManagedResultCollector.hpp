@@ -47,7 +47,7 @@ namespace apache {
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedResultCollectorGeneric(Apache::Geode::Client::ResultCollectorG^ userptr)
+        ManagedResultCollectorGeneric(Apache::Geode::Client::ResultCollectorG^ userptr)
           : m_managedptr(userptr) { }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace apache {
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::ResultCollectorG^ ptr() const
+        Apache::Geode::Client::ResultCollectorG^ ptr() const
         {
           return m_managedptr;
         }

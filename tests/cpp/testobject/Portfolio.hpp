@@ -54,7 +54,7 @@ class TESTOBJECT_EXPORT Portfolio : public DataSerializable {
   uint8_t* arrayNull;
   uint8_t* arrayZeroSize;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

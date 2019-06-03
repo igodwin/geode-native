@@ -129,9 +129,7 @@ class APACHE_GEODE_EXPORT PdxTypeRegistry
 
   bool getPdxReadSerialized() const { return pdxReadSerialized; }
 
-  inline const PreservedHashMap& getPreserveDataMap() const {
-    return preserveData;
-  };
+  const PreservedHashMap& getPreserveDataMap() const { return preserveData; };
 
   int32_t getEnumValue(std::shared_ptr<EnumInfo> ei);
 

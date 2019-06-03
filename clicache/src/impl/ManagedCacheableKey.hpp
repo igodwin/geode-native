@@ -67,7 +67,7 @@ namespace apache
         size_t m_objectSize;
       public:
 
-        inline ManagedCacheableKeyGeneric(
+        ManagedCacheableKeyGeneric(
           Apache::Geode::Client::IDataSerializable^ managedptr, int hashcode)
           : m_managedptr(managedptr) {
           m_hashcode = hashcode;
@@ -80,7 +80,7 @@ namespace apache
         /// <param name="managedptr">
         /// The managed object.
         /// </param>
-        inline ManagedCacheableKeyGeneric(Apache::Geode::Client::IDataSerializable^ managedptr)
+        ManagedCacheableKeyGeneric(Apache::Geode::Client::IDataSerializable^ managedptr)
           : m_managedptr(managedptr) {
           m_hashcode = 0;
           m_objectSize = 0;
@@ -104,7 +104,7 @@ namespace apache
 
         int32_t hashcode() const override;
 
-        inline Apache::Geode::Client::IDataSerializable^ ptr() const
+        Apache::Geode::Client::IDataSerializable^ ptr() const
         {
           return m_managedptr;
         }
@@ -127,7 +127,7 @@ namespace apache
       {
       public:
 
-        inline ManagedDataSerializablePrimitive(
+        ManagedDataSerializablePrimitive(
           Apache::Geode::Client::IDataSerializablePrimitive^ managedptr)
           : m_managedptr(managedptr) {
         }
@@ -149,7 +149,7 @@ namespace apache
 
         int32_t hashcode() const override;
 
-        inline Apache::Geode::Client::IDataSerializablePrimitive^ ptr() const
+        Apache::Geode::Client::IDataSerializablePrimitive^ ptr() const
         {
           return m_managedptr;
         }
@@ -164,7 +164,7 @@ namespace apache
       {
       public:
 
-        inline ManagedDataSerializableInternal(
+        ManagedDataSerializableInternal(
           Apache::Geode::Client::IDataSerializableInternal^ managedptr)
           : m_managedptr(managedptr) {
         }
@@ -180,7 +180,7 @@ namespace apache
 
         void fromData(DataInput& input) override;
 
-        inline Apache::Geode::Client::IDataSerializableInternal^ ptr() const
+        Apache::Geode::Client::IDataSerializableInternal^ ptr() const
         {
           return m_managedptr;
         }
@@ -195,7 +195,7 @@ namespace apache
       {
       public:
 
-        inline ManagedDataSerializableFixedId(
+        ManagedDataSerializableFixedId(
           Apache::Geode::Client::IDataSerializableFixedId^ managedptr)
           : m_managedptr(managedptr) {
         }
@@ -213,7 +213,7 @@ namespace apache
 
         native::internal::DSFid getDSFID() const override { return static_cast<native::internal::DSFid>(m_managedptr->DSFID); }
 
-        inline Apache::Geode::Client::IDataSerializableFixedId^ ptr() const
+        Apache::Geode::Client::IDataSerializableFixedId^ ptr() const
         {
           return m_managedptr;
         }

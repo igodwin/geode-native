@@ -36,7 +36,7 @@ template <class LimitRep, class LimitPeriod,
           LimitRep upper = std::numeric_limits<LimitRep>::max()>
 struct assert_bounds {
   template <class Rep, class Period>
-  inline void operator()(const std::chrono::duration<Rep, Period> value) const {
+  void operator()(const std::chrono::duration<Rep, Period> value) const {
     using apache::geode::client::IllegalArgumentException;
     using apache::geode::internal::chrono::duration::to_string;
 

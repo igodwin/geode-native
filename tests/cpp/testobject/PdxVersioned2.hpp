@@ -105,7 +105,7 @@ class TESTOBJECT_EXPORT PdxVersioned2 : public PdxSerializable {
   int* lengthArr;
 
  public:
-  // inline void init(const char* key = "abc"){
+  // void init(const char* key = "abc"){
 
   /*
     PdxVersioned2(const char* key) {
@@ -116,7 +116,7 @@ class TESTOBJECT_EXPORT PdxVersioned2 : public PdxSerializable {
   PdxVersioned2() { init("abc"); }
   explicit PdxVersioned2(const char* key);
   void init(const char* key);
-  inline bool compareBool(bool b, bool b2) {
+  bool compareBool(bool b, bool b2) {
     if (b == b2) return b;
     throw IllegalStateException("Not got expected value for bool type: ");
   }

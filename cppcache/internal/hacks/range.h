@@ -37,19 +37,19 @@ template <class Range>
 struct range_wrapper {
   Range&& range_;
   range_wrapper(Range&& range) : range_(range) {}
-  inline decltype(range_.begin()) begin() { return range_.begin(); }
-  inline decltype(range_.end()) end() { return range_.end(); }
+  decltype(range_.begin()) begin() { return range_.begin(); }
+  decltype(range_.end()) end() { return range_.end(); }
 };
 
 template <class Range>
-inline range_wrapper<Range> range(Range&& range) {
+range_wrapper<Range> range(Range&& range) {
   return range_wrapper<Range>(std::forward<Range>(range));
 }
 
 #else
 
 template <class Range>
-inline Range range(Range&& range) {
+Range range(Range&& range) {
   return std::forward<Range>(range);
 }
 

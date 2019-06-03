@@ -60,10 +60,10 @@ class TcrMessagePing;
 
 class APACHE_GEODE_EXPORT TcrMessage {
  private:
-  inline static void writeInt(uint8_t* buffer, uint16_t value);
-  inline static void writeInt(uint8_t* buffer, uint32_t value);
-  inline static void readInt(uint8_t* buffer, uint16_t* value);
-  inline static void readInt(uint8_t* buffer, uint32_t* value);
+  static void writeInt(uint8_t* buffer, uint16_t value);
+  static void writeInt(uint8_t* buffer, uint32_t value);
+  static void readInt(uint8_t* buffer, uint16_t* value);
+  static void readInt(uint8_t* buffer, uint32_t* value);
 
  public:
   typedef enum {
@@ -240,13 +240,13 @@ class APACHE_GEODE_EXPORT TcrMessage {
   // Updates the early ack byte of the message to reflect that it is a retry op
   void updateHeaderForRetry();
 
-  inline const std::vector<std::shared_ptr<CacheableKey>>* getKeys() const {
+  const std::vector<std::shared_ptr<CacheableKey>>* getKeys() const {
     return m_keyList;
   }
 
-  inline const std::string& getRegex() const { return m_regex; }
+  const std::string& getRegex() const { return m_regex; }
 
-  inline InterestResultPolicy getInterestResultPolicy() const {
+  InterestResultPolicy getInterestResultPolicy() const {
     if (m_interestPolicy == 2) {
       return InterestResultPolicy::KEYS_VALUES;
     } else if (m_interestPolicy == 1) {
@@ -262,14 +262,14 @@ class APACHE_GEODE_EXPORT TcrMessage {
    * Whether the request is meant to be
    * sent to PR primary node for single hop.
    */
-  inline bool forPrimary() const {
+  bool forPrimary() const {
     return m_msgType == TcrMessage::PUT || m_msgType == TcrMessage::DESTROY ||
            m_msgType == TcrMessage::EXECUTE_REGION_FUNCTION;
   }
 
-  inline void initCqMap() { m_cqs = new std::map<std::string, int>(); }
+  void initCqMap() { m_cqs = new std::map<std::string, int>(); }
 
-  inline bool forSingleHop() const {
+  bool forSingleHop() const {
     return m_msgType == TcrMessage::PUT || m_msgType == TcrMessage::DESTROY ||
            m_msgType == TcrMessage::REQUEST ||
            m_msgType == TcrMessage::GET_ALL_70 ||
@@ -279,10 +279,10 @@ class APACHE_GEODE_EXPORT TcrMessage {
            m_msgType == TcrMessage::PUT_ALL_WITH_CALLBACK;
   }
 
-  inline bool forTransaction() const { return m_txId != -1; }
+  bool forTransaction() const { return m_txId != -1; }
 
   /*
-  inline void getSingleHopFlags(bool& forSingleHop, bool& forPrimary) const
+  void getSingleHopFlags(bool& forSingleHop, bool& forPrimary) const
   {
     if (m_msgType == TcrMessage::PUT ||
          m_msgType == TcrMessage::DESTROY ||
@@ -325,7 +325,7 @@ class APACHE_GEODE_EXPORT TcrMessage {
 
   const std::map<std::string, int>* getCqs() const;
   bool getBoolValue() const { return m_boolValue; };
-  inline const char* getException() {
+  const char* getException() {
     exceptionMessage = Utils::nullSafeToString(m_value);
     return exceptionMessage.c_str();
   }
@@ -1233,13 +1233,13 @@ class TcrMessageHelper {
    * Tries to read an exception part and returns true if the exception
    * was successfully read.
    */
-  inline static bool readExceptionPart(TcrMessage& msg, DataInput& input,
-                                       uint8_t isLastChunk) {
+  static bool readExceptionPart(TcrMessage& msg, DataInput& input,
+                                uint8_t isLastChunk) {
     return msg.readExceptionPart(input, isLastChunk);
   }
 
-  inline static void skipParts(TcrMessage& msg, DataInput& input,
-                               int32_t numParts = 1) {
+  static void skipParts(TcrMessage& msg, DataInput& input,
+                        int32_t numParts = 1) {
     msg.skipParts(input, numParts);
   }
 
@@ -1249,10 +1249,12 @@ class TcrMessageHelper {
    * Throws a MessageException with relevant message if an unknown
    * message type is encountered in the header.
    */
-  inline static ChunkObjectType readChunkPartHeader(
-      TcrMessage& msg, DataInput& input, DSCode expectedFirstType,
-      int32_t expectedPartType, const char* methodName, uint32_t& partLen,
-      uint8_t isLastChunk) {
+  static ChunkObjectType readChunkPartHeader(TcrMessage& msg, DataInput& input,
+                                             DSCode expectedFirstType,
+                                             int32_t expectedPartType,
+                                             const char* methodName,
+                                             uint32_t& partLen,
+                                             uint8_t isLastChunk) {
     partLen = input.readInt32();
     const auto isObj = input.readBoolean();
 
@@ -1324,11 +1326,10 @@ class TcrMessageHelper {
     return ChunkObjectType::OBJECT;
   }
 
-  inline static ChunkObjectType readChunkPartHeader(TcrMessage& msg,
-                                                    DataInput& input,
-                                                    const char* methodName,
-                                                    uint32_t& partLen,
-                                                    uint8_t isLastChunk) {
+  static ChunkObjectType readChunkPartHeader(TcrMessage& msg, DataInput& input,
+                                             const char* methodName,
+                                             uint32_t& partLen,
+                                             uint8_t isLastChunk) {
     partLen = input.readInt32();
     const auto isObj = input.readBoolean();
 

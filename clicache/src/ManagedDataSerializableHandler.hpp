@@ -126,7 +126,7 @@ namespace apache {
 
           return nullptr;
         }
-        inline DSCode getSerializableDataDsCode(int32_t classId) {
+        DSCode getSerializableDataDsCode(int32_t classId) {
           if (classId <= std::numeric_limits<int8_t>::max() &&
             classId >= std::numeric_limits<int8_t>::min()) {
             return DSCode::CacheableUserData;

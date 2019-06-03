@@ -47,7 +47,7 @@ namespace Apache
 
       public:
 
-        inline PropertyToString( ) : m_str( "{" )
+        PropertyToString( ) : m_str( "{" )
         { }
 
         void Visit( Apache::Geode::Client::ICacheableKey^ key, ISerializable^ value )

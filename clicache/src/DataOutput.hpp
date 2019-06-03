@@ -108,7 +108,7 @@ namespace Apache
         /// Write an array of bytes to the <c>DataOutput</c>.
         /// </summary>
         /// <param name="bytes">The array of bytes to write.</param>
-        inline void WriteBytes( array<Byte>^ bytes )
+        void WriteBytes( array<Byte>^ bytes )
         {
           WriteBytes( bytes, ( bytes == nullptr ? -1 : bytes->Length ) );
         }
@@ -126,7 +126,7 @@ namespace Apache
         /// Write an array of signed bytes to the <c>DataOutput</c>.
         /// </summary>
         /// <param name="bytes">The array of signed bytes to write.</param>
-        inline void WriteSBytes( array<SByte>^ bytes )
+        void WriteSBytes( array<SByte>^ bytes )
         {
           WriteSBytes( bytes, ( bytes == nullptr ? -1 : bytes->Length )  );
         }
@@ -148,7 +148,7 @@ namespace Apache
         /// <c>DataOutput</c>.
         /// </summary>
         /// <param name="bytes">The array of bytes to write.</param>
-        inline void WriteBytesOnly( array<Byte>^ bytes )
+        void WriteBytesOnly( array<Byte>^ bytes )
         {
           WriteBytesOnly( bytes, ( bytes == nullptr ? 0 : bytes->Length )  );
         }
@@ -168,7 +168,7 @@ namespace Apache
         /// to the <c>DataOutput</c>.
         /// </summary>
         /// <param name="bytes">The array of signed bytes to write.</param>
-        inline void WriteSBytesOnly( array<SByte>^ bytes )
+        void WriteSBytesOnly( array<SByte>^ bytes )
         {
           WriteSBytesOnly( bytes, ( bytes == nullptr ? 0 : bytes->Length )  );
         }        
@@ -482,7 +482,7 @@ namespace Apache
         
         static int8_t DSFID(System::UInt32 classId);        
   
-        static inline DSCode getDataSerializableDsCode(int32_t classId) {
+        static DSCode getDataSerializableDsCode(int32_t classId) {
           if (classId <= std::numeric_limits<int8_t>::max() &&
               classId >= std::numeric_limits<int8_t>::min()) {
             return DSCode::CacheableUserData;
@@ -494,7 +494,7 @@ namespace Apache
           }
         }
 
-				static inline int8_t getDataSerializableFixedIdDsCode(int32_t fixedId) {
+				static int8_t getDataSerializableFixedIdDsCode(int32_t fixedId) {
           if (fixedId <= std::numeric_limits<int8_t>::max() &&
               fixedId >= std::numeric_limits<int8_t>::min()) {
             return static_cast<int8_t>(DSCode::FixedIDByte);
@@ -582,7 +582,7 @@ namespace Apache
           };
         }
 
-        inline void EnsureCapacity( System::Int32 size )
+        void EnsureCapacity( System::Int32 size )
         {
           System::Int32 bytesLeft = m_remainingBufferLength - m_cursor;
           if ( bytesLeft < size ) {
@@ -605,7 +605,7 @@ namespace Apache
         }
 
         //it expects list is not null
-        inline void WriteList(System::Collections::IList^ list)
+        void WriteList(System::Collections::IList^ list)
         {
           this->WriteArrayLen(list->Count);
           for each (Object^ obj in list) 
@@ -640,7 +640,7 @@ namespace Apache
         /// Internal constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline DataOutput(apache::geode::client::DataOutput* nativeptr, bool managedObject, Apache::Geode::Client::Cache^ cache)
+        DataOutput(apache::geode::client::DataOutput* nativeptr, bool managedObject, Apache::Geode::Client::Cache^ cache)
         {
           m_cache = cache;
           m_nativeptr = gcnew native_conditional_unique_ptr<native::DataOutput>(nativeptr);

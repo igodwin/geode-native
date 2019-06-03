@@ -158,7 +158,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CacheFactory(native::CacheFactory nativeptr, Properties<String^, String^>^ dsProps)
+        CacheFactory(native::CacheFactory nativeptr, Properties<String^, String^>^ dsProps)
         {
           m_nativeptr = gcnew native_conditional_shared_ptr<native::CacheFactory>(
               std::unique_ptr<native::CacheFactory>(new native::CacheFactory(nativeptr)));

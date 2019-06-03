@@ -62,7 +62,7 @@ class TESTOBJECT_EXPORT CharTypesWithInvalidUsage : public PdxSerializable {
   int32_t m_charArrayLen;
 
  public:
-  inline void init() {
+  void init() {
     m_ch = 'C';
 
     m_chArray = std::vector<char16_t>(2);
@@ -285,7 +285,7 @@ class TESTOBJECT_EXPORT InvalidPdxUsage : public PdxSerializable {
   int fromDataexceptionCounter;
 
  public:
-  inline void init() {
+  void init() {
     m_char = 'C';
     m_bool = true;
     m_byte = 0x74;
@@ -494,7 +494,7 @@ class TESTOBJECT_EXPORT InvalidPdxUsage : public PdxSerializable {
 
   InvalidPdxUsage() { init(); }
 
-  inline bool compareBool(bool b, bool b2) {
+  bool compareBool(bool b, bool b2) {
     if (b == b2) return b;
     throw IllegalStateException("Not got expected value for bool type: ");
   }

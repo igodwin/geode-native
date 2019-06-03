@@ -91,7 +91,7 @@ namespace Apache
         /// <returns>
         /// The managed wrapper object
         /// </returns>
-        inline static Client::CqAttributesMutator<TKey, TResult>^ Create(native::CqAttributesMutator* nativeptr)
+        static Client::CqAttributesMutator<TKey, TResult>^ Create(native::CqAttributesMutator* nativeptr)
         {
           auto instance = gcnew CqAttributesMutator(nativeptr);
           return instance;
@@ -103,7 +103,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CqAttributesMutator<TKey, TResult>(native::CqAttributesMutator* nativeptr)
+        CqAttributesMutator<TKey, TResult>(native::CqAttributesMutator* nativeptr)
         {
             m_nativeptr = gcnew native_unique_ptr<native::CqAttributesMutator>(std::unique_ptr<native::CqAttributesMutator>(nativeptr));
         }

@@ -37,7 +37,7 @@ class DataOutputInternal : public DataOutput {
 
   explicit DataOutputInternal(CacheImpl* cache) : DataOutput(cache, nullptr) {}
 
-  inline static Pool* getPool(const DataOutput& dataOutput) {
+  static Pool* getPool(const DataOutput& dataOutput) {
     return dataOutput.getPool();
   }
 };

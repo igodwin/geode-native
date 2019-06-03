@@ -279,7 +279,7 @@ class APACHE_GEODE_EXPORT CacheImpl : private NonCopyable,
   std::shared_ptr<PdxTypeRegistry> getPdxTypeRegistry() const;
 
   std::shared_ptr<SerializationRegistry> getSerializationRegistry() const;
-  inline CachePerfStats& getCachePerfStats() { return *m_cacheStats; }
+  CachePerfStats& getCachePerfStats() { return *m_cacheStats; }
 
   PoolManager& getPoolManager() const {
     this->throwIfClosed();
@@ -298,7 +298,7 @@ class APACHE_GEODE_EXPORT CacheImpl : private NonCopyable,
 
   ThreadPool& getThreadPool();
 
-  inline const std::shared_ptr<AuthInitialize>& getAuthInitialize() {
+  const std::shared_ptr<AuthInitialize>& getAuthInitialize() {
     return m_authInitialize;
   }
 
@@ -351,7 +351,7 @@ class APACHE_GEODE_EXPORT CacheImpl : private NonCopyable,
   void validateRegionAttributes(const std::string& name,
                                 const RegionAttributes attrs) const;
 
-  inline void getSubRegions(
+  void getSubRegions(
       std::unordered_map<std::string, std::shared_ptr<Region>>& srm) {
     auto&& lock = m_regions.make_lock<std::lock_guard>();
     if (m_regions.empty()) return;
@@ -388,7 +388,7 @@ class APACHE_GEODE_EXPORT CacheImpl : private NonCopyable,
   const std::shared_ptr<AuthInitialize> m_authInitialize;
   std::unique_ptr<TypeRegistry> m_typeRegistry;
 
-  inline void throwIfClosed() const {
+  void throwIfClosed() const {
     if (m_closed) {
       throw CacheClosedException("Cache is closed.");
     }

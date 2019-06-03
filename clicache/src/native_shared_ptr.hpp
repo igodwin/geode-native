@@ -45,11 +45,11 @@ namespace Apache
           delete ptr;
         }
 
-        inline _T* get() {
+        _T* get() {
           return ptr->get();
         }
 
-        inline std::shared_ptr<_T> get_shared_ptr() {
+        std::shared_ptr<_T> get_shared_ptr() {
           return *ptr;
         }
 

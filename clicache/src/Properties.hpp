@@ -79,7 +79,7 @@ namespace Apache
         /// <summary>
         /// Default constructor: returns an empty collection.
         /// </summary>
-         inline Properties()
+         Properties()
         : Properties(native::Properties::create())
         {
         
@@ -89,7 +89,7 @@ namespace Apache
         /// Factory method to create an empty collection of properties.
         /// </summary>
         /// <returns>empty collection of properties</returns>
-        inline static Properties<TPropKey, TPropValue>^ Create()
+        static Properties<TPropKey, TPropValue>^ Create()
         {
           return gcnew Properties<TPropKey, TPropValue>();
         }
@@ -191,7 +191,7 @@ namespace Apache
 
         property int8_t DsCode
         {
-          inline virtual int8_t get( )
+          virtual int8_t get( )
           {
             return static_cast<int8_t>(native::internal::DSCode::Properties);
           }
@@ -218,7 +218,7 @@ namespace Apache
           return m_nativeptr->get_shared_ptr();
         }
 
-        inline static ISerializable^ CreateDeserializable()
+        static ISerializable^ CreateDeserializable()
         {
           return Create();
         }
@@ -229,7 +229,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline Properties( std::shared_ptr<native::Properties> nativeptr )
+        Properties( std::shared_ptr<native::Properties> nativeptr )
         {
           m_nativeptr = gcnew native_shared_ptr<native::Properties>(nativeptr);
         }

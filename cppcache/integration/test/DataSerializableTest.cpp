@@ -39,10 +39,9 @@ using apache::geode::client::RegionShortcut;
 
 class Simple : public DataSerializable {
  public:
-  inline Simple() : Simple("TestSimple", 30) {}
+  Simple() : Simple("TestSimple", 30) {}
 
-  inline Simple(std::string name, int age)
-      : name_(std::move(name)), age_(age) {}
+  Simple(std::string name, int age) : name_(std::move(name)), age_(age) {}
 
   ~Simple() noexcept override = default;
 
@@ -73,13 +72,13 @@ class Simple : public DataSerializable {
 
 class DataSerializableObject : public DataSerializable {
  public:
-  inline DataSerializableObject()
+  DataSerializableObject()
       : DataSerializableObject("TestDataSerializableObject", nullptr, nullptr) {
   }
 
-  inline DataSerializableObject(std::string name,
-                                std::shared_ptr<CacheableStringArray> csArray,
-                                std::shared_ptr<Simple> simple)
+  DataSerializableObject(std::string name,
+                         std::shared_ptr<CacheableStringArray> csArray,
+                         std::shared_ptr<Simple> simple)
       : name_(std::move(name)), csArray_(csArray), simple_(simple) {}
 
   ~DataSerializableObject() noexcept override = default;

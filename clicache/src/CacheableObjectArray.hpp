@@ -49,7 +49,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableObjectArray()
+        CacheableObjectArray()
           : List<Object^>()
         { }
 
@@ -59,7 +59,7 @@ namespace Apache
         /// <param name="collection">
         /// The collection whose elements are copied to this list.
         /// </param>
-        inline CacheableObjectArray(IEnumerable<Object^>^ collection)
+        CacheableObjectArray(IEnumerable<Object^>^ collection)
           : List<Object^>(collection)
         { }
 
@@ -69,14 +69,14 @@ namespace Apache
         /// <param name="capacity">
         /// The initial capacity of the vector.
         /// </param>
-        inline CacheableObjectArray(System::Int32 capacity)
+        CacheableObjectArray(System::Int32 capacity)
           : List<Object^>(capacity)
         { }
 
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableObjectArray^ Create()
+        static CacheableObjectArray^ Create()
         {
           return gcnew CacheableObjectArray();
         }
@@ -85,7 +85,7 @@ namespace Apache
         /// Static function to create a new instance copying from the
         /// given collection.
         /// </summary>
-        inline static CacheableObjectArray^ Create(
+        static CacheableObjectArray^ Create(
           IEnumerable<Object^>^ collection)
         {
           return gcnew CacheableObjectArray(collection);
@@ -94,7 +94,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new instance with given initial size.
         /// </summary>
-        inline static CacheableObjectArray^ Create(System::Int32 capacity)
+        static CacheableObjectArray^ Create(System::Int32 capacity)
         {
           return gcnew CacheableObjectArray(capacity);
         }

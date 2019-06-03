@@ -321,7 +321,7 @@ namespace Apache
         /// <returns>
         /// The managed wrapper object; null if the native pointer is null.
         /// </returns>
-        inline static Pool^ Create(std::shared_ptr<native::Pool> nativeptr)
+        static Pool^ Create(std::shared_ptr<native::Pool> nativeptr)
         {
           return __nullptr == nativeptr ? nullptr :
             gcnew Pool( nativeptr );
@@ -338,7 +338,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline Pool(std::shared_ptr<native::Pool> nativeptr)
+        Pool(std::shared_ptr<native::Pool> nativeptr)
         {
           m_nativeptr = gcnew native_shared_ptr<native::Pool>(nativeptr);
         }

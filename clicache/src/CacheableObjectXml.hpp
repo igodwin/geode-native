@@ -67,7 +67,7 @@ namespace Apache
         /// <remarks>
         /// If the given object is null then this method returns null.
         /// </remarks>
-        inline static CacheableObjectXml^ Create(Object^ value)
+        static CacheableObjectXml^ Create(Object^ value)
         {
           return (value != nullptr ? gcnew CacheableObjectXml(value) :
                   nullptr);
@@ -101,7 +101,7 @@ namespace Apache
         /// </remarks>
         property Object^ Value
         {
-          inline Object^ get()
+          Object^ get()
           {
             return m_obj;
           }
@@ -124,7 +124,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new instance from the given object.
         /// </summary>
-        inline CacheableObjectXml(Object^ value)
+        CacheableObjectXml(Object^ value)
           : m_obj(value), m_objectSize(0) { }
 
       private:

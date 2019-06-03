@@ -64,7 +64,7 @@ class CacheableObjectPartList : public internal::DataSerializableFixedId {
   int32_t m_destroyTracker;
   bool m_addToLocalCache;
 
-  inline CacheableObjectPartList()
+  CacheableObjectPartList()
       : m_keys(nullptr),
         m_keysOffset(nullptr),
         m_values(nullptr),
@@ -75,7 +75,7 @@ class CacheableObjectPartList : public internal::DataSerializableFixedId {
         m_destroyTracker(0),
         m_addToLocalCache(false) {}
 
-  inline explicit CacheableObjectPartList(ThinClientRegion* region)
+  explicit CacheableObjectPartList(ThinClientRegion* region)
       : m_keys(nullptr),
         m_keysOffset(nullptr),
         m_values(nullptr),

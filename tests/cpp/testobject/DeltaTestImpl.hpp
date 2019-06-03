@@ -80,7 +80,7 @@ class TESTOBJECT_EXPORT DeltaTestImpl : public DataSerializable, public Delta {
 
   bool hasDelta() const override { return m_hasDelta; }
 
-  inline std::shared_ptr<Delta> clone() const override {
+  std::shared_ptr<Delta> clone() const override {
     return std::make_shared<DeltaTestImpl>(*this);
   }
 

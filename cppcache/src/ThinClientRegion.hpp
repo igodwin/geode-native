@@ -146,7 +146,7 @@ class APACHE_GEODE_EXPORT ThinClientRegion : public LocalRegion {
 
   void localInvalidateFailover();
 
-  inline ThinClientBaseDM* getDistMgr() const { return m_tcrdm.get(); }
+  ThinClientBaseDM* getDistMgr() const { return m_tcrdm.get(); }
 
   std::shared_ptr<CacheableVector> reExecuteFunction(
       const std::string& func, const std::shared_ptr<Cacheable>& args,
@@ -388,7 +388,7 @@ class ChunkedInterestResponse : public TcrChunkedResult {
   ChunkedInterestResponse& operator=(const ChunkedInterestResponse&);
 
  public:
-  inline ChunkedInterestResponse(
+  ChunkedInterestResponse(
       TcrMessage& msg,
       const std::shared_ptr<std::vector<std::shared_ptr<CacheableKey>>>&
           resultKeys,
@@ -398,7 +398,7 @@ class ChunkedInterestResponse : public TcrChunkedResult {
         m_replyMsg(replyMsg),
         m_resultKeys(resultKeys) {}
 
-  inline const std::shared_ptr<std::vector<std::shared_ptr<CacheableKey>>>&
+  const std::shared_ptr<std::vector<std::shared_ptr<CacheableKey>>>&
   getResultKeys() const {
     return m_resultKeys;
   }
@@ -427,16 +427,16 @@ class ChunkedQueryResponse : public TcrChunkedResult {
   ChunkedQueryResponse& operator=(const ChunkedQueryResponse&);
 
  public:
-  inline explicit ChunkedQueryResponse(TcrMessage& msg)
+  explicit ChunkedQueryResponse(TcrMessage& msg)
       : TcrChunkedResult(),
         m_msg(msg),
         m_queryResults(CacheableVector::create()) {}
 
-  inline const std::shared_ptr<CacheableVector>& getQueryResults() const {
+  const std::shared_ptr<CacheableVector>& getQueryResults() const {
     return m_queryResults;
   }
 
-  inline const std::vector<std::string>& getStructFieldNames() const {
+  const std::vector<std::string>& getStructFieldNames() const {
     return m_structFieldNames;
   }
 
@@ -467,11 +467,11 @@ class ChunkedFunctionExecutionResponse : public TcrChunkedResult {
       const ChunkedFunctionExecutionResponse&);
 
  public:
-  inline ChunkedFunctionExecutionResponse(TcrMessage& msg, bool getResult,
-                                          std::shared_ptr<ResultCollector> rc)
+  ChunkedFunctionExecutionResponse(TcrMessage& msg, bool getResult,
+                                   std::shared_ptr<ResultCollector> rc)
       : TcrChunkedResult(), m_msg(msg), m_getResult(getResult), m_rc(rc) {}
 
-  inline ChunkedFunctionExecutionResponse(
+  ChunkedFunctionExecutionResponse(
       TcrMessage& msg, bool getResult, std::shared_ptr<ResultCollector> rc,
       const std::shared_ptr<std::recursive_mutex>& resultCollectorLock)
       : TcrChunkedResult(),
@@ -480,7 +480,7 @@ class ChunkedFunctionExecutionResponse : public TcrChunkedResult {
         m_rc(rc),
         m_resultCollectorLock(resultCollectorLock) {}
 
-  /* inline const std::shared_ptr<CacheableVector>&
+  /* const std::shared_ptr<CacheableVector>&
    getFunctionExecutionResults() const
    {
      return m_functionExecutionResults;
@@ -489,8 +489,8 @@ class ChunkedFunctionExecutionResponse : public TcrChunkedResult {
   /* adongre
    * CID 28805: Parse warning (PW.USELESS_TYPE_QUALIFIER_ON_RETURN_TYPE)
    */
-  // inline const bool getResult() const
-  inline bool getResult() const { return m_getResult; }
+  // const bool getResult() const
+  bool getResult() const { return m_getResult; }
 
   virtual void handleChunk(const uint8_t* chunk, int32_t chunkLen,
                            uint8_t isLastChunkWithSecurity,
@@ -521,7 +521,7 @@ class ChunkedGetAllResponse : public TcrChunkedResult {
   ChunkedGetAllResponse& operator=(const ChunkedGetAllResponse&);
 
  public:
-  inline ChunkedGetAllResponse(
+  ChunkedGetAllResponse(
       TcrMessage& msg, ThinClientRegion* region,
       const std::vector<std::shared_ptr<CacheableKey>>* keys,
       const std::shared_ptr<HashMapOfCacheable>& values,
@@ -573,10 +573,9 @@ class ChunkedPutAllResponse : public TcrChunkedResult {
   ChunkedPutAllResponse& operator=(const ChunkedPutAllResponse&);
 
  public:
-  inline ChunkedPutAllResponse(
-      const std::shared_ptr<Region>& region, TcrMessage& msg,
-      std::recursive_mutex& responseLock,
-      std::shared_ptr<VersionedCacheableObjectPartList>& list)
+  ChunkedPutAllResponse(const std::shared_ptr<Region>& region, TcrMessage& msg,
+                        std::recursive_mutex& responseLock,
+                        std::shared_ptr<VersionedCacheableObjectPartList>& list)
       : TcrChunkedResult(),
         m_msg(msg),
         m_region(region),
@@ -605,7 +604,7 @@ class ChunkedRemoveAllResponse : public TcrChunkedResult {
   ChunkedRemoveAllResponse& operator=(const ChunkedRemoveAllResponse&);
 
  public:
-  inline ChunkedRemoveAllResponse(
+  ChunkedRemoveAllResponse(
       const std::shared_ptr<Region>& region, TcrMessage& msg,
       std::recursive_mutex& responseLock,
       std::shared_ptr<VersionedCacheableObjectPartList>& list)
@@ -639,9 +638,9 @@ class ChunkedKeySetResponse : public TcrChunkedResult {
   ChunkedKeySetResponse& operator=(const ChunkedKeySetResponse&);
 
  public:
-  inline ChunkedKeySetResponse(
-      TcrMessage& msg, std::vector<std::shared_ptr<CacheableKey>>& resultKeys,
-      TcrMessageReply& replyMsg)
+  ChunkedKeySetResponse(TcrMessage& msg,
+                        std::vector<std::shared_ptr<CacheableKey>>& resultKeys,
+                        TcrMessageReply& replyMsg)
       : TcrChunkedResult(),
         m_msg(msg),
         m_replyMsg(replyMsg),
@@ -663,13 +662,11 @@ class ChunkedDurableCQListResponse : public TcrChunkedResult {
   ChunkedDurableCQListResponse& operator=(const ChunkedDurableCQListResponse&);
 
  public:
-  inline explicit ChunkedDurableCQListResponse(TcrMessage& msg)
+  explicit ChunkedDurableCQListResponse(TcrMessage& msg)
       : TcrChunkedResult(),
         m_msg(msg),
         m_resultList(CacheableArrayList::create()) {}
-  inline std::shared_ptr<CacheableArrayList> getResults() {
-    return m_resultList;
-  }
+  std::shared_ptr<CacheableArrayList> getResults() { return m_resultList; }
 
   virtual void handleChunk(const uint8_t* chunk, int32_t chunkLen,
                            uint8_t isLastChunkWithSecurity,

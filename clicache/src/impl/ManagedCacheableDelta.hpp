@@ -54,7 +54,7 @@ namespace apache
           /// <param name="managedptr">
           /// The managed object.
           /// </param>
-          inline ManagedCacheableDeltaGeneric(
+          ManagedCacheableDeltaGeneric(
             Apache::Geode::Client::IDelta^ managedptr)
             : Delta(), m_managedptr(managedptr)
           {
@@ -62,7 +62,7 @@ namespace apache
             m_objectSize = 0;
           }
 
-          inline ManagedCacheableDeltaGeneric(
+          ManagedCacheableDeltaGeneric(
             Apache::Geode::Client::IDelta^ managedptr, int hashcode, int classId)
             : Delta(),  m_managedptr(managedptr) 
           {
@@ -91,7 +91,7 @@ namespace apache
 
           virtual bool operator == (const ManagedCacheableDeltaGeneric& other) const;
 
-          inline Apache::Geode::Client::IDelta^ ptr() const
+          Apache::Geode::Client::IDelta^ ptr() const
           {
             return m_managedptr;
           }

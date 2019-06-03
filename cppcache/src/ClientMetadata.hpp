@@ -60,7 +60,7 @@ class APACHE_GEODE_EXPORT ClientMetadata : public NonAssignable {
   std::string m_colocatedWith;
   ThinClientPoolDM* m_tcrdm;
   FixedMapType m_fpaMap;
-  inline void checkBucketId(size_t bucketId) {
+  void checkBucketId(size_t bucketId) {
     if (bucketId >= m_bucketServerLocationsList.size()) {
       LOGERROR("ClientMetadata::getServerLocation(): BucketId out of range.");
       throw IllegalStateException(

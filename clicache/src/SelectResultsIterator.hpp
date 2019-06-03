@@ -84,7 +84,7 @@ namespace Apache
         /// <returns>
         /// The managed wrapper object; null if the native pointer is null.
         /// </returns>
-        inline static SelectResultsIterator<TResult>^ Create(
+        static SelectResultsIterator<TResult>^ Create(
           ISelectResults<TResult>^ results )
         {
           return results == nullptr ? nullptr :
@@ -98,7 +98,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline SelectResultsIterator(ISelectResults<TResult>^ results) : m_results(results)
+        SelectResultsIterator(ISelectResults<TResult>^ results) : m_results(results)
         {
         }
 

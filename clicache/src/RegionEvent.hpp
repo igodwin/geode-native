@@ -85,7 +85,7 @@ namespace Apache
         /// Internal constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline Apache::Geode::Client::RegionEvent<TKey, TValue>( const native::RegionEvent* nativeptr )
+        Apache::Geode::Client::RegionEvent<TKey, TValue>( const native::RegionEvent* nativeptr )
           : m_nativeptr( nativeptr )
         {
         }

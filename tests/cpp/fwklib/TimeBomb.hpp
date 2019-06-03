@@ -43,22 +43,21 @@ class TimeBomb : public ACE_Task_Base {
   int32_t svc();
 
  public:
-  inline TimeBomb(uint32_t seconds, int32_t exitCode, const std::string& msg)
+  TimeBomb(uint32_t seconds, int32_t exitCode, const std::string& msg)
       : m_stop(false), m_armed(false) {
     arm(seconds, exitCode, msg);
     activate();
   }
 
-  inline TimeBomb()
-      : m_stop(false), m_armed(false), m_seconds(0), m_exitCode(-1) {}
+  TimeBomb() : m_stop(false), m_armed(false), m_seconds(0), m_exitCode(-1) {}
 
-  inline ~TimeBomb() {
+  ~TimeBomb() {
     m_armed = false;
     m_stop = true;
     wait();
   }
 
-  inline void arm(uint32_t seconds, int32_t exitCode, const std::string& msg) {
+  void arm(uint32_t seconds, int32_t exitCode, const std::string& msg) {
     //      FWKINFO( "Timebomb set for " << seconds << " seconds." );
     m_seconds = seconds;
     m_exitCode = exitCode;
@@ -75,7 +74,7 @@ class TimeBomb : public ACE_Task_Base {
     }
     FWKINFO("Timebomb set for: " << tbuf);
   }
-  inline void disarm() { m_armed = false; }
+  void disarm() { m_armed = false; }
 };
 
 }  // namespace testframework

@@ -46,7 +46,7 @@ class TESTOBJECT_EXPORT BatchObject : public TimestampedObject {
   int32_t batch;
   std::shared_ptr<CacheableBytes> byteArray;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

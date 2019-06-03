@@ -60,13 +60,13 @@ class APACHE_GEODE_EXPORT CacheableEnum
   int32_t m_hashcode;
 
  public:
-  inline CacheableEnum()
+  CacheableEnum()
       : m_enumClassName(nullptr),
         m_enumName(nullptr),
         m_ordinal(-1),
         m_hashcode(0) {}
-  inline CacheableEnum(std::string enumClassName, std::string enumName,
-                       int32_t ordinal)
+  CacheableEnum(std::string enumClassName, std::string enumName,
+                int32_t ordinal)
       : m_enumClassName(std::move(enumClassName)),
         m_enumName(std::move(enumName)),
         m_ordinal(ordinal),

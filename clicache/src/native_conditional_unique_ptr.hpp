@@ -52,11 +52,11 @@ namespace Apache
           delete owned_ptr;
         }
 
-        inline _T* get() {
+        _T* get() {
           return __nullptr == owned_ptr ? unowned_ptr : owned_ptr->get();
         }
 
-        static inline _T& operator*(native_conditional_unique_ptr<_T>^ t) {
+        static _T& operator*(native_conditional_unique_ptr<_T>^ t) {
           return *(t->get());
         }
       };

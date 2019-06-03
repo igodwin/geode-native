@@ -160,7 +160,7 @@ namespace Apache
         /// Creates a new <c>RegionAttributesFactory</c> ready to create
         /// a <c>RegionAttributes</c> with default settings.
         /// </summary>
-        inline RegionAttributesFactory<TKey, TValue>( )
+        RegionAttributesFactory<TKey, TValue>( )
         {
           m_nativeptr = gcnew native_unique_ptr<native::RegionAttributesFactory>(std::make_unique<native::RegionAttributesFactory>());
         }

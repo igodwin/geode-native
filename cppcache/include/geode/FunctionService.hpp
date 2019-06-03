@@ -77,7 +77,7 @@ class APACHE_GEODE_EXPORT FunctionService {
    * @throws UnsupportedOperationException
    *                 if Pool is in multiusersecure Mode
    */
-  inline static Execution onServer(const std::shared_ptr<Pool>& pool) {
+  static Execution onServer(const std::shared_ptr<Pool>& pool) {
     return onServerWithPool(pool);
   }
 
@@ -95,7 +95,7 @@ class APACHE_GEODE_EXPORT FunctionService {
    * @throws UnsupportedOperationException
    *                 if Pool is in multiusersecure Mode
    */
-  inline static Execution onServer(RegionService& regionService) {
+  static Execution onServer(RegionService& regionService) {
     return onServerWithCache(regionService);
   }
 
@@ -112,7 +112,7 @@ class APACHE_GEODE_EXPORT FunctionService {
    * @throws UnsupportedOperationException
    *                 if Pool is in multiusersecure Mode
    */
-  inline static Execution onServers(const std::shared_ptr<Pool>& pool) {
+  static Execution onServers(const std::shared_ptr<Pool>& pool) {
     return onServersWithPool(pool);
   }
 
@@ -130,7 +130,7 @@ class APACHE_GEODE_EXPORT FunctionService {
    * @throws UnsupportedOperationException
    *                 if Pool is in multiusersecure Mode
    */
-  inline static Execution onServers(RegionService& regionService) {
+  static Execution onServers(RegionService& regionService) {
     return onServersWithCache(regionService);
   }
 

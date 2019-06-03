@@ -43,7 +43,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new default instance.
         /// </summary>
-        inline CacheableDate()
+        CacheableDate()
           { }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Apache
         /// <summary>
         /// Static function that returns a new default instance.
         /// </summary>
-        inline static CacheableDate^ Create()
+        static CacheableDate^ Create()
         {
           return gcnew CacheableDate();
         }
@@ -67,7 +67,7 @@ namespace Apache
         /// Static function that returns a new instance initialized to the
         /// given <c>System.DateTime</c> value.
         /// </summary>
-        inline static CacheableDate^ Create(DateTime dateTime)
+        static CacheableDate^ Create(DateTime dateTime)
         {
           return gcnew CacheableDate(dateTime);
         }
@@ -146,7 +146,7 @@ namespace Apache
         /// </summary>
         property DateTime Value
         {
-          inline DateTime get()
+          DateTime get()
           {
             return m_dateTime;
           }

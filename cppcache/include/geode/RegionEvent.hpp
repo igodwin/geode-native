@@ -53,19 +53,19 @@ class APACHE_GEODE_EXPORT RegionEvent {
   ~RegionEvent();
 
   /** Return the region this event occurred in. */
-  inline std::shared_ptr<Region> getRegion() const { return m_region; }
+  std::shared_ptr<Region> getRegion() const { return m_region; }
 
   /**
    * Returns the callbackArgument passed to the method that generated
    * this event. See the {@link Region} interface methods that take
    * a callbackArgument parameter.
    */
-  inline std::shared_ptr<Serializable> getCallbackArgument() const {
+  std::shared_ptr<Serializable> getCallbackArgument() const {
     return m_callbackArgument;
   }
 
   /** If the event originated in a remote process, returns true. */
-  inline bool remoteOrigin() const { return m_remoteOrigin; }
+  bool remoteOrigin() const { return m_remoteOrigin; }
 
  private:
   // never implemented.

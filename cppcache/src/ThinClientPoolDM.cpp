@@ -2149,7 +2149,7 @@ void ThinClientPoolDM::setThreadLocalConnection(TcrConnection* conn) {
   m_manager->addStickyConnection(conn);
 }
 
-inline bool ThinClientPoolDM::hasExpired(TcrConnection* conn) {
+bool ThinClientPoolDM::hasExpired(TcrConnection* conn) {
   return conn->hasExpired(getLoadConditioningInterval());
 }
 

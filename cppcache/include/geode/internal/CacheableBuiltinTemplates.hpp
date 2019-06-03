@@ -43,14 +43,14 @@ class CacheableKeyPrimitive : public virtual DataSerializablePrimitive,
   TObj value_;
 
  public:
-  inline CacheableKeyPrimitive() = default;
+  CacheableKeyPrimitive() = default;
 
-  inline explicit CacheableKeyPrimitive(const TObj value) : value_(value) {}
+  explicit CacheableKeyPrimitive(const TObj value) : value_(value) {}
 
   ~CacheableKeyPrimitive() noexcept override = default;
 
   /** Gets the contained value. */
-  inline TObj value() const { return value_; }
+  TObj value() const { return value_; }
 
   void toData(DataOutput& output) const override {
     apache::geode::client::serializer::writeObject(output, value_);
@@ -76,7 +76,7 @@ class CacheableKeyPrimitive : public virtual DataSerializablePrimitive,
   }
 
   /** Return true if this key matches other key value. */
-  inline bool operator==(const TObj other) const {
+  bool operator==(const TObj other) const {
     return internal::equals(value_, other);
   }
 
@@ -85,17 +85,17 @@ class CacheableKeyPrimitive : public virtual DataSerializablePrimitive,
   }
 
   /** Factory function registered with serialization registry. */
-  inline static std::shared_ptr<Serializable> createDeserializable() {
+  static std::shared_ptr<Serializable> createDeserializable() {
     return std::make_shared<CacheableKeyPrimitive<TObj, TYPEID>>();
   }
 
   /** Factory function to create a new default instance. */
-  inline static std::shared_ptr<CacheableKeyPrimitive<TObj, TYPEID>> create() {
+  static std::shared_ptr<CacheableKeyPrimitive<TObj, TYPEID>> create() {
     return std::make_shared<CacheableKeyPrimitive<TObj, TYPEID>>();
   }
 
   /** Factory function to create an instance with the given value. */
-  inline static std::shared_ptr<CacheableKeyPrimitive<TObj, TYPEID>> create(
+  static std::shared_ptr<CacheableKeyPrimitive<TObj, TYPEID>> create(
       const TObj value) {
     return std::make_shared<CacheableKeyPrimitive<TObj, TYPEID>>(value);
   }
@@ -115,7 +115,7 @@ class CacheableArrayPrimitive : public DataSerializablePrimitive {
   std::vector<T> m_value;
 
  public:
-  inline CacheableArrayPrimitive() = default;
+  CacheableArrayPrimitive() = default;
 
   template <typename TT>
   explicit CacheableArrayPrimitive(TT&& value)
@@ -128,31 +128,30 @@ class CacheableArrayPrimitive : public DataSerializablePrimitive {
   CacheableArrayPrimitive& operator=(const CacheableArrayPrimitive& other) =
       delete;
 
-  inline const std::vector<T>& value() const { return m_value; }
+  const std::vector<T>& value() const { return m_value; }
 
-  inline int32_t length() const { return static_cast<int32_t>(m_value.size()); }
+  int32_t length() const { return static_cast<int32_t>(m_value.size()); }
 
   static std::shared_ptr<Serializable> createDeserializable() {
     return std::make_shared<CacheableArrayPrimitive<T, GeodeTypeId>>();
   }
 
-  inline static std::shared_ptr<CacheableArrayPrimitive<T, GeodeTypeId>>
-  create() {
+  static std::shared_ptr<CacheableArrayPrimitive<T, GeodeTypeId>> create() {
     return std::make_shared<CacheableArrayPrimitive<T, GeodeTypeId>>();
   }
 
-  inline static std::shared_ptr<CacheableArrayPrimitive<T, GeodeTypeId>> create(
+  static std::shared_ptr<CacheableArrayPrimitive<T, GeodeTypeId>> create(
       const std::vector<T>& value) {
     return std::make_shared<CacheableArrayPrimitive<T, GeodeTypeId>>(value);
   }
 
-  inline static std::shared_ptr<CacheableArrayPrimitive<T, GeodeTypeId>> create(
+  static std::shared_ptr<CacheableArrayPrimitive<T, GeodeTypeId>> create(
       std::vector<T>&& value) {
     return std::make_shared<CacheableArrayPrimitive<T, GeodeTypeId>>(
         std::move(value));
   }
 
-  inline T operator[](int32_t index) const {
+  T operator[](int32_t index) const {
     if (index >= static_cast<int32_t>(m_value.size())) {
       throw OutOfRangeException(
           "CacheableArrayPrimitive::operator[]: Index out of range.");
@@ -174,9 +173,9 @@ template <typename TBase, DSCode TYPEID, class _Derived>
 class CacheableContainerPrimitive : public DataSerializablePrimitive,
                                     public TBase {
  public:
-  inline CacheableContainerPrimitive() : TBase() {}
+  CacheableContainerPrimitive() : TBase() {}
 
-  inline explicit CacheableContainerPrimitive(const int32_t n) : TBase(n) {}
+  explicit CacheableContainerPrimitive(const int32_t n) : TBase(n) {}
 
   void toData(DataOutput& output) const override {
     apache::geode::client::serializer::writeObject(output, *this);
@@ -193,17 +192,17 @@ class CacheableContainerPrimitive : public DataSerializablePrimitive,
   }
 
   /** Factory function registered with serialization registry. */
-  inline static std::shared_ptr<Serializable> createDeserializable() {
+  static std::shared_ptr<Serializable> createDeserializable() {
     return std::make_shared<_Derived>();
   }
 
   /** Factory function to create a default instance. */
-  inline static std::shared_ptr<_Derived> create() {
+  static std::shared_ptr<_Derived> create() {
     return std::make_shared<_Derived>();
   }
 
   /** Factory function to create an instance with the given size. */
-  inline static std::shared_ptr<_Derived> create(const int32_t n) {
+  static std::shared_ptr<_Derived> create(const int32_t n) {
     return std::make_shared<_Derived>(n);
   }
 };

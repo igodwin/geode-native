@@ -59,39 +59,34 @@ class APACHE_GEODE_EXPORT CacheableKey : public virtual Cacheable {
   static std::shared_ptr<CacheableKey> create(_T value);
 
   template <class _T>
-  inline static std::shared_ptr<CacheableKey> create(
+  static std::shared_ptr<CacheableKey> create(
       const std::shared_ptr<_T>& value) {
     return value;
   }
 
   struct hash {
-    inline std::size_t operator()(const CacheableKey& s) const {
-      return s.hashcode();
-    }
+    std::size_t operator()(const CacheableKey& s) const { return s.hashcode(); }
 
-    inline std::size_t operator()(const CacheableKey*& s) const {
+    std::size_t operator()(const CacheableKey*& s) const {
       return s->hashcode();
     }
 
-    inline std::size_t operator()(
-        const std::shared_ptr<CacheableKey>& s) const {
+    std::size_t operator()(const std::shared_ptr<CacheableKey>& s) const {
       return s->hashcode();
     }
   };
 
   struct equal_to {
-    inline bool operator()(const CacheableKey& lhs,
-                           const CacheableKey& rhs) const {
+    bool operator()(const CacheableKey& lhs, const CacheableKey& rhs) const {
       return lhs == rhs;
     }
 
-    inline bool operator()(const CacheableKey*& lhs,
-                           const CacheableKey*& rhs) const {
+    bool operator()(const CacheableKey*& lhs, const CacheableKey*& rhs) const {
       return (*lhs) == (*rhs);
     }
 
-    inline bool operator()(const std::shared_ptr<CacheableKey>& lhs,
-                           const std::shared_ptr<CacheableKey>& rhs) const {
+    bool operator()(const std::shared_ptr<CacheableKey>& lhs,
+                    const std::shared_ptr<CacheableKey>& rhs) const {
       return (*lhs) == (*rhs);
     }
   };

@@ -90,7 +90,7 @@ struct geode_hash {
  */
 template <>
 struct geode_hash<std::u16string> {
-  inline int32_t operator()(const std::u16string& val) {
+  int32_t operator()(const std::u16string& val) {
     int32_t hash = 0;
     for (auto&& c : val) {
       hash = 31 * hash + c;
@@ -104,7 +104,7 @@ struct geode_hash<std::u16string> {
  */
 template <>
 struct geode_hash<std::string> {
-  inline int32_t operator()(const std::string& val) {
+  int32_t operator()(const std::string& val) {
     int32_t hash = 0;
 
     for (auto&& it = val.cbegin(); it < val.cend(); it++) {

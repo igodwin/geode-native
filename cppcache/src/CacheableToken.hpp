@@ -45,18 +45,12 @@ class APACHE_GEODE_EXPORT CacheableToken
   static std::shared_ptr<CacheableToken> tombstoneToken;
 
  public:
-  inline static std::shared_ptr<CacheableToken>& invalid() {
-    return invalidToken;
-  }
-  inline static std::shared_ptr<CacheableToken>& destroyed() {
-    return destroyedToken;
-  }
-  inline static std::shared_ptr<CacheableToken>& overflowed() {
+  static std::shared_ptr<CacheableToken>& invalid() { return invalidToken; }
+  static std::shared_ptr<CacheableToken>& destroyed() { return destroyedToken; }
+  static std::shared_ptr<CacheableToken>& overflowed() {
     return overflowedToken;
   }
-  inline static std::shared_ptr<CacheableToken>& tombstone() {
-    return tombstoneToken;
-  }
+  static std::shared_ptr<CacheableToken>& tombstone() { return tombstoneToken; }
   /**
    *@brief serialize this object
    **/
@@ -74,13 +68,13 @@ class APACHE_GEODE_EXPORT CacheableToken
 
   ~CacheableToken() override = default;
 
-  inline bool isInvalid() { return m_value == INVALID; }
+  bool isInvalid() { return m_value == INVALID; }
 
-  inline bool isDestroyed() { return m_value == DESTROYED; }
+  bool isDestroyed() { return m_value == DESTROYED; }
 
-  inline bool isOverflowed() { return m_value == OVERFLOWED; }
+  bool isOverflowed() { return m_value == OVERFLOWED; }
 
-  inline bool isTombstone() { return m_value == TOMBSTONE; }
+  bool isTombstone() { return m_value == TOMBSTONE; }
 
   static bool isToken(const std::shared_ptr<Cacheable>& ptr) {
     return (invalidToken == ptr) || (destroyedToken == ptr) ||

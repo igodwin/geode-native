@@ -59,10 +59,10 @@ namespace apache
           public Delta
       {
         public:
-          inline PdxManagedCacheableKey()
+          PdxManagedCacheableKey()
             : Delta(), m_managedptr(nullptr), m_hashcode(0), m_objectSize(0), m_managedDeltaptr(nullptr) {}
 
-          inline PdxManagedCacheableKey(
+          PdxManagedCacheableKey(
             Apache::Geode::Client::IPdxSerializable^ managedptr, int hashcode)
             :Delta(), m_managedptr(managedptr), m_objectSize(0) 
           {
@@ -77,7 +77,7 @@ namespace apache
           /// <param name="managedptr">
           /// The managed object.
           /// </param>
-          inline PdxManagedCacheableKey(
+          PdxManagedCacheableKey(
             Apache::Geode::Client::IPdxSerializable^ managedptr)
             : PdxManagedCacheableKey(managedptr, 0) {}
 
@@ -105,7 +105,7 @@ namespace apache
 
           System::Int32 hashcode() const override;
 
-          inline Apache::Geode::Client::IPdxSerializable^ ptr() const
+          Apache::Geode::Client::IPdxSerializable^ ptr() const
           {
             return m_managedptr;
           }

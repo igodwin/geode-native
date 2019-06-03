@@ -48,12 +48,12 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableUndefined() { }
+        CacheableUndefined() { }
 
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableUndefined^ Create()
+        static CacheableUndefined^ Create()
         {
           return gcnew CacheableUndefined();
         }

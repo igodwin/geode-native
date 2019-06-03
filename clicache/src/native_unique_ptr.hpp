@@ -45,7 +45,7 @@ namespace Apache
           delete ptr;
         }
 
-        inline _T* get() {
+        _T* get() {
           return ptr->get();
         }
 

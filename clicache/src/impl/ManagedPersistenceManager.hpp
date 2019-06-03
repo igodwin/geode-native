@@ -38,7 +38,7 @@ namespace apache {
       {
       public:
 
-        inline ManagedPersistenceManagerGeneric(Object^ userptr) : m_userptr(userptr) { }
+        ManagedPersistenceManagerGeneric(Object^ userptr) : m_userptr(userptr) { }
 
         static apache::geode::client::PersistenceManager* create(const char* assemblyPath,
           const char* factoryFunctionName);
@@ -54,12 +54,12 @@ namespace apache {
         virtual void destroy(const std::shared_ptr<CacheableKey>& key, const std::shared_ptr<void>& PersistenceInfo);
         virtual void close();
 
-        inline void setptr(Apache::Geode::Client::IPersistenceManagerProxy^ managedptr)
+        void setptr(Apache::Geode::Client::IPersistenceManagerProxy^ managedptr)
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr() const
+        Object^ userptr() const
         {
           return m_userptr;
         }

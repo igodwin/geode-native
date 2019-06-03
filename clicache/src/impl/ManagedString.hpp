@@ -48,7 +48,7 @@ namespace Apache
 
       // Constructors
 
-      inline ManagedString( String^ str )
+      ManagedString( String^ str )
       {
         m_str = (str == nullptr) ? IntPtr::Zero :
           System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi( str );
@@ -56,7 +56,7 @@ namespace Apache
 
       // Destructor
 
-      inline ~ManagedString( )
+      ~ManagedString( )
       {
         if (m_str != IntPtr::Zero)
         {
@@ -74,12 +74,12 @@ namespace Apache
         }
       }
 
-      inline static String^ Get( const char* str )
+      static String^ Get( const char* str )
       {
         return ((str == nullptr) ? nullptr : gcnew String( str ));
       }
 
-      inline static String^ Get( const wchar_t* str )
+      static String^ Get( const wchar_t* str )
       {
         return ((str == nullptr) ? nullptr : gcnew String( str ));
       }
@@ -88,7 +88,7 @@ namespace Apache
 
       property const char* CharPtr
       {
-        inline const char* get( )
+        const char* get( )
         {
           return ((m_str == IntPtr::Zero) ? nullptr :
             static_cast<const char*>( m_str.ToPointer( ) ));

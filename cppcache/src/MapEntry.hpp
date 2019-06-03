@@ -52,7 +52,7 @@ class APACHE_GEODE_EXPORT ExpEntryProperties {
  public:
   typedef std::chrono::system_clock::time_point time_point;
 
-  inline explicit ExpEntryProperties(ExpiryTaskManager* expiryTaskManager)
+  explicit ExpEntryProperties(ExpiryTaskManager* expiryTaskManager)
       : m_lastAccessTime(0),
         m_lastModifiedTime(0),
         m_expiryTaskId(-1),
@@ -62,40 +62,35 @@ class APACHE_GEODE_EXPORT ExpEntryProperties {
     // for this entry. // TODO confirm
   }
 
-  inline time_point getLastAccessTime() const {
+  time_point getLastAccessTime() const {
     return time_point(std::chrono::system_clock::duration(m_lastAccessTime));
   }
 
-  inline time_point getLastModifiedTime() const {
+  time_point getLastModifiedTime() const {
     return time_point(std::chrono::system_clock::duration(m_lastModifiedTime));
   }
 
   //  moved time initialization outside of constructor to avoid
   // the costly gettimeofday call in MapSegment spinlock
-  inline void initStartTime() {
+  void initStartTime() {
     time_point currentTime = std::chrono::system_clock::now();
     m_lastAccessTime = currentTime.time_since_epoch().count();
     m_lastModifiedTime = currentTime.time_since_epoch().count();
   }
 
-  inline void updateLastAccessTime(time_point currTime) {
+  void updateLastAccessTime(time_point currTime) {
     m_lastAccessTime = currTime.time_since_epoch().count();
   }
 
-  inline void updateLastModifiedTime(time_point currTime) {
+  void updateLastModifiedTime(time_point currTime) {
     m_lastModifiedTime = currTime.time_since_epoch().count();
   }
 
-  inline void setExpiryTaskId(ExpiryTaskManager::id_type id) {
-    m_expiryTaskId = id;
-  }
+  void setExpiryTaskId(ExpiryTaskManager::id_type id) { m_expiryTaskId = id; }
 
-  inline ExpiryTaskManager::id_type getExpiryTaskId() const {
-    return m_expiryTaskId;
-  }
+  ExpiryTaskManager::id_type getExpiryTaskId() const { return m_expiryTaskId; }
 
-  inline void cancelExpiryTaskId(
-      const std::shared_ptr<CacheableKey>& key) const {
+  void cancelExpiryTaskId(const std::shared_ptr<CacheableKey>& key) const {
     LOGDEBUG("Cancelling expiration task for key [%s] with id [%d]",
              Utils::nullSafeToString(key).c_str(), m_expiryTaskId);
     m_expiryTaskManager->cancelTask(m_expiryTaskId);
@@ -103,7 +98,7 @@ class APACHE_GEODE_EXPORT ExpEntryProperties {
 
  protected:
   // this constructor deliberately skips initializing any fields
-  inline explicit ExpEntryProperties(bool)
+  explicit ExpEntryProperties(bool)
       : m_lastAccessTime(0), m_lastModifiedTime(0) {}
 
  private:
@@ -190,9 +185,9 @@ class APACHE_GEODE_EXPORT MapEntry {
   virtual void cleanup(const CacheEventFlags eventFlags) = 0;
 
  protected:
-  inline MapEntry() {}
+  MapEntry() {}
 
-  inline explicit MapEntry(bool) {}
+  explicit MapEntry(bool) {}
 };
 
 /**
@@ -206,11 +201,9 @@ class MapEntryImpl : public MapEntry,
   MapEntryImpl(const MapEntryImpl&) = delete;
   MapEntryImpl& operator=(const MapEntryImpl&) = delete;
 
-  inline void getKeyI(std::shared_ptr<CacheableKey>& result) const {
-    result = m_key;
-  }
+  void getKeyI(std::shared_ptr<CacheableKey>& result) const { result = m_key; }
 
-  inline void getValueI(std::shared_ptr<Cacheable>& result) const {
+  void getValueI(std::shared_ptr<Cacheable>& result) const {
     // If value is destroyed, then this returns nullptr
     if (CacheableToken::isDestroyed(m_value)) {
       result = nullptr;
@@ -219,9 +212,7 @@ class MapEntryImpl : public MapEntry,
     }
   }
 
-  inline void setValueI(const std::shared_ptr<Cacheable>& value) {
-    m_value = value;
-  }
+  void setValueI(const std::shared_ptr<Cacheable>& value) { m_value = value; }
 
   void getKey(std::shared_ptr<CacheableKey>& result) const override {
     getKeyI(result);
@@ -260,9 +251,9 @@ class MapEntryImpl : public MapEntry,
   void cleanup(const CacheEventFlags) override{};
 
  protected:
-  inline explicit MapEntryImpl(bool) : MapEntry(true) {}
+  explicit MapEntryImpl(bool) : MapEntry(true) {}
 
-  inline explicit MapEntryImpl(const std::shared_ptr<CacheableKey>& key)
+  explicit MapEntryImpl(const std::shared_ptr<CacheableKey>& key)
       : MapEntry(), m_key(key) {}
 
   std::shared_ptr<Cacheable> m_value;
@@ -277,10 +268,9 @@ class APACHE_GEODE_EXPORT VersionedMapEntryImpl : public MapEntryImpl,
   virtual VersionStamp& getVersionStamp() { return *this; }
 
  protected:
-  inline explicit VersionedMapEntryImpl(bool) : MapEntryImpl(true) {}
+  explicit VersionedMapEntryImpl(bool) : MapEntryImpl(true) {}
 
-  inline explicit VersionedMapEntryImpl(
-      const std::shared_ptr<CacheableKey>& key)
+  explicit VersionedMapEntryImpl(const std::shared_ptr<CacheableKey>& key)
       : MapEntryImpl(key) {}
 
  private:

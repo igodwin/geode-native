@@ -129,7 +129,7 @@ class FairQueue {
   std::deque<T*> m_queue;
   MUTEX m_queueLock;
 
-  inline T* popFromQueue(bool& isClosed) {
+  T* popFromQueue(bool& isClosed) {
     T* mp = nullptr;
 
     isClosed = m_closed;

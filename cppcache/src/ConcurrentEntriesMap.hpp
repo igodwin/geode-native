@@ -59,14 +59,14 @@ class APACHE_GEODE_EXPORT ConcurrentEntriesMap : public EntriesMap {
   /**
    * Return the segment index number for the given key.
    */
-  inline int segmentIdx(const std::shared_ptr<CacheableKey>& key) const {
+  int segmentIdx(const std::shared_ptr<CacheableKey>& key) const {
     return segmentIdx(key->hashcode());
   }
 
   /**
    * Return the segment index number for the given hash.
    */
-  inline int segmentIdx(uint32_t hash) const { return (hash % m_concurrency); }
+  int segmentIdx(uint32_t hash) const { return (hash % m_concurrency); }
 
  public:
   /**

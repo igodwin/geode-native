@@ -50,7 +50,7 @@ namespace apache
         /// <param name="managedptr">
         /// The managed object.
         /// </param>
-        inline ManagedAuthInitializeGeneric(Apache::Geode::Client::IAuthInitialize^ managedptr)
+        ManagedAuthInitializeGeneric(Apache::Geode::Client::IAuthInitialize^ managedptr)
           : m_managedptr(managedptr) {
           m_getCredentials = gcnew Apache::Geode::Client::IAuthInitialize::GetCredentialsDelegate(managedptr, 
             &Apache::Geode::Client::IAuthInitialize::GetCredentials);
@@ -89,7 +89,7 @@ namespace apache
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::IAuthInitialize^ ptr() const
+        Apache::Geode::Client::IAuthInitialize^ ptr() const
         {
           return m_managedptr;
         }

@@ -151,8 +151,7 @@ inline
  * @return std::string representing the given duration.
  */
 template <class Rep, class Period>
-inline std::string to_string(
-    const std::chrono::duration<Rep, Period>& duration) {
+std::string to_string(const std::chrono::duration<Rep, Period>& duration) {
   return std::to_string(duration.count()) + _suffix<Period>::value;
 }
 

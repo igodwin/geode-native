@@ -60,15 +60,15 @@ class APACHE_GEODE_EXPORT PdxFieldType
 
   PdxFieldType();
 
-  inline const std::string& getFieldName() { return m_fieldName; }
+  const std::string& getFieldName() { return m_fieldName; }
 
-  inline const std::string& getClassName() { return m_className; }
+  const std::string& getClassName() { return m_className; }
 
-  inline PdxFieldTypes getTypeId() { return m_typeId; }
+  PdxFieldTypes getTypeId() { return m_typeId; }
 
-  inline uint8_t getSequenceId() { return m_sequenceId; }
+  uint8_t getSequenceId() { return m_sequenceId; }
 
-  inline bool IsVariableLengthType() { return m_isVariableLengthType; }
+  bool IsVariableLengthType() { return m_isVariableLengthType; }
 
   bool getIdentityField() const { return m_isIdentityField; }
 

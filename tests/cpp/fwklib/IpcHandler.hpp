@@ -61,7 +61,7 @@ class IpcHandler {
  public:
   explicit IpcHandler(const ACE_INET_Addr &driver, int32_t maxWaitSecs = 0);
 
-  inline explicit IpcHandler(ACE_SOCK_Stream *io) : m_io(io) {
+  explicit IpcHandler(ACE_SOCK_Stream *io) : m_io(io) {
     ACE_OS::signal(SIGPIPE, SIG_IGN);  // Ignore broken pipe
   }
 
@@ -77,7 +77,7 @@ class IpcHandler {
 
   bool sendResult(char *result) { return sendBuffer(IPC_DONE, result); }
 
-  inline bool sendExit() {
+  bool sendExit() {
     return sendIpcMsg(IPC_EXIT);
     close();
   }

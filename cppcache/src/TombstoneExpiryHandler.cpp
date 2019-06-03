@@ -86,7 +86,7 @@ int TombstoneExpiryHandler::handle_close(ACE_HANDLE, ACE_Reactor_Mask) {
   return 0;
 }
 
-inline void TombstoneExpiryHandler::DoTheExpirationAction(
+void TombstoneExpiryHandler::DoTheExpirationAction(
     const std::shared_ptr<CacheableKey>& key) {
   LOGDEBUG(
       "EntryExpiryHandler::DoTheExpirationAction LOCAL_DESTROY "

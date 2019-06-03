@@ -58,7 +58,7 @@ class TESTOBJECT_EXPORT Position : public DataSerializable {
   int64_t volatility;
   int32_t pid;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

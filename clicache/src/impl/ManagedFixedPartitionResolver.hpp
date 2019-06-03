@@ -46,7 +46,7 @@ namespace apache {
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedFixedPartitionResolverGeneric(Object^ userptr) : m_userptr(userptr) { }
+        ManagedFixedPartitionResolverGeneric(Object^ userptr) : m_userptr(userptr) { }
 
         /// <summary>
         /// Destructor -- does nothing.
@@ -115,17 +115,17 @@ namespace apache {
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::IFixedPartitionResolverProxy^ ptr() const
+        Apache::Geode::Client::IFixedPartitionResolverProxy^ ptr() const
         {
           return m_managedptr;
         }
 
-        inline void setptr(Apache::Geode::Client::IFixedPartitionResolverProxy^ managedptr)
+        void setptr(Apache::Geode::Client::IFixedPartitionResolverProxy^ managedptr)
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr() const
+        Object^ userptr() const
         {
           return m_userptr;
         }

@@ -50,7 +50,7 @@ namespace apache
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedCacheWriterGeneric(Object^ userptr) : m_userptr(userptr) { }
+        ManagedCacheWriterGeneric(Object^ userptr) : m_userptr(userptr) { }
 
         /// <summary>
         /// Static function to create a <c>ManagedCacheWriter</c> using given
@@ -158,17 +158,17 @@ namespace apache
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::ICacheWriter<Object^, Object^>^ ptr() const
+        Apache::Geode::Client::ICacheWriter<Object^, Object^>^ ptr() const
         {
           return m_managedptr;
         }
 
-        inline void setptr(Apache::Geode::Client::ICacheWriter<Object^, Object^>^ managedptr)
+        void setptr(Apache::Geode::Client::ICacheWriter<Object^, Object^>^ managedptr)
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr() const
+        Object^ userptr() const
         {
           return m_userptr;
         }

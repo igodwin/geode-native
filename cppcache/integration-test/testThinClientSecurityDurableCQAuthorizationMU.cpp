@@ -99,7 +99,7 @@ class MyCqListener : public CqListener {
         m_numDeletes(0),
         m_numEvents(0) {}
   ~MyCqListener() noexcept override = default;
-  inline void updateCount(const CqEvent &cqEvent) {
+  void updateCount(const CqEvent &cqEvent) {
     printf(" in cqEvent.getQueryOperation() %d id = %d\n",
            static_cast<int>(cqEvent.getQueryOperation()), m_id);
     printf(" in update key = %s \n",

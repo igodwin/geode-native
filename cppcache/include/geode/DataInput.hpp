@@ -63,7 +63,7 @@ class APACHE_GEODE_EXPORT DataInput {
    *
    * @@return signed byte read from stream
    */
-  inline int8_t read() {
+  int8_t read() {
     _GEODE_CHECK_BUFFER_SIZE(1);
     return readNoCheck();
   }
@@ -73,7 +73,7 @@ class APACHE_GEODE_EXPORT DataInput {
    *
    * @param value output parameter to hold the boolean read from stream
    */
-  inline bool readBoolean() {
+  bool readBoolean() {
     _GEODE_CHECK_BUFFER_SIZE(1);
     return *(m_buf++) == 1 ? true : false;
   }
@@ -88,7 +88,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * @param buffer array to hold the bytes read from stream
    * @param len number of unsigned bytes to be read
    */
-  inline void readBytesOnly(uint8_t* buffer, size_t len) {
+  void readBytesOnly(uint8_t* buffer, size_t len) {
     if (len > 0) {
       _GEODE_CHECK_BUFFER_SIZE(len);
       std::memcpy(buffer, m_buf, len);
@@ -106,7 +106,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * @param buffer array to hold the bytes read from stream
    * @param len number of signed bytes to be read
    */
-  inline void readBytesOnly(int8_t* buffer, size_t len) {
+  void readBytesOnly(int8_t* buffer, size_t len) {
     if (len > 0) {
       _GEODE_CHECK_BUFFER_SIZE(len);
       std::memcpy(buffer, m_buf, len);
@@ -124,7 +124,7 @@ class APACHE_GEODE_EXPORT DataInput {
    *   is allocated by this method
    * @param len output parameter to hold the length of array read from stream
    */
-  inline void readBytes(uint8_t** bytes, int32_t* len) {
+  void readBytes(uint8_t** bytes, int32_t* len) {
     auto length = readArrayLength();
     *len = length;
     uint8_t* buffer = nullptr;
@@ -147,7 +147,7 @@ class APACHE_GEODE_EXPORT DataInput {
    *   is allocated by this method
    * @param len output parameter to hold the length of array read from stream
    */
-  inline void readBytes(int8_t** bytes, int32_t* len) {
+  void readBytes(int8_t** bytes, int32_t* len) {
     auto length = readArrayLength();
     *len = length;
     int8_t* buffer = nullptr;
@@ -165,7 +165,7 @@ class APACHE_GEODE_EXPORT DataInput {
    *
    * @return 16-bit signed integer read from stream
    */
-  inline int16_t readInt16() {
+  int16_t readInt16() {
     _GEODE_CHECK_BUFFER_SIZE(2);
     return readInt16NoCheck();
   }
@@ -176,7 +176,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * @param value output parameter to hold the 32-bit signed integer
    *   read from stream
    */
-  inline int32_t readInt32() {
+  int32_t readInt32() {
     _GEODE_CHECK_BUFFER_SIZE(4);
     int32_t tmp = *(m_buf++);
     tmp = (tmp << 8) | *(m_buf++);
@@ -191,7 +191,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * @param value output parameter to hold the 64-bit signed integer
    *   read from stream
    */
-  inline int64_t readInt64() {
+  int64_t readInt64() {
     _GEODE_CHECK_BUFFER_SIZE(8);
     int64_t tmp;
     tmp = *(m_buf++);
@@ -213,7 +213,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * @param len output parameter to hold the 32-bit signed length
    *   read from stream
    */
-  inline int32_t readArrayLength() {
+  int32_t readArrayLength() {
     const uint8_t code = read();
     if (code == 0xFF) {
       return -1;
@@ -240,7 +240,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * This is taken from the varint encoding in protobufs (BSD licensed).
    * See https://developers.google.com/protocol-buffers/docs/encoding
    */
-  inline int64_t readUnsignedVL() {
+  int64_t readUnsignedVL() {
     int32_t shift = 0;
     int64_t result = 0;
     while (shift < 64) {
@@ -259,7 +259,7 @@ class APACHE_GEODE_EXPORT DataInput {
    *
    * @param value output parameter to hold the float read from stream
    */
-  inline float readFloat() {
+  float readFloat() {
     _GEODE_CHECK_BUFFER_SIZE(4);
     union float_uint32_t {
       float f;
@@ -275,7 +275,7 @@ class APACHE_GEODE_EXPORT DataInput {
    * @param value output parameter to hold the double precision number
    *   read from stream
    */
-  inline double readDouble() {
+  double readDouble() {
     _GEODE_CHECK_BUFFER_SIZE(8);
     union double_uint64_t {
       double d;
@@ -286,14 +286,14 @@ class APACHE_GEODE_EXPORT DataInput {
   }
 
   template <class CharT = char, class... Tail>
-  inline std::basic_string<CharT, Tail...> readUTF() {
+  std::basic_string<CharT, Tail...> readUTF() {
     std::basic_string<CharT, Tail...> value;
     readJavaModifiedUtf8(value);
     return value;
   }
 
   template <class CharT = char, class... Tail>
-  inline std::basic_string<CharT, Tail...> readString() {
+  std::basic_string<CharT, Tail...> readString() {
     std::basic_string<CharT, Tail...> value;
     auto type = static_cast<internal::DSCode>(read());
     switch (type) {
@@ -319,17 +319,17 @@ class APACHE_GEODE_EXPORT DataInput {
     return value;
   }
 
-  inline bool readNativeBool() {
+  bool readNativeBool() {
     read();  // ignore type id
     return readBoolean();
   }
 
-  inline int32_t readNativeInt32() {
+  int32_t readNativeInt32() {
     read();  // ignore type id
     return readInt32();
   }
 
-  inline std::shared_ptr<Serializable> readDirectObject(int8_t typeId = -1) {
+  std::shared_ptr<Serializable> readDirectObject(int8_t typeId = -1) {
     return readObjectInternal(typeId);
   }
 
@@ -338,51 +338,49 @@ class APACHE_GEODE_EXPORT DataInput {
    *
    * @return Serializable object or <code>nullptr</code>.
    */
-  inline std::shared_ptr<Serializable> readObject() {
-    return readObjectInternal();
-  }
+  std::shared_ptr<Serializable> readObject() { return readObjectInternal(); }
 
   /**
    * Read a <code>Serializable</code> object from the <code>DataInput</code>.
    * Null objects are handled.
    */
-  inline void readObject(std::shared_ptr<Serializable>& ptr) {
+  void readObject(std::shared_ptr<Serializable>& ptr) {
     ptr = readObjectInternal();
   }
 
-  inline void readObject(char16_t* value) { *value = readInt16(); }
+  void readObject(char16_t* value) { *value = readInt16(); }
 
-  inline void readObject(bool* value) { *value = readBoolean(); }
+  void readObject(bool* value) { *value = readBoolean(); }
 
-  inline void readObject(int8_t* value) { *value = read(); }
+  void readObject(int8_t* value) { *value = read(); }
 
-  inline void readObject(int16_t* value) { *value = readInt16(); }
+  void readObject(int16_t* value) { *value = readInt16(); }
 
-  inline void readObject(int32_t* value) { *value = readInt32(); }
+  void readObject(int32_t* value) { *value = readInt32(); }
 
-  inline void readObject(int64_t* value) { *value = readInt64(); }
+  void readObject(int64_t* value) { *value = readInt64(); }
 
-  inline void readObject(float* value) { *value = readFloat(); }
+  void readObject(float* value) { *value = readFloat(); }
 
-  inline void readObject(double* value) { *value = readDouble(); }
+  void readObject(double* value) { *value = readDouble(); }
 
-  inline std::vector<char16_t> readCharArray() { return readArray<char16_t>(); }
+  std::vector<char16_t> readCharArray() { return readArray<char16_t>(); }
 
-  inline std::vector<bool> readBooleanArray() { return readArray<bool>(); }
+  std::vector<bool> readBooleanArray() { return readArray<bool>(); }
 
-  inline std::vector<int8_t> readByteArray() { return readArray<int8_t>(); }
+  std::vector<int8_t> readByteArray() { return readArray<int8_t>(); }
 
-  inline std::vector<int16_t> readShortArray() { return readArray<int16_t>(); }
+  std::vector<int16_t> readShortArray() { return readArray<int16_t>(); }
 
-  inline std::vector<int32_t> readIntArray() { return readArray<int32_t>(); }
+  std::vector<int32_t> readIntArray() { return readArray<int32_t>(); }
 
-  inline std::vector<int64_t> readLongArray() { return readArray<int64_t>(); }
+  std::vector<int64_t> readLongArray() { return readArray<int64_t>(); }
 
-  inline std::vector<float> readFloatArray() { return readArray<float>(); }
+  std::vector<float> readFloatArray() { return readArray<float>(); }
 
-  inline std::vector<double> readDoubleArray() { return readArray<double>(); }
+  std::vector<double> readDoubleArray() { return readArray<double>(); }
 
-  inline std::vector<std::string> readStringArray() {
+  std::vector<std::string> readStringArray() {
     std::vector<std::string> value;
 
     auto arrLen = readArrayLength();
@@ -396,9 +394,8 @@ class APACHE_GEODE_EXPORT DataInput {
     return value;
   }
 
-  inline void readArrayOfByteArrays(int8_t*** arrayofBytearr,
-                                    int32_t& arrayLength,
-                                    int32_t** elementLength) {
+  void readArrayOfByteArrays(int8_t*** arrayofBytearr, int32_t& arrayLength,
+                             int32_t** elementLength) {
     auto arrLen = readArrayLength();
     arrayLength = arrLen;
 
@@ -423,33 +420,31 @@ class APACHE_GEODE_EXPORT DataInput {
    * as readonly and modification of contents using this internal pointer
    * has undefined behavior.
    */
-  inline const uint8_t* currentBufferPosition() const { return m_buf; }
+  const uint8_t* currentBufferPosition() const { return m_buf; }
 
   /** get the number of bytes read in the buffer */
-  inline size_t getBytesRead() const { return m_buf - m_bufHead; }
+  size_t getBytesRead() const { return m_buf - m_bufHead; }
 
   /** get the number of bytes remaining to be read in the buffer */
-  inline size_t getBytesRemaining() const {
-    return (m_bufLength - getBytesRead());
-  }
+  size_t getBytesRemaining() const { return (m_bufLength - getBytesRead()); }
 
   /** advance the cursor by given offset */
-  inline void advanceCursor(size_t offset) { m_buf += offset; }
+  void advanceCursor(size_t offset) { m_buf += offset; }
 
   /** rewind the cursor by given offset */
-  inline void rewindCursor(size_t offset) { m_buf -= offset; }
+  void rewindCursor(size_t offset) { m_buf -= offset; }
 
   /** reset the cursor to the start of buffer */
-  inline void reset() { m_buf = m_bufHead; }
+  void reset() { m_buf = m_bufHead; }
 
-  inline void setBuffer() {
+  void setBuffer() {
     m_buf = currentBufferPosition();
     m_bufLength = getBytesRemaining();
   }
 
-  inline void resetPdx(size_t offset) { m_buf = m_bufHead + offset; }
+  void resetPdx(size_t offset) { m_buf = m_bufHead + offset; }
 
-  inline size_t getPdxBytes() const { return m_bufLength; }
+  size_t getPdxBytes() const { return m_bufLength; }
 
   static uint8_t* getBufferCopy(const uint8_t* from, size_t length) {
     uint8_t* result;
@@ -459,7 +454,7 @@ class APACHE_GEODE_EXPORT DataInput {
     return result;
   }
 
-  inline void reset(size_t offset) { m_buf = m_bufHead + offset; }
+  void reset(size_t offset) { m_buf = m_bufHead + offset; }
 
   uint8_t* getBufferCopyFrom(const uint8_t* from, size_t length) {
     uint8_t* result;
@@ -527,9 +522,9 @@ class APACHE_GEODE_EXPORT DataInput {
     return objArray;
   }
 
-  inline char readPdxChar() { return static_cast<char>(readInt16()); }
+  char readPdxChar() { return static_cast<char>(readInt16()); }
 
-  inline void _checkBufferSize(size_t size, int32_t line) {
+  void _checkBufferSize(size_t size, int32_t line) {
     if ((m_bufLength - (m_buf - m_bufHead)) < size) {
       throw OutOfRangeException(
           "DataInput: attempt to read beyond buffer at line " +
@@ -539,17 +534,16 @@ class APACHE_GEODE_EXPORT DataInput {
     }
   }
 
-  inline int8_t readNoCheck() { return *(m_buf++); }
+  int8_t readNoCheck() { return *(m_buf++); }
 
-  inline int16_t readInt16NoCheck() {
+  int16_t readInt16NoCheck() {
     int16_t tmp = *(m_buf++);
     tmp = static_cast<int16_t>((tmp << 8) | *(m_buf++));
     return tmp;
   }
 
   template <class CharT, class... Tail>
-  inline void readAscii(std::basic_string<CharT, Tail...>& value,
-                        size_t length) {
+  void readAscii(std::basic_string<CharT, Tail...>& value, size_t length) {
     _GEODE_CHECK_BUFFER_SIZE(length);
     value.reserve(length);
     while (length-- > 0) {
@@ -559,12 +553,12 @@ class APACHE_GEODE_EXPORT DataInput {
   }
 
   template <class CharT, class... Tail>
-  inline void readAscii(std::basic_string<CharT, Tail...>& value) {
+  void readAscii(std::basic_string<CharT, Tail...>& value) {
     readAscii(value, static_cast<uint16_t>(readInt16()));
   }
 
   template <class CharT, class... Tail>
-  inline void readAsciiHuge(std::basic_string<CharT, Tail...>& value) {
+  void readAsciiHuge(std::basic_string<CharT, Tail...>& value) {
     readAscii(value, static_cast<uint32_t>(readInt32()));
   }
 
@@ -585,7 +579,7 @@ class APACHE_GEODE_EXPORT DataInput {
       std::basic_string<char32_t, _Traits, _Allocator>& value);
 
   template <class _Traits, class _Allocator>
-  inline void readJavaModifiedUtf8(
+  void readJavaModifiedUtf8(
       std::basic_string<wchar_t, _Traits, _Allocator>& value) {
     // TODO string optimize
     typedef std::conditional<
@@ -602,8 +596,7 @@ class APACHE_GEODE_EXPORT DataInput {
   void readUtf16Huge(std::basic_string<_CharT, _Traits, _Allocator>& value);
 
   template <class _Traits, class _Allocator>
-  inline void readUtf16Huge(
-      std::basic_string<char16_t, _Traits, _Allocator>& value) {
+  void readUtf16Huge(std::basic_string<char16_t, _Traits, _Allocator>& value) {
     uint32_t length = readInt32();
     _GEODE_CHECK_BUFFER_SIZE(length);
     value.reserve(length);
@@ -619,8 +612,7 @@ class APACHE_GEODE_EXPORT DataInput {
   void readUtf16Huge(std::basic_string<char32_t, _Traits, _Allocator>& value);
 
   template <class _Traits, class _Allocator>
-  inline void readUtf16Huge(
-      std::basic_string<wchar_t, _Traits, _Allocator>& value) {
+  void readUtf16Huge(std::basic_string<wchar_t, _Traits, _Allocator>& value) {
     // TODO string optimize
     typedef std::conditional<
         sizeof(wchar_t) == sizeof(char16_t), char16_t,

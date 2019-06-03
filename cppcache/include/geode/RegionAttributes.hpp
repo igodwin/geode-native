@@ -145,7 +145,7 @@ class APACHE_GEODE_EXPORT RegionAttributes
    * If true, this region will store data in the current process.
    * @return true or false, indicating cachingEnabled state.
    */
-  inline bool getCachingEnabled() const { return m_caching; }
+  bool getCachingEnabled() const { return m_caching; }
 
   // MAP ATTRIBUTES
 
@@ -332,12 +332,12 @@ class APACHE_GEODE_EXPORT RegionAttributes
   void setDiskPolicy(DiskPolicyType diskPolicy);
   void setConcurrencyChecksEnabled(bool enable);
 
-  inline bool getEntryExpiryEnabled() const {
+  bool getEntryExpiryEnabled() const {
     return (m_entryTimeToLive > std::chrono::seconds::zero() ||
             m_entryIdleTimeout > std::chrono::seconds::zero());
   }
 
-  inline bool getRegionExpiryEnabled() const {
+  bool getRegionExpiryEnabled() const {
     return (m_regionTimeToLive > std::chrono::seconds::zero() ||
             m_regionIdleTimeout > std::chrono::seconds::zero());
   }

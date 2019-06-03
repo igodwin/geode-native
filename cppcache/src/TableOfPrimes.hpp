@@ -51,9 +51,9 @@ static const uint8_t g_primeConcurLen =
  */
 class APACHE_GEODE_EXPORT TableOfPrimes {
  public:
-  inline static uint32_t getPrimeLength() { return g_primeLen; }
+  static uint32_t getPrimeLength() { return g_primeLen; }
 
-  inline static uint32_t getPrime(uint32_t index) {
+  static uint32_t getPrime(uint32_t index) {
     if (index < g_primeLen) {
       return g_primeTable[index];
     }
@@ -72,7 +72,7 @@ class APACHE_GEODE_EXPORT TableOfPrimes {
         "number that large");
   }
 
-  inline static uint8_t getMaxPrimeForConcurrency() {
+  static uint8_t getMaxPrimeForConcurrency() {
     return g_primeConcurTable[g_primeConcurLen - 1];
   }
 

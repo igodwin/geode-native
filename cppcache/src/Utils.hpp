@@ -61,7 +61,7 @@ class APACHE_GEODE_EXPORT Utils {
   static int32_t getLastError();
 
 #ifdef __GNUC__
-  inline static char* _gnuDemangledName(const char* typeIdName, size_t& len) {
+  static char* _gnuDemangledName(const char* typeIdName, size_t& len) {
     int status;
     char* demangledName =
         abi::__cxa_demangle(typeIdName, nullptr, &len, &status);
@@ -72,8 +72,7 @@ class APACHE_GEODE_EXPORT Utils {
   }
 #endif
 
-  inline static void demangleTypeName(const char* typeIdName,
-                                      std::string& str) {
+  static void demangleTypeName(const char* typeIdName, std::string& str) {
 #ifdef __GNUC__
     size_t len;
     char* demangledName = _gnuDemangledName(typeIdName, len);
@@ -86,7 +85,7 @@ class APACHE_GEODE_EXPORT Utils {
     str.append(typeIdName);
   }
 
-  inline static std::string demangleTypeName(const char* typeIdName) {
+  static std::string demangleTypeName(const char* typeIdName) {
 #ifdef __GNUC__
     size_t len;
     char* demangledName = _gnuDemangledName(typeIdName, len);
@@ -100,7 +99,7 @@ class APACHE_GEODE_EXPORT Utils {
   /**
    * The only operations that is well defined on the result is "asChar".
    */
-  inline static std::string nullSafeToString(
+  static std::string nullSafeToString(
       const std::shared_ptr<CacheableKey>& key) {
     std::string result;
     if (key) {
@@ -130,7 +129,7 @@ class APACHE_GEODE_EXPORT Utils {
 
   // Check objectSize() implementation return value and log a warning at most
   // once.
-  inline static size_t checkAndGetObjectSize(
+  static size_t checkAndGetObjectSize(
       const std::shared_ptr<Cacheable>& theObject) {
     auto objectSize = theObject->objectSize();
     static bool youHaveBeenWarned = false;
@@ -168,8 +167,8 @@ class APACHE_GEODE_EXPORT Utils {
    * Convert the byte array to a string as "%d %d ...".
    * <code>maxLength</code> as zero implies no limit.
    */
-  inline static std::string convertBytesToString(
-      const char* bytes, size_t length, size_t maxLength = _GF_MSG_LIMIT) {
+  static std::string convertBytesToString(const char* bytes, size_t length,
+                                          size_t maxLength = _GF_MSG_LIMIT) {
     return convertBytesToString(reinterpret_cast<const uint8_t*>(bytes), length,
                                 maxLength);
   }
@@ -179,13 +178,13 @@ class APACHE_GEODE_EXPORT Utils {
 class RandGen {
  public:
   template <typename T, class G = std::default_random_engine>
-  inline T operator()(T max) {
+  T operator()(T max) {
     return std::uniform_int_distribution<T>{0, max - 1}(generator<G>());
   }
 
  private:
   template <class G>
-  inline G& generator() {
+  G& generator() {
     static thread_local G generator(std::random_device{}());
     return generator;
   }

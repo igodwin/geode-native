@@ -99,7 +99,7 @@ int EntryExpiryHandler::handle_close(ACE_HANDLE, ACE_Reactor_Mask) {
   return 0;
 }
 
-inline void EntryExpiryHandler::DoTheExpirationAction(
+void EntryExpiryHandler::DoTheExpirationAction(
     const std::shared_ptr<CacheableKey>& key) {
   // Pass a blank version tag.
   std::shared_ptr<VersionTag> versionTag;

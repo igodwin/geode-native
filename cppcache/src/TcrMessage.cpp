@@ -226,8 +226,7 @@ void TcrMessage::readCqsPart(DataInput& input) {
   }
 }
 
-inline void TcrMessage::readCallbackObjectPart(DataInput& input,
-                                               bool defaultString) {
+void TcrMessage::readCallbackObjectPart(DataInput& input, bool defaultString) {
   int32_t lenObj = input.readInt32();
   const auto isObj = input.readBoolean();
   if (lenObj > 0) {
@@ -243,7 +242,7 @@ inline void TcrMessage::readCallbackObjectPart(DataInput& input,
   }
 }
 
-inline void TcrMessage::readObjectPart(DataInput& input, bool defaultString) {
+void TcrMessage::readObjectPart(DataInput& input, bool defaultString) {
   int32_t lenObj = input.readInt32();
   auto isObj = input.read();
   if (lenObj > 0) {
@@ -352,7 +351,7 @@ int64_t TcrMessage::getUniqueId(TcrConnection* conn) {
   return 0;
 }
 
-inline void TcrMessage::readFailedNodePart(DataInput& input) {
+void TcrMessage::readFailedNodePart(DataInput& input) {
   // read and ignore length
   input.readInt32();
   // read and ignore isObj
@@ -364,7 +363,7 @@ inline void TcrMessage::readFailedNodePart(DataInput& input) {
   LOGDEBUG("readFailedNodePart m_failedNode size = %d ", m_failedNode->size());
 }
 
-inline void TcrMessage::readKeyPart(DataInput& input) {
+void TcrMessage::readKeyPart(DataInput& input) {
   int32_t lenObj = input.readInt32();
   const auto isObj = input.readBoolean();
   if (lenObj > 0) {
@@ -377,12 +376,12 @@ inline void TcrMessage::readKeyPart(DataInput& input) {
   }
 }
 
-inline void TcrMessage::writeInt(uint8_t* buffer, uint16_t value) {
+void TcrMessage::writeInt(uint8_t* buffer, uint16_t value) {
   *(buffer++) = static_cast<uint8_t>(value >> 8);
   *(buffer++) = static_cast<uint8_t>(value);
 }
 
-inline void TcrMessage::writeInt(uint8_t* buffer, uint32_t value) {
+void TcrMessage::writeInt(uint8_t* buffer, uint32_t value) {
   *(buffer++) = static_cast<uint8_t>(value >> 24);
   *(buffer++) = static_cast<uint8_t>(value >> 16);
   *(buffer++) = static_cast<uint8_t>(value >> 8);

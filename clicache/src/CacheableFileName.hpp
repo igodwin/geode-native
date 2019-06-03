@@ -46,7 +46,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new instance from the given string.
         /// </summary>
-        inline static CacheableFileName^ Create(String^ value)
+        static CacheableFileName^ Create(String^ value)
         {
           return (value != nullptr && value->Length > 0 ?
             gcnew CacheableFileName(value) : nullptr);
@@ -56,7 +56,7 @@ namespace Apache
         /// Static function to create a new instance from the
         /// given character array.
         /// </summary>
-        inline static CacheableFileName^ Create(array<Char>^ value)
+        static CacheableFileName^ Create(array<Char>^ value)
         {
           return (value != nullptr && value->Length > 0 ?
             gcnew CacheableFileName(value) : nullptr);
@@ -109,7 +109,7 @@ namespace Apache
         /// </summary>
         property String^ Value
         {
-          inline String^ get()
+          String^ get()
           {
             return m_str;
           }
@@ -128,13 +128,13 @@ namespace Apache
         /// <summary>
         /// Allocates a new instance from the given string.
         /// </summary>
-        inline CacheableFileName(String^ value)
+        CacheableFileName(String^ value)
           : m_str(value == nullptr ? String::Empty : value),m_hashcode(0) { }
 
         /// <summary>
         /// Allocates a new instance copying from the given character array.
         /// </summary>
-        inline CacheableFileName(array<Char>^ value)
+        CacheableFileName(array<Char>^ value)
           : m_str(gcnew String(value)),m_hashcode(0) { }
 
         String^ m_str;

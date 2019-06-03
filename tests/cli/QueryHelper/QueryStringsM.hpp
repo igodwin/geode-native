@@ -63,7 +63,7 @@ namespace Apache
         {
         public:
 
-          inline QueryStrings( QueryCategory pcategory, String^ pquery,
+          QueryStrings( QueryCategory pcategory, String^ pquery,
             Boolean pisLargeResultset )
           {
             Init( pcategory, pquery, pisLargeResultset );
@@ -132,7 +132,7 @@ namespace Apache
           /// Internal constructor to wrap a native object pointer
           /// </summary>
           /// <param name="nativeptr">The native object pointer</param>
-          inline QueryStrings(testData::QueryStrings* nativeptr)
+          QueryStrings(testData::QueryStrings* nativeptr)
           {
             m_nativeptr = gcnew native_conditional_unique_ptr<testData::QueryStrings>(nativeptr);
           }

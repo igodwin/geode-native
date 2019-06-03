@@ -49,9 +49,9 @@ class APACHE_GEODE_EXPORT RemoteQueryService
 
   void init();
 
-  inline ACE_RW_Thread_Mutex& getLock() { return m_rwLock; }
+  ACE_RW_Thread_Mutex& getLock() { return m_rwLock; }
 
-  inline const volatile bool& invalid() { return m_invalid; }
+  const volatile bool& invalid() { return m_invalid; }
 
   void close();
 
@@ -92,7 +92,7 @@ class APACHE_GEODE_EXPORT RemoteQueryService
   void receiveNotification(TcrMessage* msg);
   void invokeCqConnectedListeners(ThinClientPoolDM* pool, bool connected);
   // For Lazy Cq Start-no use, no start
-  inline void initCqService() {
+  void initCqService() {
     if (m_cqService == nullptr) {
       LOGFINE("RemoteQueryService: starting cq service");
       m_cqService = std::make_shared<CqService>(m_tccdm, m_statisticsFactory);

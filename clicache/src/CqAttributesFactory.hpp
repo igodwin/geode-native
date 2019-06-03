@@ -54,12 +54,12 @@ namespace Apache
         /// Creates a new instance of <c>CqAttributesFactory</c> ready
         /// to create a <c>CqAttributes</c> with default settings.
         /// </summary>
-        inline CqAttributesFactory( )
+        CqAttributesFactory( )
         {
           m_nativeptr = gcnew native_unique_ptr<native::CqAttributesFactory>(std::make_unique<native::CqAttributesFactory>());
         }
 
-        inline CqAttributesFactory(Client::CqAttributes<TKey, TResult>^ cqAttributes )
+        CqAttributesFactory(Client::CqAttributes<TKey, TResult>^ cqAttributes )
         {
            m_nativeptr = gcnew native_unique_ptr<native::CqAttributesFactory>(std::make_unique<native::CqAttributesFactory>(cqAttributes->GetNative()));
         }

@@ -79,7 +79,7 @@ namespace Apache
           /// Internal constructor to wrap a native object pointer
           /// </summary>
           /// <param name="nativeptr">The native object pointer</param>
-          inline TransactionEvent( apache::geode::client::TransactionEvent* nativeptr )
+          TransactionEvent( apache::geode::client::TransactionEvent* nativeptr )
             : UMWrap( nativeptr, false ) { }
         };
     }  // namespace Client

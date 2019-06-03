@@ -50,7 +50,7 @@ namespace apache
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedCacheLoaderGeneric(
+        ManagedCacheLoaderGeneric(
           /*Generic::ICacheLoader<Object^, Object^>^ managedptr,*/ Object^ userptr)
           : /*m_managedptr( managedptr ),*/ m_userptr(userptr) { }
 
@@ -122,18 +122,18 @@ namespace apache
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::ICacheLoader^ ptr( ) const
+        Apache::Geode::Client::ICacheLoader^ ptr( ) const
         {
         return m_managedptr;
         }
         */
 
-        inline void setptr(Apache::Geode::Client::ICacheLoaderProxy^ managedptr)
+        void setptr(Apache::Geode::Client::ICacheLoaderProxy^ managedptr)
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr() const
+        Object^ userptr() const
         {
           return m_userptr;
         }

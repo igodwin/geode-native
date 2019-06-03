@@ -35,7 +35,7 @@ class MyListener : public CacheListener {
   MyListener() : CacheListener() {
     for (int i = 0; i < 5; i++) m_gotit[i] = 0;
   }
-  inline void checkEntry(const EntryEvent &event) {
+  void checkEntry(const EntryEvent &event) {
     auto keyPtr = std::dynamic_pointer_cast<CacheableString>(event.getKey());
     for (int i = 0; i < 5; i++) {
       if (!ACE_OS::strcmp(keys[i], keyPtr->value().c_str())) {
@@ -48,7 +48,7 @@ class MyListener : public CacheListener {
   }
   virtual void afterCreate(const EntryEvent &event) { checkEntry(event); }
   virtual void afterUpdate(const EntryEvent &event) { checkEntry(event); }
-  inline bool gotAll() {
+  bool gotAll() {
     for (int i = 0; i < 5; i++) {
       if (m_gotit[i] == 0) return false;
     }

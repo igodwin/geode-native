@@ -83,13 +83,13 @@ class APACHE_GEODE_EXPORT LRUAction {
 
   virtual LRUAction::Action getType() = 0;
 
-  inline bool invalidates() { return m_invalidates; }
+  bool invalidates() { return m_invalidates; }
 
-  inline bool destroys() { return m_destroys; }
+  bool destroys() { return m_destroys; }
 
-  inline bool distributes() { return m_distributes; }
+  bool distributes() { return m_distributes; }
 
-  inline bool overflows() { return m_overflows; }
+  bool overflows() { return m_overflows; }
 };
 
 /**

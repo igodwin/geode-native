@@ -287,7 +287,7 @@ namespace Apache
         /// <returns>
         /// The managed wrapper object; null if the native pointer is null.
         /// </returns>
-        inline static Cache^ Create(std::shared_ptr<native::Cache> nativeptr)
+        static Cache^ Create(std::shared_ptr<native::Cache> nativeptr)
         {
           return __nullptr == nativeptr ? nullptr :
             gcnew Cache( nativeptr );

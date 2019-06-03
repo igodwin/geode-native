@@ -34,9 +34,9 @@ class DeleteObject {
  public:
   explicit DeleteObject(T*& p) : m_p(p), m_cond(true) {}
 
-  inline void noDelete() { m_cond = false; }
+  void noDelete() { m_cond = false; }
 
-  inline T*& ptr() { return m_p; }
+  T*& ptr() { return m_p; }
 
   ~DeleteObject() {
     if (m_cond) {
@@ -54,11 +54,11 @@ class DeleteArray {
  public:
   explicit DeleteArray(T*& p) : m_p(p), m_cond(true) {}
 
-  inline T operator[](int32_t index) { return m_p[index]; }
+  T operator[](int32_t index) { return m_p[index]; }
 
-  inline void noDelete() { m_cond = false; }
+  void noDelete() { m_cond = false; }
 
-  inline T*& ptr() { return m_p; }
+  T*& ptr() { return m_p; }
 
   ~DeleteArray() {
     if (m_cond) {

@@ -47,7 +47,7 @@ namespace apache
         /// Create a <c>apache::geode::client::Properties::Visitor</c> from the given managed
         /// <c>PropertyVisitor</c> delegate.
         /// </summary>
-        inline ManagedVisitorGeneric(Object^ visitorFunc) : m_managedptr(visitorFunc) { }
+        ManagedVisitorGeneric(Object^ visitorFunc) : m_managedptr(visitorFunc) { }
 
         /// <summary>
         /// Invokes the managed <c>PropertyVisitor</c> delegate for the given

@@ -29,20 +29,18 @@ namespace client {
 
 template <class _Serializable>
 struct SerializableHelper {
-  inline void serialize(DataOutput& dataOutput,
-                        const _Serializable& serializable) {
+  void serialize(DataOutput& dataOutput, const _Serializable& serializable) {
     serializable.toData(dataOutput);
   };
 
-  inline void deserialize(DataInput& dataInput, _Serializable& serializable) {
+  void deserialize(DataInput& dataInput, _Serializable& serializable) {
     serializable.fromData(dataInput);
   }
 
-  inline bool metadataEqualTo(const _Serializable& lhs,
-                              const _Serializable& rhs);
+  bool metadataEqualTo(const _Serializable& lhs, const _Serializable& rhs);
 
-  inline bool equalTo(CacheImpl& cache, const _Serializable& lhs,
-                      const _Serializable& rhs) {
+  bool equalTo(CacheImpl& cache, const _Serializable& lhs,
+               const _Serializable& rhs) {
     if (!metadataEqualTo(lhs, rhs)) {
       return false;
     }
@@ -61,9 +59,8 @@ struct SerializableHelper {
                   lhsOut.getBufferLength()) == 0;
   }
 
-  inline bool equalTo(CacheImpl& cache,
-                      const std::shared_ptr<_Serializable>& lhs,
-                      const std::shared_ptr<_Serializable>& rhs) {
+  bool equalTo(CacheImpl& cache, const std::shared_ptr<_Serializable>& lhs,
+               const std::shared_ptr<_Serializable>& rhs) {
     if (rhs && lhs) {
       return equalTo(cache, *lhs, *rhs);
     }
@@ -73,26 +70,27 @@ struct SerializableHelper {
 };
 
 template <>
-inline bool SerializableHelper<DataSerializablePrimitive>::metadataEqualTo(
+bool SerializableHelper<DataSerializablePrimitive>::metadataEqualTo(
     const DataSerializablePrimitive& lhs,
     const DataSerializablePrimitive& rhs) {
   return lhs.getDsCode() == rhs.getDsCode();
 }
 
 template <>
-inline bool SerializableHelper<DataSerializable>::metadataEqualTo(
+bool SerializableHelper<DataSerializable>::metadataEqualTo(
     const DataSerializable& lhs, const DataSerializable& rhs) {
   return lhs.getType() == rhs.getType();
 }
 
 template <>
-inline bool SerializableHelper<PdxSerializable>::equalTo(
-    CacheImpl&, const PdxSerializable& lhs, const PdxSerializable& rhs) {
+bool SerializableHelper<PdxSerializable>::equalTo(CacheImpl&,
+                                                  const PdxSerializable& lhs,
+                                                  const PdxSerializable& rhs) {
   return lhs == rhs;
 }
 
 template <>
-inline bool SerializableHelper<DataSerializableInternal>::metadataEqualTo(
+bool SerializableHelper<DataSerializableInternal>::metadataEqualTo(
     const DataSerializableInternal&, const DataSerializableInternal&) {
   return true;
 }

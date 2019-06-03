@@ -75,7 +75,7 @@ class CacheableStringTests : public ::testing::Test, public ByteArrayFixture {
  protected:
 };
 
-inline std::string to_hex(const uint8_t* bytes, size_t len) {
+std::string to_hex(const uint8_t* bytes, size_t len) {
   std::stringstream ss;
   ss << std::setfill('0') << std::hex;
   for (size_t i(0); i < len; ++i) {
@@ -84,7 +84,7 @@ inline std::string to_hex(const uint8_t* bytes, size_t len) {
   return ss.str();
 }
 
-inline std::string to_hex(const DataOutput& out) {
+std::string to_hex(const DataOutput& out) {
   return to_hex(out.getBuffer(), out.getBufferLength());
 }
 

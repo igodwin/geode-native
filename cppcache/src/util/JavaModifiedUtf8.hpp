@@ -36,7 +36,7 @@ struct JavaModifiedUtf8 {
    * Calculate the length of the given UTF-8 string when encoded in Java
    * Modified UTF-8.
    */
-  inline static size_t encodedLength(const std::string& utf8) {
+  static size_t encodedLength(const std::string& utf8) {
     if (utf8.empty()) {
       return 0;
     }
@@ -49,11 +49,11 @@ struct JavaModifiedUtf8 {
    * Calculate the length of the given UTF-16 string when encoded in Java
    * Modified UTF-8.
    */
-  inline static size_t encodedLength(const std::u16string& utf16) {
+  static size_t encodedLength(const std::u16string& utf16) {
     return encodedLength(utf16.data(), utf16.length());
   }
 
-  inline static size_t encodedLength(const char16_t* data, size_t length) {
+  static size_t encodedLength(const char16_t* data, size_t length) {
     size_t encodedLen = 0;
     while (length-- > 0) {
       const char16_t c = *(data++);
@@ -75,14 +75,14 @@ struct JavaModifiedUtf8 {
   /**
    * Converts given UTF-8 string to Java Modified UTF-8 string.
    */
-  inline static std::string fromString(const std::string& utf8) {
+  static std::string fromString(const std::string& utf8) {
     return fromString(to_utf16(utf8));
   }
 
   /**
    * Converts given UTF-16 string to Java Modified UTF-8 string.
    */
-  inline static std::string fromString(const std::u16string& utf16) {
+  static std::string fromString(const std::u16string& utf16) {
     std::string jmutf8;
     jmutf8.reserve(utf16.length());
 
@@ -96,7 +96,7 @@ struct JavaModifiedUtf8 {
   /**
    * Converts a single UTF-16 code unit into Java Modified UTF-8 code units.
    */
-  inline static void encode(const char16_t c, std::string& jmutf8) {
+  static void encode(const char16_t c, std::string& jmutf8) {
     if (c == 0) {
       // NUL
       jmutf8 += static_cast<uint8_t>(0xc0);
@@ -114,7 +114,7 @@ struct JavaModifiedUtf8 {
     }
   }
 
-  inline static std::u16string decode(const char* buf, uint16_t len) {
+  static std::u16string decode(const char* buf, uint16_t len) {
     std::u16string value;
     const auto end = buf + len;
     while (buf < end) {
@@ -123,7 +123,7 @@ struct JavaModifiedUtf8 {
     return value;
   }
 
-  inline static char16_t decodeJavaModifiedUtf8Char(const char** pbuf) {
+  static char16_t decodeJavaModifiedUtf8Char(const char** pbuf) {
     char16_t c;
 
     // get next byte unsigned

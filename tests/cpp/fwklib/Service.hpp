@@ -71,13 +71,13 @@ class Service : public ACE_Task_Base {
 
   int32_t svc();
 
-  inline void putQ(ServiceTask* task, uint32_t cnt = 1) {
+  void putQ(ServiceTask* task, uint32_t cnt = 1) {
     ACE_Guard<ACE_Thread_Mutex> guard(m_Mutex);
     m_busy += cnt;
     for (uint32_t i = 0; i < cnt; i++) m_TaskQueue.insert_tail(task);
   }
 
-  inline ServiceTask* getQ() {
+  ServiceTask* getQ() {
     ACE_Guard<ACE_Thread_Mutex> guard(m_Mutex);
     return m_TaskQueue.delete_head();
   }
@@ -85,14 +85,14 @@ class Service : public ACE_Task_Base {
  public:
   explicit Service(int32_t threadCnt);
 
-  inline ~Service() { stopThreads(); }
+  ~Service() { stopThreads(); }
 
   int32_t runThreaded(ServiceTask* task, uint32_t threads);
 
-  inline uint32_t getBusyCount() { return m_busy; }
-  inline uint32_t getIdleCount() { return m_ThreadCount - m_busy; }
+  uint32_t getBusyCount() { return m_busy; }
+  uint32_t getIdleCount() { return m_ThreadCount - m_busy; }
 
-  inline void stopThreads() {
+  void stopThreads() {
     m_run = false;
     wait();
   }

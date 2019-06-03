@@ -141,7 +141,7 @@ class MyCqListener : public CqListener {
         m_numUpdates(0),
         m_numDeletes(0),
         m_numEvents(0) {}
-  inline void updateCount(const CqEvent &cqEvent) {
+  void updateCount(const CqEvent &cqEvent) {
     m_numEvents++;
     switch (cqEvent.getQueryOperation()) {
       case CqOperation::OP_TYPE_CREATE:
@@ -196,7 +196,7 @@ class MyCqStatusListener : public CqStatusListener {
         m_numEvents(0),
         m_cqsConnectedCount(0),
         m_cqsDisconnectedCount(0) {}
-  inline void updateCount(const CqEvent &cqEvent) {
+  void updateCount(const CqEvent &cqEvent) {
     m_numEvents++;
     switch (cqEvent.getQueryOperation()) {
       case CqOperation::OP_TYPE_CREATE: {

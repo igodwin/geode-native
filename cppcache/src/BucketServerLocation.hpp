@@ -91,11 +91,11 @@ class BucketServerLocation : public ServerLocation {
     }
   }
 
-  inline int getBucketId() const { return m_bucketId; }
+  int getBucketId() const { return m_bucketId; }
 
-  inline bool isPrimary() const { return m_isPrimary; }
+  bool isPrimary() const { return m_isPrimary; }
 
-  inline int8_t getVersion() const { return m_version; }
+  int8_t getVersion() const { return m_version; }
 
   void toData(DataOutput& output) const override {
     ServerLocation::toData(output);
@@ -160,7 +160,7 @@ class BucketServerLocation : public ServerLocation {
     this->m_serverGroups = rhs.m_serverGroups;
   }
 
-  inline std::shared_ptr<CacheableStringArray> getServerGroups() {
+  std::shared_ptr<CacheableStringArray> getServerGroups() {
     return m_serverGroups;
   }
 };

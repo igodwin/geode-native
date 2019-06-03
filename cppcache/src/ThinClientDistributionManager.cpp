@@ -218,7 +218,7 @@ void ThinClientDistributionManager::failover() {
   selectEndpoint(randIndex, doRand);
 }
 
-inline GfErrType ThinClientDistributionManager::connectToEndpoint(int epIndex) {
+GfErrType ThinClientDistributionManager::connectToEndpoint(int epIndex) {
   GfErrType err = GF_NOERR;
   TcrEndpoint* ep = m_endpoints[epIndex];
   ep->setDM(this);

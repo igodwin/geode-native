@@ -38,7 +38,7 @@ constexpr std::codecvt_mode codecvt_mode_native_endian =
     endian::native == endian::little ? std::little_endian
                                      : static_cast<std::codecvt_mode>(0);
 
-inline std::u16string to_utf16(const std::string& utf8) {
+std::u16string to_utf16(const std::string& utf8) {
 #if defined(_MSC_VER) && _MSC_VER >= 1900
   /*
    * Workaround for missing std:codecvt identifier.
@@ -55,7 +55,7 @@ inline std::u16string to_utf16(const std::string& utf8) {
 #endif
 }
 
-inline std::u16string to_utf16(const std::u32string& ucs4) {
+std::u16string to_utf16(const std::u32string& ucs4) {
 #if defined(_MSC_VER) && _MSC_VER >= 1900
   /*
    * Workaround for missing std:codecvt identifier.
@@ -79,7 +79,7 @@ inline std::u16string to_utf16(const std::u32string& ucs4) {
                         bytes.length() / sizeof(char16_t));
 }
 
-inline std::u16string to_utf16(const char32_t* ucs4, size_t len) {
+std::u16string to_utf16(const char32_t* ucs4, size_t len) {
 #if defined(_MSC_VER) && _MSC_VER >= 1900
   /*
    * Workaround for missing std:codecvt identifier.
@@ -103,7 +103,7 @@ inline std::u16string to_utf16(const char32_t* ucs4, size_t len) {
                         bytes.length() / sizeof(char16_t));
 }
 
-inline std::u32string to_ucs4(const std::u16string& utf16) {
+std::u32string to_ucs4(const std::u16string& utf16) {
 #if defined(_MSC_VER) && _MSC_VER >= 1900
   /*
    * Workaround for missing std:codecvt identifier.
@@ -126,7 +126,7 @@ inline std::u32string to_ucs4(const std::u16string& utf16) {
 #endif
 }
 
-inline std::string to_utf8(const std::u16string& utf16) {
+std::string to_utf8(const std::u16string& utf16) {
 #if defined(_MSC_VER) && _MSC_VER >= 1900
   /*
    * Workaround for missing std:codecvt identifier.
@@ -141,7 +141,7 @@ inline std::string to_utf8(const std::u16string& utf16) {
 #endif
 }
 
-inline std::string to_utf8(const std::u32string& ucs4) {
+std::string to_utf8(const std::u32string& ucs4) {
 #if defined(_MSC_VER) && _MSC_VER >= 1900
   /*
    * Workaround for missing std:codecvt identifier.
@@ -156,8 +156,7 @@ inline std::string to_utf8(const std::u32string& ucs4) {
 #endif
 }
 
-inline bool equal_ignore_case(const std::string& str1,
-                              const std::string& str2) {
+bool equal_ignore_case(const std::string& str1, const std::string& str2) {
   return ((str1.size() == str2.size()) &&
           std::equal(str1.begin(), str1.end(), str2.begin(),
                      [](const char& c1, const char& c2) {

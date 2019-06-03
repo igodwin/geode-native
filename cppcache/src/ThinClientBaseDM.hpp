@@ -85,7 +85,7 @@ class ThinClientBaseDM {
                                               const TcrMessage* request,
                                               TcrMessageReply* reply);
 
-  inline static bool isFatalError(GfErrType err) {
+  static bool isFatalError(GfErrType err) {
     return (err == GF_MSG || err == GF_CACHESERVER_EXCEPTION ||
             err == GF_NOT_AUTHORIZED_EXCEPTION ||
             err == GF_AUTHENTICATION_REQUIRED_EXCEPTION ||
@@ -93,7 +93,7 @@ class ThinClientBaseDM {
             err == GF_CACHE_LOCATOR_EXCEPTION);
   }
 
-  inline static bool isFatalClientError(GfErrType err) {
+  static bool isFatalClientError(GfErrType err) {
     return (err == GF_NOT_AUTHORIZED_EXCEPTION ||
             err == GF_AUTHENTICATION_REQUIRED_EXCEPTION ||
             err == GF_AUTHENTICATION_FAILED_EXCEPTION ||
@@ -121,7 +121,7 @@ class ThinClientBaseDM {
 
   static bool isDeltaEnabledOnServer() { return s_isDeltaEnabledOnServer; }
 
-  inline static void setDeltaEnabledOnServer(bool isDeltaEnabledOnServer) {
+  static void setDeltaEnabledOnServer(bool isDeltaEnabledOnServer) {
     s_isDeltaEnabledOnServer = isDeltaEnabledOnServer;
     LOGFINE("Delta enabled on server: %s",
             s_isDeltaEnabledOnServer ? "true" : "false");

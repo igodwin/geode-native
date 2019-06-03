@@ -30,18 +30,18 @@ using namespace apache::geode::client;
 
 class Order : public PdxSerializable {
  public:
-  inline Order() : Order(0, "", 0) {}
+  Order() : Order(0, "", 0) {}
 
-  inline Order(int32_t order_id, std::string name, int16_t quantity)
+  Order(int32_t order_id, std::string name, int16_t quantity)
       : order_id_(order_id), name_(std::move(name)), quantity_(quantity) {}
 
   ~Order() override = default;
 
-  inline int32_t getOrderId() const { return order_id_; }
+  int32_t getOrderId() const { return order_id_; }
 
-  inline const std::string& getName() const { return name_; }
+  const std::string& getName() const { return name_; }
 
-  inline uint16_t getQuantity() const { return quantity_; }
+  uint16_t getQuantity() const { return quantity_; }
 
   using PdxSerializable::fromData;
 

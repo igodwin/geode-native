@@ -114,7 +114,7 @@ class APACHE_GEODE_EXPORT Queue {
   bool empty() { return (size() == 0); }
 
  private:
-  inline T getNoLock() {
+  T getNoLock() {
     T mp = nullptr;
 
     auto queueSize = static_cast<uint32_t>(m_queue.size());
@@ -129,7 +129,7 @@ class APACHE_GEODE_EXPORT Queue {
     return mp;
   }
 
-  inline bool putNoLock(T mp) {
+  bool putNoLock(T mp) {
     if (!m_closed) {
       m_queue.push_front(mp);
       // signal the waiting getter threads, if any

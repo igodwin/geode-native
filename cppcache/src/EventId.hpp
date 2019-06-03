@@ -89,7 +89,7 @@ class APACHE_GEODE_EXPORT EventId
 
   int64_t getEventIdData(DataInput& input, char numberCode);
 
-  inline void writeIdsData(DataOutput& output) {
+  void writeIdsData(DataOutput& output) {
     //  Write EventId threadid and seqno.
     int idsBufferLength = 18;
     output.writeInt(idsBufferLength);

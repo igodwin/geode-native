@@ -78,7 +78,7 @@ namespace Apache
         /// Returns true if this action is distributed invalidate.
         /// </summary>
         /// <returns>true if this an <c>Invalidate</c></returns>
-        inline static bool IsInvalidate( ExpirationAction type ) 
+        static bool IsInvalidate( ExpirationAction type )
         {
           return (type == ExpirationAction::Invalidate);
         }
@@ -87,7 +87,7 @@ namespace Apache
         /// Returns true if this action is local invalidate.
         /// </summary>
         /// <returns>true if this is a <c>LocalInvalidate</c></returns>
-        inline static bool IsLocalInvalidate( ExpirationAction type ) 
+        static bool IsLocalInvalidate( ExpirationAction type )
         {
           return (type == ExpirationAction::LocalInvalidate);
         }
@@ -96,7 +96,7 @@ namespace Apache
         /// Returns true if this action is distributed destroy.
         /// </summary>
         /// <returns>true if this is <c>Destroy</c></returns>
-        inline static bool IsDestroy( ExpirationAction type ) 
+        static bool IsDestroy( ExpirationAction type )
         {
           return (type == ExpirationAction::Destroy);
         }
@@ -105,7 +105,7 @@ namespace Apache
         /// Returns true if this action is local destroy.
         /// </summary>
         /// <returns>true if this is <c>LocalDestroy</c></returns>
-        inline static bool IsLocalDestroy( ExpirationAction type )
+        static bool IsLocalDestroy( ExpirationAction type )
         {
           return (type == ExpirationAction::LocalDestroy);
         }
@@ -115,7 +115,7 @@ namespace Apache
         /// </summary>
         /// <returns>true if this is <c>LocalInvalidate</c> or
         /// <c>LocalDestroy</c></returns>
-        inline static bool IsLocal( ExpirationAction type )
+        static bool IsLocal( ExpirationAction type )
         {
           return (type == ExpirationAction::LocalInvalidate) ||
             (type == ExpirationAction::LocalDestroy);
@@ -126,7 +126,7 @@ namespace Apache
         /// </summary>
         /// <returns>true if this is an <c>Invalidate</c> or
         /// a <c>Destroy</c></returns>
-        inline static bool IsDistributed( ExpirationAction type ) 
+        static bool IsDistributed( ExpirationAction type )
         {
           return (type == ExpirationAction::Invalidate) ||
             (type == ExpirationAction::Destroy);

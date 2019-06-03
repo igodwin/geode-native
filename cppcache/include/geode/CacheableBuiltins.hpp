@@ -47,11 +47,11 @@ using CacheableBoolean =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<bool, internal::DSCode::CacheableBoolean>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(bool value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(bool value) {
   return CacheableBoolean::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(bool value) {
+std::shared_ptr<Cacheable> Serializable::create(bool value) {
   return CacheableBoolean::create(value);
 }
 
@@ -64,11 +64,11 @@ using CacheableByte =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<int8_t, internal::DSCode::CacheableByte>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(int8_t value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(int8_t value) {
   return CacheableByte::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(int8_t value) {
+std::shared_ptr<Cacheable> Serializable::create(int8_t value) {
   return CacheableByte::create(value);
 }
 
@@ -81,11 +81,11 @@ using CacheableDouble =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<double, internal::DSCode::CacheableDouble>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(double value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(double value) {
   return CacheableDouble::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(double value) {
+std::shared_ptr<Cacheable> Serializable::create(double value) {
   return CacheableDouble::create(value);
 }
 
@@ -99,11 +99,11 @@ using CacheableFloat =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<float, internal::DSCode::CacheableFloat>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(float value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(float value) {
   return CacheableFloat::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(float value) {
+std::shared_ptr<Cacheable> Serializable::create(float value) {
   return CacheableFloat::create(value);
 }
 
@@ -116,11 +116,11 @@ using CacheableInt16 =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<int16_t, internal::DSCode::CacheableInt16>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(int16_t value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(int16_t value) {
   return CacheableInt16::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(int16_t value) {
+std::shared_ptr<Cacheable> Serializable::create(int16_t value) {
   return CacheableInt16::create(value);
 }
 
@@ -133,11 +133,11 @@ using CacheableInt32 =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<int32_t, internal::DSCode::CacheableInt32>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(int32_t value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(int32_t value) {
   return CacheableInt32::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(int32_t value) {
+std::shared_ptr<Cacheable> Serializable::create(int32_t value) {
   return CacheableInt32::create(value);
 }
 
@@ -150,11 +150,11 @@ using CacheableInt64 =
 extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<int64_t, internal::DSCode::CacheableInt64>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(int64_t value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(int64_t value) {
   return CacheableInt64::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(int64_t value) {
+std::shared_ptr<Cacheable> Serializable::create(int64_t value) {
   return CacheableInt64::create(value);
 }
 
@@ -169,11 +169,11 @@ extern template class APACHE_GEODE_EXTERN_TEMPLATE_EXPORT
     internal::CacheableKeyPrimitive<char16_t,
                                     internal::DSCode::CacheableCharacter>;
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(char16_t value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(char16_t value) {
   return CacheableCharacter::create(value);
 }
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(char16_t value) {
+std::shared_ptr<Cacheable> Serializable::create(char16_t value) {
   return CacheableCharacter::create(value);
 }
 

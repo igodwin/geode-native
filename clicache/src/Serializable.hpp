@@ -177,14 +177,14 @@ namespace Apache
         /// <summary>
         /// Default constructor.
         /// </summary>
-        inline Apache::Geode::Client::Serializable()
+        Apache::Geode::Client::Serializable()
         :Serializable(__nullptr) { }
 
         /// <summary>
         /// Internal constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline Apache::Geode::Client::Serializable(std::shared_ptr<native::Serializable> nativeptr)
+        Apache::Geode::Client::Serializable(std::shared_ptr<native::Serializable> nativeptr)
         {
           m_nativeptr = gcnew native_shared_ptr<native::Serializable>(nativeptr);
         }

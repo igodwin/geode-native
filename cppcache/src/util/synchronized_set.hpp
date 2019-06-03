@@ -55,10 +55,10 @@ class synchronized_set {
   typedef typename Set::difference_type difference_type;
   typedef typename Set::size_type size_type;
 
-  inline mutex_type& mutex() const noexcept { return mutex_; }
+  mutex_type& mutex() const noexcept { return mutex_; }
 
-  inline set_type& set() noexcept { return set_; }
-  inline const set_type& set() const noexcept { return set_; }
+  set_type& set() noexcept { return set_; }
+  const set_type& set() const noexcept { return set_; }
 
   /**
    * Allocates a Lock object around the Mutex and locks the Mutex.
@@ -78,7 +78,7 @@ class synchronized_set {
    * @throws Any exception throws by Mutex::lock()
    */
   template <template <class...> class Lock = std::lock_guard>
-  inline Lock<Mutex> make_lock() const {
+  Lock<Mutex> make_lock() const {
     mutex_.lock();
     return {mutex_, std::adopt_lock};
   }
@@ -104,65 +104,65 @@ class synchronized_set {
    * @throws Any exception throws by Lock constructors.
    */
   template <template <class...> class Lock = std::lock_guard, class... Args>
-  inline Lock<Mutex> make_lock(Args&&... args) const {
+  Lock<Mutex> make_lock(Args&&... args) const {
     return {mutex_, std::forward<Args>(args)...};
   }
 
   template <class... Args>
-  inline std::pair<typename Set::iterator, bool> emplace(Args&&... args) {
+  std::pair<typename Set::iterator, bool> emplace(Args&&... args) {
     std::lock_guard<Mutex> lock(mutex_);
     return set_.emplace(std::forward<Args>(args)...);
   }
 
-  inline size_type erase(const key_type& key) {
+  size_type erase(const key_type& key) {
     std::lock_guard<Mutex> lock(mutex_);
     return set_.erase(key);
   }
 
-  inline bool empty() const noexcept {
+  bool empty() const noexcept {
     std::lock_guard<Mutex> lock(mutex_);
     return set_.empty();
   }
 
-  inline size_type size() const noexcept {
+  size_type size() const noexcept {
     std::lock_guard<Mutex> lock(mutex_);
     return set_.size();
   }
 
-  inline void clear() noexcept {
+  void clear() noexcept {
     std::lock_guard<Mutex> lock(mutex_);
     set_.clear();
   }
 
-  inline iterator find(const key_type& key) {
+  iterator find(const key_type& key) {
     //    std::lock_guard<Mutex> lock(mutex_);
     return set_.find(key);
   }
 
-  inline const_iterator find(const key_type& key) const {
+  const_iterator find(const key_type& key) const {
     //    std::lock_guard<Mutex> lock(mutex_);
     return set_.find(key);
   }
 
-  inline iterator begin() noexcept { return set_.begin(); }
-  inline iterator end() noexcept { return set_.end(); }
-  inline const_iterator begin() const noexcept { return set_.begin(); }
-  inline const_iterator end() const noexcept { return set_.end(); }
-  inline const_iterator cbegin() const noexcept { return set_.begin(); }
-  inline const_iterator cend() const noexcept { return set_.end(); }
+  iterator begin() noexcept { return set_.begin(); }
+  iterator end() noexcept { return set_.end(); }
+  const_iterator begin() const noexcept { return set_.begin(); }
+  const_iterator end() const noexcept { return set_.end(); }
+  const_iterator cbegin() const noexcept { return set_.begin(); }
+  const_iterator cend() const noexcept { return set_.end(); }
 
   template <class InputIterator>
-  inline void insert(InputIterator first, InputIterator last) {
+  void insert(InputIterator first, InputIterator last) {
     std::lock_guard<Mutex> lock(mutex_);
     set_.insert(first, last);
   }
 
-  inline std::pair<iterator, bool> insert(value_type&& value) {
+  std::pair<iterator, bool> insert(value_type&& value) {
     std::lock_guard<Mutex> lock(mutex_);
     return set_.insert(std::move(value));
   }
 
-  inline std::pair<iterator, bool> insert(const value_type& value) {
+  std::pair<iterator, bool> insert(const value_type& value) {
     std::lock_guard<Mutex> lock(mutex_);
     return set_.insert(value);
   }

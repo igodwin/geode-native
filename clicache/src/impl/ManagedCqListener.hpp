@@ -47,7 +47,7 @@ namespace apache {
         /// <param name="userptr">
         /// The user object.
         /// </param>
-        inline ManagedCqListenerGeneric( /*Generic::ICqListener<Object^, Object^>^ managedptr*/Object^ userptr)
+        ManagedCqListenerGeneric( /*Generic::ICqListener<Object^, Object^>^ managedptr*/Object^ userptr)
           : /*m_managedptr( managedptr )*/m_userptr(userptr) { }
 
         /// <summary>
@@ -115,17 +115,17 @@ namespace apache {
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::ICqListener<Object^, Object^>^ ptr() const
+        Apache::Geode::Client::ICqListener<Object^, Object^>^ ptr() const
         {
           return m_managedptr;
         }
 
-        inline void setptr(Apache::Geode::Client::ICqListener<Object^, Object^>^ managedptr)
+        void setptr(Apache::Geode::Client::ICqListener<Object^, Object^>^ managedptr)
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr() const
+        Object^ userptr() const
         {
           return m_userptr;
         }

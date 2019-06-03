@@ -151,7 +151,7 @@ class VersionedCacheableObjectPartList : public CacheableObjectPartList {
     this->m_hasKeys = false;
   }
 
-  inline uint16_t getEndpointMemId() { return m_endpointMemId; }
+  uint16_t getEndpointMemId() { return m_endpointMemId; }
 
   std::vector<std::shared_ptr<VersionTag>>& getVersionedTagptr() {
     return m_versionTags;
@@ -172,8 +172,8 @@ class VersionedCacheableObjectPartList : public CacheableObjectPartList {
     return m_tempKeys;
   }
 
-  inline VersionedCacheableObjectPartList(uint16_t endpointMemId,
-                                          std::recursive_mutex& responseLock)
+  VersionedCacheableObjectPartList(uint16_t endpointMemId,
+                                   std::recursive_mutex& responseLock)
       : m_tempKeys(
             std::make_shared<std::vector<std::shared_ptr<CacheableKey>>>()),
         m_responseLock(responseLock) {

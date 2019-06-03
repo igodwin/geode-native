@@ -130,13 +130,13 @@ class APACHE_GEODE_EXPORT CacheableDate
 };
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(
+std::shared_ptr<CacheableKey> CacheableKey::create(
     CacheableDate::time_point value) {
   return CacheableDate::create(value);
 }
 
 template <>
-inline std::shared_ptr<Serializable> Serializable::create(
+std::shared_ptr<Serializable> Serializable::create(
     CacheableDate::time_point value) {
   return CacheableDate::create(value);
 }

@@ -69,19 +69,19 @@ class GsRandom {
    * @return the next pseudorandom, uniformly distributed <code>boolean</code>
    *         value from this random number generator's sequence.
    */
-  inline bool nextBoolean() { return 1 == distBoolean(engine); }
+  bool nextBoolean() { return 1 == distBoolean(engine); }
 
   /**
    * @return the next pseudorandom, uniformly distributed <code>uint16_t</code>
    *         value from this random number generator's sequence.
    */
-  inline uint16_t nextInt16() { return distUint16(engine); }
+  uint16_t nextInt16() { return distUint16(engine); }
 
   /**
    * @return the next pseudorandom, uniformly distributed <code>byte</code>
    *         value from this random number generator's sequence.
    */
-  inline uint8_t nextByte() { return static_cast<uint8_t>(distUint8(engine)); }
+  uint8_t nextByte() { return static_cast<uint8_t>(distUint8(engine)); }
 
   /**
    * @param   min the minimum range (inclusive) for the pseudorandom.
@@ -90,7 +90,7 @@ class GsRandom {
    *          value from this random number generator's sequence.
    *       If max < min, returns 0 .
    */
-  inline uint8_t nextByte(uint8_t min, uint8_t max) {
+  uint8_t nextByte(uint8_t min, uint8_t max) {
     return static_cast<uint8_t>(
         distUint8(engine, decltype(distUint8)::param_type(min, max)));
   }
@@ -100,7 +100,7 @@ class GsRandom {
    * @return  the next pseudorandom, uniformly distributed <code>double</code>
    *          value from this random number generator's sequence.
    */
-  inline double nextDouble(double max) { return nextDouble(0.0, max); }
+  double nextDouble(double max) { return nextDouble(0.0, max); }
 
   /**
    * @param   min the minimum range (inclusive) for the pseudorandom.
@@ -109,7 +109,7 @@ class GsRandom {
    *      value from this random number generator's sequence within a range
    *      from min to max.
    */
-  inline double nextDouble(double min, double max) {
+  double nextDouble(double min, double max) {
     return distDouble(engine, decltype(distDouble)::param_type(min, max));
   }
 
@@ -118,7 +118,7 @@ class GsRandom {
    * @return  the next pseudorandom, uniformly distributed <code>int32_t</code>
    *          value from this random number generator's sequence.
    */
-  inline int32_t nextInt(int32_t max) { return nextInt(0, max); }
+  int32_t nextInt(int32_t max) { return nextInt(0, max); }
 
   /**
    * @param   min the minimum range (inclusive) for the pseudorandom.
@@ -127,7 +127,7 @@ class GsRandom {
    *          value from this random number generator's sequence.
    *       If max < min, returns 0 .
    */
-  inline int32_t nextInt(int32_t min, int32_t max) {
+  int32_t nextInt(int32_t min, int32_t max) {
     return distInt32(engine, decltype(distInt32)::param_type(min, max));
   }
 

@@ -73,7 +73,7 @@ namespace Apache
         /// <c>CacheableString</c> object.
         /// </remarks>
         /// <param name="value">the string value of the new instance</param>
-        inline static CacheableString^ Create(String^ value)
+        static CacheableString^ Create(String^ value)
         {
           return (value != nullptr ?
                   gcnew CacheableString(value, true) : nullptr);
@@ -107,7 +107,7 @@ namespace Apache
         /// <param name="value">
         /// the character array value of the new instance
         /// </param>
-        inline static CacheableString^ Create(array<Char>^ value)
+        static CacheableString^ Create(array<Char>^ value)
         {
           return (value != nullptr && value->Length > 0 ?
                   gcnew CacheableString(value, true) : nullptr);
@@ -146,7 +146,7 @@ namespace Apache
         /// </summary>
         property String^ Value
         {
-          inline String^ get()
+          String^ get()
           {
             return m_value;
           }
@@ -159,7 +159,7 @@ namespace Apache
         /// This is similar to the C# string.IsNullOrEmpty method.
         /// </remarks>
         /// <param name="value">the CacheableString value to check</param>
-        inline static bool IsNullOrEmpty(CacheableString^ value)
+        static bool IsNullOrEmpty(CacheableString^ value)
         {
           return (value == nullptr || value->Length == 0);
         }
@@ -167,7 +167,7 @@ namespace Apache
         /// <summary>
         /// Implicit conversion operator to underlying <c>System.String</c>.
         /// </summary>
-        inline static operator String ^ (CacheableString^ str)
+        static operator String ^ (CacheableString^ str)
         {
           return (str != nullptr ? str->ToString() : nullptr);
         }
@@ -177,7 +177,7 @@ namespace Apache
         /// </summary>
         property System::UInt32 Length
         {
-          inline System::UInt32 get()
+          System::UInt32 get()
           {
             return m_value->Length;
           }
@@ -188,7 +188,7 @@ namespace Apache
         /// </summary>
         property bool IsWideString
         {
-          inline bool get()
+          bool get()
           {
             return true;//TODO:
           }
@@ -258,7 +258,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CacheableString(std::shared_ptr<apache::geode::client::CacheableString> nativeptr)
+        CacheableString(std::shared_ptr<apache::geode::client::CacheableString> nativeptr)
           : CacheableKey(nativeptr) {
         
           m_value = msclr::interop::marshal_as<String^>(nativeptr->value());

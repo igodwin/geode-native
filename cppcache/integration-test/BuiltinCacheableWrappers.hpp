@@ -122,21 +122,21 @@ const uint32_t m_crc32Table[] = {
     0x54de5729, 0x23d967bf, 0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,
     0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
-inline double random(double maxValue) {
+double random(double maxValue) {
   static thread_local std::default_random_engine generator(
       std::random_device{}());
   return std::uniform_real_distribution<double>{0.0, maxValue}(generator);
 }
 
 template <typename TPRIM>
-inline TPRIM random(TPRIM maxValue) {
+TPRIM random(TPRIM maxValue) {
   return static_cast<TPRIM>(random(static_cast<double>(maxValue)));
 }
 
 // This returns an array allocated on heap
 // which should be freed by the user.
 template <typename TPRIM>
-inline std::vector<TPRIM> randomArray(int32_t size, TPRIM maxValue) {
+std::vector<TPRIM> randomArray(int32_t size, TPRIM maxValue) {
   ASSERT(size > 0, "The size of the array should be greater than zero.");
   std::vector<TPRIM> array;
   array.reserve(size);
@@ -148,7 +148,7 @@ inline std::vector<TPRIM> randomArray(int32_t size, TPRIM maxValue) {
 }
 
 // Taken from GsRandom::getAlphanumericString
-inline void randomString(int32_t size, std::string& randStr) {
+void randomString(int32_t size, std::string& randStr) {
   ASSERT(size > 0, "The size of the string should be greater than zero.");
 
   static const char chooseFrom[] =
@@ -161,7 +161,7 @@ inline void randomString(int32_t size, std::string& randStr) {
   }
 }
 
-inline void randomString(int32_t size, std::wstring& randStr,
+void randomString(int32_t size, std::wstring& randStr,
                          bool useASCII = false) {
   ASSERT(size > 0, "The size of the string should be greater than zero.");
 
@@ -180,7 +180,7 @@ inline void randomString(int32_t size, std::wstring& randStr,
   }
 }
 
-inline uint32_t crc32(const uint8_t* buffer, size_t bufLen) {
+uint32_t crc32(const uint8_t* buffer, size_t bufLen) {
   if (buffer == nullptr || bufLen == 0) {
     return 0;
   }
@@ -194,19 +194,19 @@ inline uint32_t crc32(const uint8_t* buffer, size_t bufLen) {
   return ~crc;
 }
 
-inline uint32_t crc32(const int8_t* buffer, size_t bufLen) {
+uint32_t crc32(const int8_t* buffer, size_t bufLen) {
   return crc32(reinterpret_cast<const uint8_t*>(buffer), bufLen);
 }
 
 template <typename TPRIM>
-inline uint32_t crc32(TPRIM value) {
+uint32_t crc32(TPRIM value) {
   auto output = CacheHelper::getHelper().getCache()->createDataOutput();
   apache::geode::client::serializer::writeObject(output, value);
   return crc32(output.getBuffer(), output.getBufferLength());
 }
 
 template <typename TPRIM>
-inline uint32_t crc32Array(const std::vector<TPRIM> arr) {
+uint32_t crc32Array(const std::vector<TPRIM> arr) {
   auto output = CacheHelper::getHelper().getCache()->createDataOutput();
   for (auto obj : arr) {
     apache::geode::client::serializer::writeObject(output, obj);
@@ -214,7 +214,7 @@ inline uint32_t crc32Array(const std::vector<TPRIM> arr) {
   return crc32(output.getBuffer(), output.getBufferLength());
 }
 
-inline bool isContainerTypeId(DSCode typeId) {
+bool isContainerTypeId(DSCode typeId) {
   return (typeId == DSCode::CacheableObjectArray) ||
          (typeId == DSCode::CacheableVector) ||
          (typeId == DSCode::CacheableHashMap) ||
@@ -233,7 +233,7 @@ class CacheableBooleanWrapper : public CacheableWrapper {
  public:
   // Constructor and factory function
 
-  inline CacheableBooleanWrapper() : CacheableWrapper(nullptr) {}
+  CacheableBooleanWrapper() : CacheableWrapper(nullptr) {}
 
   static CacheableWrapper* create() { return new CacheableBooleanWrapper(); }
 
@@ -262,7 +262,7 @@ class CacheableByteWrapper : public CacheableWrapper {
  public:
   // Constructor and factory function
 
-  inline CacheableByteWrapper() : CacheableWrapper(nullptr) {}
+  CacheableByteWrapper() : CacheableWrapper(nullptr) {}
 
   static CacheableWrapper* create() { return new CacheableByteWrapper(); }
 

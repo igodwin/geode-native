@@ -76,10 +76,9 @@ class APACHE_GEODE_EXPORT LRUMapEntry : public MapEntryImpl,
   }
 
  protected:
-  inline explicit LRUMapEntry(bool)
-      : MapEntryImpl(true), LRUEntryProperties(true) {}
+  explicit LRUMapEntry(bool) : MapEntryImpl(true), LRUEntryProperties(true) {}
 
-  inline explicit LRUMapEntry(const std::shared_ptr<CacheableKey>& key)
+  explicit LRUMapEntry(const std::shared_ptr<CacheableKey>& key)
       : MapEntryImpl(key) {}
 
  private:
@@ -96,9 +95,9 @@ class APACHE_GEODE_EXPORT VersionedLRUMapEntry : public LRUMapEntry,
   virtual VersionStamp& getVersionStamp() { return *this; }
 
  protected:
-  inline explicit VersionedLRUMapEntry(bool) : LRUMapEntry(true) {}
+  explicit VersionedLRUMapEntry(bool) : LRUMapEntry(true) {}
 
-  inline explicit VersionedLRUMapEntry(const std::shared_ptr<CacheableKey>& key)
+  explicit VersionedLRUMapEntry(const std::shared_ptr<CacheableKey>& key)
       : LRUMapEntry(key) {}
 
  private:

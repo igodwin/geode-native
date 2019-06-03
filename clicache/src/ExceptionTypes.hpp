@@ -131,7 +131,7 @@ namespace Apache
         /// </summary>
         /// <param name="nativeEx">The native Geode exception object</param>
         /// <returns>The stack trace of the native exception.</returns>
-        inline static String^ GetStackTrace(
+        static String^ GetStackTrace(
           const apache::geode::client::Exception& nativeEx )
         {
           return marshal_as<String^>(nativeEx.getStackTrace());
@@ -151,7 +151,7 @@ namespace Apache
         /// contained in the message. Note that in this process the
         /// original stacktrace is appended to the message of the exception.
         /// </remarks>
-        inline static std::shared_ptr<apache::geode::client::Exception> GetNative(Exception^ ex)
+        static std::shared_ptr<apache::geode::client::Exception> GetNative(Exception^ ex)
         {
           if (ex != nullptr) {
             GeodeException^ gfEx = dynamic_cast<GeodeException^>(ex);
@@ -200,7 +200,7 @@ namespace Apache
         /// contained in the message. Note that in this process the
         /// original stacktrace is appended to the message of the exception.
         /// </remarks>
-        inline static void ThrowNative(Exception^ ex)
+        static void ThrowNative(Exception^ ex)
         {
           if (ex != nullptr) {
             std::shared_ptr<apache::geode::client::Exception> cause;
@@ -217,7 +217,7 @@ namespace Apache
         /// Throws the C++ native exception object for this managed
         /// <c>GeodeException</c>.
         /// </summary>
-        inline void ThrowNative()
+        void ThrowNative()
         {
           throw GetNative();
         }
@@ -228,14 +228,14 @@ namespace Apache
         /// <summary>
         /// Default constructor.
         /// </summary>
-        inline GeodeException( )
+        GeodeException( )
           : Exception( ) { }
 
         /// <summary>
         /// Constructor to create an exception object with the given message.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        inline GeodeException( String^ message )
+        GeodeException( String^ message )
           : Exception( message ) { }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Apache
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The inner exception object.</param>
-        inline GeodeException( String^ message, System::Exception^ innerException )
+        GeodeException( String^ message, System::Exception^ innerException )
           : Exception( message, innerException ) { }
 
       protected:
@@ -262,7 +262,7 @@ namespace Apache
         /// contains contextual information about
         /// the source or destination
         /// </param>
-        inline GeodeException( SerializationInfo^ info, StreamingContext context )
+        GeodeException( SerializationInfo^ info, StreamingContext context )
           : Exception( info, context ) { }
       };
 

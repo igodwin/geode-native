@@ -68,7 +68,7 @@ class APACHE_GEODE_EXPORT CqService
 
   std::shared_ptr<CqServiceStatistics> m_stats;
 
-  inline bool noCq() const { return m_cqQueryMap.empty(); }
+  bool noCq() const { return m_cqQueryMap.empty(); }
 
  public:
   typedef std::vector<std::shared_ptr<CqQuery>> query_container_type;

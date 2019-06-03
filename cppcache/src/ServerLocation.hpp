@@ -106,11 +106,11 @@ class APACHE_GEODE_EXPORT ServerLocation
     return (m_serverName == rhs.m_serverName) && (m_port == rhs.m_port);
   }
 
-  inline bool isValid() const { return !m_serverName.empty() && m_port >= 0; }
+  bool isValid() const { return !m_serverName.empty() && m_port >= 0; }
 
-  inline const std::string& getEpString() { return m_epString; }
+  const std::string& getEpString() { return m_epString; }
 
-  inline int hashcode() const {
+  int hashcode() const {
     int prime = 31;
     int result = 1;
     result = prime * result +
@@ -119,7 +119,7 @@ class APACHE_GEODE_EXPORT ServerLocation
     return result;
   }
 
-  inline void makeEpString() {
+  void makeEpString() {
     m_epString = m_serverName + ":" + std::to_string(m_port);
   }
 

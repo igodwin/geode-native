@@ -86,7 +86,7 @@ namespace Apache
           return m_nativeref;
         }
 
-        inline PoolManager(native::PoolManager& nativeref)
+        PoolManager(native::PoolManager& nativeref)
           : m_nativeref(nativeref)
         {
         }

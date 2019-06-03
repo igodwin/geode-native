@@ -225,7 +225,7 @@ namespace Apache
         /// Error level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Error(String^ format, ... array<Object^>^ args)
+        static void Error(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Error)
             Log::Write(LogLevel::Error, String::Format(
@@ -236,7 +236,7 @@ namespace Apache
         /// Warning level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Warning(String^ format, ... array<Object^>^ args)
+        static void Warning(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Warning)
             Log::Write(LogLevel::Warning, String::Format(
@@ -247,7 +247,7 @@ namespace Apache
         /// Info level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Info(String^ format, ... array<Object^>^ args)
+        static void Info(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Info)
             Log::Write(LogLevel::Info, String::Format(
@@ -258,7 +258,7 @@ namespace Apache
         /// Config level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Config(String^ format, ... array<Object^>^ args)
+        static void Config(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Config)
             Log::Write(LogLevel::Config, String::Format(
@@ -269,7 +269,7 @@ namespace Apache
         /// Fine level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Fine(String^ format, ... array<Object^>^ args)
+        static void Fine(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Fine)
             Log::Write(LogLevel::Fine, String::Format(
@@ -280,7 +280,7 @@ namespace Apache
         /// Finer level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Finer(String^ format, ... array<Object^>^ args)
+        static void Finer(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Finer)
             Log::Write(LogLevel::Finer, String::Format(
@@ -291,7 +291,7 @@ namespace Apache
         /// Finest level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Finest(String^ format, ... array<Object^>^ args)
+        static void Finest(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Finest)
             Log::Write(LogLevel::Finest, String::Format(
@@ -302,7 +302,7 @@ namespace Apache
         /// Debug level logging with variable number of arguments using
         /// format as in <c>System.String.Format</c>.
         /// </summary>
-        inline static void Debug(String^ format, ... array<Object^>^ args)
+        static void Debug(String^ format, ... array<Object^>^ args)
         {
           if (staticLogLevel >= LogLevel::Debug)
             Log::Write(LogLevel::Debug, String::Format(

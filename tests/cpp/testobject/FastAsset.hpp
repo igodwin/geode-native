@@ -43,7 +43,7 @@ class TESTOBJECT_EXPORT FastAsset : public TimestampedObject {
   int32_t assetId;
   double value;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

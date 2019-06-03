@@ -47,13 +47,13 @@ class APACHE_GEODE_EXPORT CacheableString
   mutable int m_hashcode;
 
  public:
-  inline explicit CacheableString(DSCode type = DSCode::CacheableASCIIString)
+  explicit CacheableString(DSCode type = DSCode::CacheableASCIIString)
       : m_str(), m_type(type), m_hashcode(0) {}
 
-  inline explicit CacheableString(const std::string& value)
+  explicit CacheableString(const std::string& value)
       : CacheableString(std::string(value)) {}
 
-  inline explicit CacheableString(std::string&& value)
+  explicit CacheableString(std::string&& value)
       : m_str(std::move(value)), m_hashcode(0) {
     bool ascii = isAscii(m_str);
 
@@ -93,12 +93,11 @@ class APACHE_GEODE_EXPORT CacheableString
   /** return the hashcode for this key. */
   virtual int32_t hashcode() const override;
 
-  inline static std::shared_ptr<CacheableString> create(
-      const std::string& value) {
+  static std::shared_ptr<CacheableString> create(const std::string& value) {
     return std::make_shared<CacheableString>(value);
   }
 
-  inline static std::shared_ptr<CacheableString> create(std::string&& value) {
+  static std::shared_ptr<CacheableString> create(std::string&& value) {
     return std::make_shared<CacheableString>(std::move(value));
   }
 
@@ -110,23 +109,22 @@ class APACHE_GEODE_EXPORT CacheableString
 
   static std::shared_ptr<CacheableString> create(std::u32string&& value);
 
-  inline static std::shared_ptr<CacheableString> create(
-      const std::wstring& value) {
+  static std::shared_ptr<CacheableString> create(const std::wstring& value) {
     return std::make_shared<CacheableString>(
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t>{}
             .to_bytes(value));
   }
 
-  inline static std::shared_ptr<CacheableString> create(std::wstring&& value) {
+  static std::shared_ptr<CacheableString> create(std::wstring&& value) {
     return std::make_shared<CacheableString>(
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t>{}
             .to_bytes(std::move(value)));
   }
 
   /** Return the length of the contained string. */
-  inline std::string::size_type length() const { return m_str.length(); }
+  std::string::size_type length() const { return m_str.length(); }
 
-  inline const std::string& value() const { return m_str; }
+  const std::string& value() const { return m_str; }
 
   virtual std::string toString() const override;
 
@@ -137,126 +135,121 @@ class APACHE_GEODE_EXPORT CacheableString
 };
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(std::string value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(std::string value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(
-    std::u16string value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(std::u16string value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(
-    std::u32string value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(std::u32string value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(std::wstring value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(std::wstring value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(std::string value) {
+std::shared_ptr<Cacheable> Serializable::create(std::string value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(std::u16string value) {
+std::shared_ptr<Cacheable> Serializable::create(std::u16string value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(std::u32string value) {
+std::shared_ptr<Cacheable> Serializable::create(std::u32string value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(std::wstring value) {
+std::shared_ptr<Cacheable> Serializable::create(std::wstring value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(const char* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(const char* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(const char* value) {
+std::shared_ptr<Cacheable> Serializable::create(const char* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(char* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(char* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(char* value) {
+std::shared_ptr<Cacheable> Serializable::create(char* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(
-    const char16_t* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(const char16_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(const char16_t* value) {
+std::shared_ptr<Cacheable> Serializable::create(const char16_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(char16_t* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(char16_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(char16_t* value) {
+std::shared_ptr<Cacheable> Serializable::create(char16_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(
-    const char32_t* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(const char32_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(const char32_t* value) {
+std::shared_ptr<Cacheable> Serializable::create(const char32_t* value) {
   return CacheableString::create(value);
 }
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(char32_t* value) {
-  return CacheableString::create(value);
-}
-
-template <>
-inline std::shared_ptr<Cacheable> Serializable::create(char32_t* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(char32_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(
-    const wchar_t* value) {
+std::shared_ptr<Cacheable> Serializable::create(char32_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(const wchar_t* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(const wchar_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<CacheableKey> CacheableKey::create(wchar_t* value) {
+std::shared_ptr<Cacheable> Serializable::create(const wchar_t* value) {
   return CacheableString::create(value);
 }
 
 template <>
-inline std::shared_ptr<Cacheable> Serializable::create(wchar_t* value) {
+std::shared_ptr<CacheableKey> CacheableKey::create(wchar_t* value) {
+  return CacheableString::create(value);
+}
+
+template <>
+std::shared_ptr<Cacheable> Serializable::create(wchar_t* value) {
   return CacheableString::create(value);
 }
 

@@ -341,7 +341,7 @@ namespace Apache
         /// <returns>
         /// the managed wrapper object, or null if the native pointer is null.
         /// </returns>
-        inline static SystemProperties^ Create(
+        static SystemProperties^ Create(
           native::SystemProperties* nativeptr)
         {
           return (nativeptr != nullptr ?
@@ -355,7 +355,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline SystemProperties(native::SystemProperties* nativeptr)
+        SystemProperties(native::SystemProperties* nativeptr)
           : m_nativeptr(nativeptr)
         {
         }

@@ -45,7 +45,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableLinkedList(System::Collections::Generic::LinkedList<Object^>^ list)
+        CacheableLinkedList(System::Collections::Generic::LinkedList<Object^>^ list)
         {
           m_linkedList = list;
         }
@@ -54,7 +54,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableLinkedList^ Create()
+        static CacheableLinkedList^ Create()
         {
           return gcnew CacheableLinkedList(gcnew System::Collections::Generic::LinkedList<Object^>());
         }
@@ -62,7 +62,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableLinkedList^ Create(System::Collections::Generic::LinkedList<Object^>^ list)
+        static CacheableLinkedList^ Create(System::Collections::Generic::LinkedList<Object^>^ list)
         {
           return gcnew CacheableLinkedList(list);
         }

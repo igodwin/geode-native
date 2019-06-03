@@ -128,14 +128,10 @@ class PoolStats {
   void incQueryExecutionTimeId(int64_t value) {  // counter
     getStats()->incLong(m_queryExecutionTimeId, value);
   }
-  inline apache::geode::statistics::Statistics* getStats() {
-    return m_poolStats;
-  }
-  inline int32_t getTotalWaitingConnTimeId() {
-    return m_totalWaitingConnTimeId;
-  }
+  apache::geode::statistics::Statistics* getStats() { return m_poolStats; }
+  int32_t getTotalWaitingConnTimeId() { return m_totalWaitingConnTimeId; }
 
-  inline int32_t getQueryExecutionTimeId() { return m_queryExecutionTimeId; }
+  int32_t getQueryExecutionTimeId() { return m_queryExecutionTimeId; }
 
  private:
   // volatile apache::geode::statistics::Statistics* m_poolStats;

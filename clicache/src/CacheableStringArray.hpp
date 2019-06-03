@@ -58,7 +58,7 @@ namespace Apache
         /// <exception cref="IllegalArgumentException">
         /// If the array contains a string greater than or equal 64K in length.
         /// </exception>
-        inline static CacheableStringArray^ Create(array<String^>^ strings)
+        static CacheableStringArray^ Create(array<String^>^ strings)
         {
           return (strings != nullptr && strings->Length > 0 ?
                   gcnew CacheableStringArray(strings) : nullptr);
@@ -108,7 +108,7 @@ namespace Apache
         /// </summary>
         property System::Int32 Length
         {
-          inline System::Int32 get()
+          System::Int32 get()
           {
             return m_value->Length;
           }
@@ -139,7 +139,7 @@ namespace Apache
         CacheableStringArray(array<String^>^ strings);
 
 
-        inline CacheableStringArray()
+        CacheableStringArray()
         {
         }
       };

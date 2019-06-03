@@ -373,7 +373,7 @@ class APACHE_GEODE_EXPORT LocalRegion : public RegionInternal {
     return m_regionAttributes.getCachingEnabled();
   }
 
-  inline bool cachelessWithListener() {
+  bool cachelessWithListener() {
     return !m_regionAttributes.getCachingEnabled() && (m_listener != nullptr);
   }
 

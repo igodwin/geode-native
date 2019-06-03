@@ -77,7 +77,7 @@ class APACHE_GEODE_EXPORT Serializable {
   static std::shared_ptr<Serializable> create(_T value);
 
   template <class _T>
-  inline static std::shared_ptr<Serializable> create(
+  static std::shared_ptr<Serializable> create(
       const std::shared_ptr<_T>& value) {
     return value;
   }

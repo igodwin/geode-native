@@ -46,7 +46,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableHashTable()
+        CacheableHashTable()
           : CacheableHashMap()
         { }
 
@@ -56,7 +56,7 @@ namespace Apache
         /// <param name="dictionary">
         /// The dictionary whose elements are copied to this HashTable.
         /// </param>
-        inline CacheableHashTable(Object^ dictionary)
+        CacheableHashTable(Object^ dictionary)
           : CacheableHashMap(dictionary)
         { }
 
@@ -66,7 +66,7 @@ namespace Apache
         /// <param name="capacity">
         /// The initial capacity of the HashTable.
         /// </param>
-        inline CacheableHashTable(System::Int32 capacity)
+        CacheableHashTable(System::Int32 capacity)
           : CacheableHashMap(capacity)
         { }
 

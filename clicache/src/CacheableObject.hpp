@@ -64,7 +64,7 @@ namespace Apache
         /// <remarks>
         /// If the given object is null then this method returns null.
         /// </remarks>
-        inline static CacheableObject^ Create(Object^ value)
+        static CacheableObject^ Create(Object^ value)
         {
           return (value != nullptr ? gcnew CacheableObject(value) :
                   nullptr);
@@ -98,7 +98,7 @@ namespace Apache
         /// </remarks>
         property Object^ Value
         {
-          inline Object^ get()
+          Object^ get()
           {
             return m_obj;
           }
@@ -121,7 +121,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new instance from the given object.
         /// </summary>
-        inline CacheableObject(Object^ value)
+        CacheableObject(Object^ value)
           : m_obj(value), m_objectSize(0) { }
 
 

@@ -108,7 +108,7 @@ TcrEndpoint::~TcrEndpoint() {
   LOGFINE("Connection to %s deleted", m_name.c_str());
 }
 
-inline bool TcrEndpoint::needtoTakeConnectLock() {
+bool TcrEndpoint::needtoTakeConnectLock() {
 #ifdef __linux
   if (m_cacheImpl->getDistributedSystem()
           .getSystemProperties()
@@ -717,10 +717,10 @@ void TcrEndpoint::receiveNotification(std::atomic<bool>& isRunning) {
   LOGFINE("Ended subscription channel for endpoint %s", m_name.c_str());
 }
 
-inline bool TcrEndpoint::compareTransactionIds(int32_t reqTransId,
-                                               int32_t replyTransId,
-                                               std::string& failReason,
-                                               TcrConnection* conn) {
+bool TcrEndpoint::compareTransactionIds(int32_t reqTransId,
+                                        int32_t replyTransId,
+                                        std::string& failReason,
+                                        TcrConnection* conn) {
   LOGDEBUG("TcrEndpoint::compareTransactionIds requested id = %d ,replied = %d",
            reqTransId, replyTransId);
   if (replyTransId != reqTransId) {
@@ -735,8 +735,8 @@ inline bool TcrEndpoint::compareTransactionIds(int32_t reqTransId,
   return true;
 }
 
-inline bool TcrEndpoint::handleIOException(const std::string& message,
-                                           TcrConnection*& conn, bool) {
+bool TcrEndpoint::handleIOException(const std::string& message,
+                                    TcrConnection*& conn, bool) {
   int32_t lastError = ACE_OS::last_error();
   if (lastError == ECONNRESET || lastError == EPIPE) {
     _GEODE_SAFE_DELETE(conn);

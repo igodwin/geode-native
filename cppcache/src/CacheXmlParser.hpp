@@ -123,31 +123,25 @@ class APACHE_GEODE_EXPORT CacheXmlParser : public CacheXml {
   void startServer(const xmlChar** atts);
 
   // getters/setters for flags and other members
-  inline bool isCacheXmlException() const { return m_flagCacheXmlException; }
+  bool isCacheXmlException() const { return m_flagCacheXmlException; }
 
-  inline void setCacheXmlException() { m_flagCacheXmlException = true; }
+  void setCacheXmlException() { m_flagCacheXmlException = true; }
 
-  inline bool isIllegalStateException() const {
-    return m_flagIllegalStateException;
-  }
+  bool isIllegalStateException() const { return m_flagIllegalStateException; }
 
-  inline void setIllegalStateException() { m_flagIllegalStateException = true; }
+  void setIllegalStateException() { m_flagIllegalStateException = true; }
 
-  inline bool isAnyOtherException() const { return m_flagAnyOtherException; }
+  bool isAnyOtherException() const { return m_flagAnyOtherException; }
 
-  inline void setAnyOtherException() { m_flagAnyOtherException = true; }
+  void setAnyOtherException() { m_flagAnyOtherException = true; }
 
-  inline bool isExpirationAttribute() const {
-    return m_flagExpirationAttribute;
-  }
+  bool isExpirationAttribute() const { return m_flagExpirationAttribute; }
 
-  inline void setExpirationAttribute() { m_flagExpirationAttribute = true; }
+  void setExpirationAttribute() { m_flagExpirationAttribute = true; }
 
-  inline const std::string& getParserMessage() const { return m_parserMessage; }
+  const std::string& getParserMessage() const { return m_parserMessage; }
 
-  inline void setParserMessage(const std::string& str) {
-    m_parserMessage = str;
-  }
+  void setParserMessage(const std::string& str) { m_parserMessage = str; }
 
   // hooks for .NET managed cache listener/loader/writers
   static LibraryCacheLoaderFn managedCacheLoaderFn;

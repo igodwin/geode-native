@@ -47,7 +47,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableIdentityHashMap()
+        CacheableIdentityHashMap()
           : CacheableHashMap()
         { }
 
@@ -57,7 +57,7 @@ namespace Apache
         /// <param name="dictionary">
         /// The dictionary whose elements are copied to this HashMap.
         /// </param>
-        inline CacheableIdentityHashMap(Object^ dictionary)
+        CacheableIdentityHashMap(Object^ dictionary)
           : CacheableHashMap(dictionary)
         { }
 
@@ -67,14 +67,14 @@ namespace Apache
         /// <param name="capacity">
         /// The initial capacity of the HashMap.
         /// </param>
-        inline CacheableIdentityHashMap(System::Int32 capacity)
+        CacheableIdentityHashMap(System::Int32 capacity)
           : CacheableHashMap(capacity)
         { }
 
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableIdentityHashMap^ Create()
+        static CacheableIdentityHashMap^ Create()
         {
           return gcnew CacheableIdentityHashMap();
         }
@@ -83,7 +83,7 @@ namespace Apache
         /// Static function to create a new instance copying from the
         /// given dictionary.
         /// </summary>
-        inline static CacheableIdentityHashMap^ Create(
+        static CacheableIdentityHashMap^ Create(
           Object^ dictionary)
         {
           return gcnew CacheableIdentityHashMap(dictionary);
@@ -92,7 +92,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new instance with given initial size.
         /// </summary>
-        inline static CacheableIdentityHashMap^ Create(System::Int32 capacity)
+        static CacheableIdentityHashMap^ Create(System::Int32 capacity)
         {
           return gcnew CacheableIdentityHashMap(capacity);
         }

@@ -41,35 +41,35 @@ namespace client {
  */
 class APACHE_GEODE_EXPORT LRUEntryProperties {
  public:
-  inline LRUEntryProperties() : m_bits(0), m_persistenceInfo(nullptr) {}
+  LRUEntryProperties() : m_bits(0), m_persistenceInfo(nullptr) {}
 
-  inline void setRecentlyUsed() { m_bits |= RECENTLY_USED_BITS; }
+  void setRecentlyUsed() { m_bits |= RECENTLY_USED_BITS; }
 
-  inline void clearRecentlyUsed() { m_bits &= ~RECENTLY_USED_BITS; }
+  void clearRecentlyUsed() { m_bits &= ~RECENTLY_USED_BITS; }
 
-  inline bool testRecentlyUsed() const {
+  bool testRecentlyUsed() const {
     return (m_bits.load() & RECENTLY_USED_BITS) == RECENTLY_USED_BITS;
   }
 
-  inline bool testEvicted() const {
+  bool testEvicted() const {
     return (m_bits.load() & EVICTED_BITS) == EVICTED_BITS;
   }
 
-  inline void setEvicted() { m_bits |= EVICTED_BITS; }
+  void setEvicted() { m_bits |= EVICTED_BITS; }
 
-  inline void clearEvicted() { m_bits &= ~EVICTED_BITS; }
+  void clearEvicted() { m_bits &= ~EVICTED_BITS; }
 
-  inline const std::shared_ptr<void>& getPersistenceInfo() const {
+  const std::shared_ptr<void>& getPersistenceInfo() const {
     return m_persistenceInfo;
   }
 
-  inline void setPersistenceInfo(const std::shared_ptr<void>& persistenceInfo) {
+  void setPersistenceInfo(const std::shared_ptr<void>& persistenceInfo) {
     m_persistenceInfo = persistenceInfo;
   }
 
  protected:
   // this constructor deliberately skips initializing any fields
-  inline explicit LRUEntryProperties(bool) {}
+  explicit LRUEntryProperties(bool) {}
 
  private:
   std::atomic<uint32_t> m_bits;
@@ -93,22 +93,18 @@ class LRUList {
    */
   class LRUListNode {
    public:
-    inline explicit LRUListNode(const std::shared_ptr<TEntry>& entry)
+    explicit LRUListNode(const std::shared_ptr<TEntry>& entry)
         : m_entry(entry), m_nextLRUListNode(nullptr) {}
 
-    inline ~LRUListNode() {}
+    ~LRUListNode() {}
 
-    inline void getEntry(std::shared_ptr<TEntry>& result) const {
-      result = m_entry;
-    }
+    void getEntry(std::shared_ptr<TEntry>& result) const { result = m_entry; }
 
-    inline LRUListNode* getNextLRUListNode() const { return m_nextLRUListNode; }
+    LRUListNode* getNextLRUListNode() const { return m_nextLRUListNode; }
 
-    inline void setNextLRUListNode(LRUListNode* next) {
-      m_nextLRUListNode = next;
-    }
+    void setNextLRUListNode(LRUListNode* next) { m_nextLRUListNode = next; }
 
-    inline void clearNextLRUListNode() { m_nextLRUListNode = nullptr; }
+    void clearNextLRUListNode() { m_nextLRUListNode = nullptr; }
 
    private:
     std::shared_ptr<TEntry> m_entry;

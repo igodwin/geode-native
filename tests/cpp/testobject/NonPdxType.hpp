@@ -174,7 +174,7 @@ class TESTOBJECT_EXPORT NonPdxType {
  public:
   bool selfCheck();
 
-  inline void init() {
+  void init() {
     m_char = 'C';
     m_bool = true;
     m_byte = 0x74;
@@ -369,7 +369,7 @@ class TESTOBJECT_EXPORT NonPdxType {
 
   NonPdxType() { init(); }
 
-  inline bool compareBool(bool b, bool b2) {
+  bool compareBool(bool b, bool b2) {
     if (b == b2) return b;
     throw IllegalStateException("Not got expected value for bool type: ");
   }

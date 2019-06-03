@@ -40,34 +40,34 @@ class Task {
  public:
   typedef void (T::*Method)(std::atomic<bool>& isRunning);
 
-  inline Task(T* target, Method method, const char* threadName)
+  Task(T* target, Method method, const char* threadName)
       : target_(target),
         method_(method),
         threadName_(threadName),
         runnable_(false),
         appDomainContext_(createAppDomainContext()) {}
 
-  inline ~Task() noexcept { stop(); };
+  ~Task() noexcept { stop(); };
 
-  inline void start() {
+  void start() {
     runnable_ = true;
     thread_ = std::thread(&Task::svc, this);
   }
 
-  inline void stop() noexcept {
+  void stop() noexcept {
     stopNoblock();
     wait();
   }
 
-  inline void stopNoblock() noexcept { runnable_ = false; }
+  void stopNoblock() noexcept { runnable_ = false; }
 
-  inline void wait() noexcept {
+  void wait() noexcept {
     if (thread_.joinable()) {
       thread_.join();
     }
   }
 
-  inline void svc(void) {
+  void svc(void) {
     DistributedSystemImpl::setThreadName(threadName_);
 
     if (appDomainContext_) {

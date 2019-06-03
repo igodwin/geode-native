@@ -204,7 +204,7 @@ namespace Apache
 
       internal:
 
-        inline static CacheTransactionManager^ Create(native::InternalCacheTransactionManager2PC* nativeptr )
+        static CacheTransactionManager^ Create(native::InternalCacheTransactionManager2PC* nativeptr )
         {
           return ( nativeptr != nullptr ?
             gcnew CacheTransactionManager( nativeptr ) : nullptr );
@@ -217,7 +217,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CacheTransactionManager(native::InternalCacheTransactionManager2PC* nativeptr )
+        CacheTransactionManager(native::InternalCacheTransactionManager2PC* nativeptr )
           : m_nativeptr(nativeptr)
         {
         }

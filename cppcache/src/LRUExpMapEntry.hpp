@@ -49,13 +49,13 @@ class APACHE_GEODE_EXPORT LRUExpMapEntry : public MapEntryImpl,
   }
 
  protected:
-  inline explicit LRUExpMapEntry(bool)
+  explicit LRUExpMapEntry(bool)
       : MapEntryImpl(true),
         LRUEntryProperties(true),
         ExpEntryProperties(true) {}
 
-  inline LRUExpMapEntry(ExpiryTaskManager* expiryTaskManager,
-                        const std::shared_ptr<CacheableKey>& key)
+  LRUExpMapEntry(ExpiryTaskManager* expiryTaskManager,
+                 const std::shared_ptr<CacheableKey>& key)
       : MapEntryImpl(key), ExpEntryProperties(expiryTaskManager) {}
 
  private:
@@ -72,10 +72,10 @@ class APACHE_GEODE_EXPORT VersionedLRUExpMapEntry : public LRUExpMapEntry,
   virtual VersionStamp& getVersionStamp() { return *this; }
 
  protected:
-  inline explicit VersionedLRUExpMapEntry(bool) : LRUExpMapEntry(true) {}
+  explicit VersionedLRUExpMapEntry(bool) : LRUExpMapEntry(true) {}
 
-  inline VersionedLRUExpMapEntry(ExpiryTaskManager* expiryTaskManager,
-                                 const std::shared_ptr<CacheableKey>& key)
+  VersionedLRUExpMapEntry(ExpiryTaskManager* expiryTaskManager,
+                          const std::shared_ptr<CacheableKey>& key)
       : LRUExpMapEntry(expiryTaskManager, key) {}
 
  private:

@@ -174,8 +174,8 @@ class APACHE_GEODE_EXPORT SerializationRegistry {
    * then write whatever the object's toData requires. The length at the
    * front is backfilled after the serialization.
    */
-  inline void serialize(const std::shared_ptr<Serializable>& obj,
-                        DataOutput& output, bool isDelta = false) const {
+  void serialize(const std::shared_ptr<Serializable>& obj, DataOutput& output,
+                 bool isDelta = false) const {
     if (obj == nullptr) {
       output.write(static_cast<int8_t>(DSCode::NullObj));
     } else if (auto&& pdxSerializable =
@@ -200,8 +200,8 @@ class APACHE_GEODE_EXPORT SerializationRegistry {
     }
   }
 
-  inline void serializeWithoutHeader(const std::shared_ptr<Serializable>& obj,
-                                     DataOutput& output) const {
+  void serializeWithoutHeader(const std::shared_ptr<Serializable>& obj,
+                              DataOutput& output) const {
     if (auto&& pdxSerializable =
             std::dynamic_pointer_cast<PdxSerializable>(obj)) {
       serializeWithoutHeader(pdxSerializable, output);
@@ -297,8 +297,8 @@ class APACHE_GEODE_EXPORT SerializationRegistry {
   std::shared_ptr<Serializable> deserializeDataSerializableFixedId(
       DataInput& input, DSCode dsCode) const;
 
-  inline void serialize(const std::shared_ptr<DataSerializableFixedId>& obj,
-                        DataOutput& output) const {
+  void serialize(const std::shared_ptr<DataSerializableFixedId>& obj,
+                 DataOutput& output) const {
     auto id = static_cast<int32_t>(obj->getDSFID());
     if (id <= std::numeric_limits<int8_t>::max() &&
         id >= std::numeric_limits<int8_t>::min()) {
@@ -316,28 +316,28 @@ class APACHE_GEODE_EXPORT SerializationRegistry {
     serializeWithoutHeader(obj, output);
   }
 
-  inline void serializeWithoutHeader(
+  void serializeWithoutHeader(
       const std::shared_ptr<DataSerializableFixedId>& obj,
       DataOutput& output) const {
     obj->toData(output);
   }
 
-  inline void serialize(const std::shared_ptr<DataSerializablePrimitive>& obj,
-                        DataOutput& output) const {
+  void serialize(const std::shared_ptr<DataSerializablePrimitive>& obj,
+                 DataOutput& output) const {
     auto id = obj->getDsCode();
     output.write(static_cast<int8_t>(id));
 
     serializeWithoutHeader(obj, output);
   }
 
-  inline void serializeWithoutHeader(
+  void serializeWithoutHeader(
       const std::shared_ptr<DataSerializablePrimitive>& obj,
       DataOutput& output) const {
     obj->toData(output);
   }
 
-  inline void serialize(const std::shared_ptr<PdxSerializable>& obj,
-                        DataOutput& output) const {
+  void serialize(const std::shared_ptr<PdxSerializable>& obj,
+                 DataOutput& output) const {
     output.write(static_cast<int8_t>(DSCode::PDX));
     serializeWithoutHeader(obj, output);
   }
@@ -345,19 +345,19 @@ class APACHE_GEODE_EXPORT SerializationRegistry {
   void serializeWithoutHeader(const std::shared_ptr<PdxSerializable>& obj,
                               DataOutput& output) const;
 
-  inline void serialize(const std::shared_ptr<DataSerializableInternal>& obj,
-                        DataOutput& output) const {
+  void serialize(const std::shared_ptr<DataSerializableInternal>& obj,
+                 DataOutput& output) const {
     serializeWithoutHeader(obj, output);
   }
 
-  inline void serializeWithoutHeader(
+  void serializeWithoutHeader(
       const std::shared_ptr<DataSerializableInternal>& obj,
       DataOutput& output) const {
     obj->toData(output);
   }
 
  public:
-  static inline DSCode getSerializableDataDsCode(int32_t classId) {
+  static DSCode getSerializableDataDsCode(int32_t classId) {
     if (classId <= std::numeric_limits<int8_t>::max() &&
         classId >= std::numeric_limits<int8_t>::min()) {
       return DSCode::CacheableUserData;

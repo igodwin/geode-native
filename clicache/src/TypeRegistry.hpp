@@ -178,7 +178,7 @@ namespace Apache
           ClassNameVsCreateNewObjectArrayDelegate->Clear();
         }
 
-        static inline int8_t GetDsCodeForManagedType(Type^ managedType)
+        static int8_t GetDsCodeForManagedType(Type^ managedType)
         {
           int8_t retVal = 0;
           if (!ManagedTypeToDsCode->TryGetValue(managedType, retVal))
@@ -191,17 +191,17 @@ namespace Apache
           return retVal;
         }
 
-        inline TypeFactoryMethod^ GetDataSerializableFixedTypeFactoryMethodForFixedId(Int32 fixedId)
+        TypeFactoryMethod^ GetDataSerializableFixedTypeFactoryMethodForFixedId(Int32 fixedId)
         {
           return FixedIdToDataSerializableFixedIdTypeFactoryMethod[fixedId];
         }
 
-        inline TypeFactoryMethod^ GetDataSerializablePrimitiveTypeFactoryMethodForDsCode(int8_t dsCode)
+        TypeFactoryMethod^ GetDataSerializablePrimitiveTypeFactoryMethodForDsCode(int8_t dsCode)
         {
           return DsCodeToDataSerializablePrimitiveTypeFactoryMethod[dsCode];
         }
 
-        static inline DataSerializablePrimitiveWrapperDelegate^ GetDataSerializablePrimitiveWrapperDelegateForDsCode(int8_t dsCode)
+        static DataSerializablePrimitiveWrapperDelegate^ GetDataSerializablePrimitiveWrapperDelegateForDsCode(int8_t dsCode)
         {
           return DsCodeToDataSerializablePrimitiveWrapperDelegate[dsCode];
         }

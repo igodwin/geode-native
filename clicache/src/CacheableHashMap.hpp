@@ -53,7 +53,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableHashMap()
+        CacheableHashMap()
         { }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Apache
         /// <param name="dictionary">
         /// The dictionary whose elements are copied to this HashMap.
         /// </param>
-        inline CacheableHashMap(Object^ dictionary)
+        CacheableHashMap(Object^ dictionary)
         {
           m_dictionary = dictionary;
         }
@@ -71,7 +71,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableHashMap^ Create()
+        static CacheableHashMap^ Create()
         {
           return gcnew CacheableHashMap();
         }
@@ -80,7 +80,7 @@ namespace Apache
         /// Static function to create a new instance copying from the
         /// given dictionary.
         /// </summary>
-        inline static CacheableHashMap^ Create(Object^ dictionary)
+        static CacheableHashMap^ Create(Object^ dictionary)
         {
           return gcnew CacheableHashMap(dictionary);
         }

@@ -223,7 +223,7 @@ namespace Apache
             /// Internal constructor to wrap a native object pointer
             /// </summary>
             /// <param name="nativeptr">The native object pointer</param>
-            inline Enumerator(CacheableHashSetType<TYPEID, HSTYPE>^ set)
+            Enumerator(CacheableHashSetType<TYPEID, HSTYPE>^ set)
                               : m_set(set) {
               Reset();
             }
@@ -272,7 +272,7 @@ namespace Apache
           /// </summary>
           property System::Int32 MaxSize
           {
-            inline System::Int32 get()
+            System::Int32 get()
             {
               try
               {
@@ -290,7 +290,7 @@ namespace Apache
           /// </summary>
           property bool IsEmpty
           {
-            inline bool get()
+            bool get()
             {
               try
               {
@@ -308,7 +308,7 @@ namespace Apache
           /// </summary>
           property System::Int32 BucketCount
           {
-            inline System::Int32 get()
+            System::Int32 get()
             {
               try
               {
@@ -578,13 +578,13 @@ namespace Apache
           /// Private constructor to wrap a native object pointer
           /// </summary>
           /// <param name="nativeptr">The native object pointer</param>
-          inline CacheableHashSetType<TYPEID, HSTYPE>(std::shared_ptr<apache::geode::client::Serializable> nativeptr)
+          CacheableHashSetType<TYPEID, HSTYPE>(std::shared_ptr<apache::geode::client::Serializable> nativeptr)
             : Serializable(nativeptr) { }
 
           /// <summary>
           /// Allocates a new empty instance.
           /// </summary>
-          inline CacheableHashSetType<TYPEID, HSTYPE>()
+          CacheableHashSetType<TYPEID, HSTYPE>()
             : Serializable(HSTYPE::createDeserializable())
           { }
 
@@ -592,7 +592,7 @@ namespace Apache
           /// Allocates a new empty instance with given initial size.
           /// </summary>
           /// <param name="size">The initial size of the HashSet.</param>
-          inline CacheableHashSetType<TYPEID, HSTYPE>(System::Int32 size)
+          CacheableHashSetType<TYPEID, HSTYPE>(System::Int32 size)
             : Serializable(HSTYPE::create(size))
           { }
         };
@@ -606,7 +606,7 @@ namespace Apache
       *  Allocates a new empty instance.
       *  </summary>
       */                                                                   \
-      inline m()                                                            \
+      m()                                                            \
       : Internal::CacheableHashSetType<static_cast<int8_t>(native::internal::DSCode::m), HSTYPE>() {}                      \
       \
       /** <summary>
@@ -614,14 +614,14 @@ namespace Apache
        *  </summary>
        *  <param name="size">the initial size of the new instance</param>
        */                                                                   \
-       inline m(System::Int32 size)                                                 \
+       m(System::Int32 size)                                                 \
        : Internal::CacheableHashSetType<static_cast<int8_t>(native::internal::DSCode::m), HSTYPE>(size) {}                  \
        \
        /** <summary>
         *  Static function to create a new empty instance.
         *  </summary>
         */                                                                   \
-        inline static m^ Create()                                             \
+        static m^ Create()                                             \
       {                                                                     \
       return gcnew m();                                                   \
       }                                                                     \
@@ -630,7 +630,7 @@ namespace Apache
        *  Static function to create a new instance with the given size.
        *  </summary>
        */                                                                   \
-       inline static m^ Create(System::Int32 size)                                  \
+       static m^ Create(System::Int32 size)                                  \
       {                                                                     \
       return gcnew m(size);                                               \
       }                                                                     \
@@ -651,7 +651,7 @@ namespace Apache
       }                                                                     \
       \
             private:                                                                \
-              inline m(std::shared_ptr<apache::geode::client::Serializable> nativeptr)                            \
+              m(std::shared_ptr<apache::geode::client::Serializable> nativeptr)                            \
               : Internal::CacheableHashSetType<static_cast<int8_t>(native::internal::DSCode::m), HSTYPE>(nativeptr) { }             \
       };
 

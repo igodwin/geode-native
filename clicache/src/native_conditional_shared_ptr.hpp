@@ -46,11 +46,11 @@ namespace Apache
            delete owned_ptr;
          }
 
-         inline _T* get() {
+         _T* get() {
            return __nullptr == owned_ptr ? unowned_ptr : owned_ptr->get();
          }
 
-         inline std::shared_ptr<_T> get_conditional_shared_ptr() {
+         std::shared_ptr<_T> get_conditional_shared_ptr() {
            return owned_ptr ? *owned_ptr : nullptr;
          }
 

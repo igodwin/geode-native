@@ -46,11 +46,10 @@ class APACHE_GEODE_EXPORT ExpMapEntry : public MapEntryImpl,
   }
 
   // this constructor deliberately skips touching or initializing any members
-  inline explicit ExpMapEntry(bool)
-      : MapEntryImpl(true), ExpEntryProperties(true) {}
+  explicit ExpMapEntry(bool) : MapEntryImpl(true), ExpEntryProperties(true) {}
 
-  inline ExpMapEntry(ExpiryTaskManager* expiryTaskManager,
-                     const std::shared_ptr<CacheableKey>& key)
+  ExpMapEntry(ExpiryTaskManager* expiryTaskManager,
+              const std::shared_ptr<CacheableKey>& key)
       : MapEntryImpl(key), ExpEntryProperties(expiryTaskManager) {}
 
  private:
@@ -62,11 +61,11 @@ class APACHE_GEODE_EXPORT ExpMapEntry : public MapEntryImpl,
 class APACHE_GEODE_EXPORT VersionedExpMapEntry : public ExpMapEntry,
                                                  public VersionStamp {
  public:
-  inline VersionedExpMapEntry(ExpiryTaskManager* expiryTaskManager,
-                              const std::shared_ptr<CacheableKey>& key)
+  VersionedExpMapEntry(ExpiryTaskManager* expiryTaskManager,
+                       const std::shared_ptr<CacheableKey>& key)
       : ExpMapEntry(expiryTaskManager, key) {}
 
-  inline explicit VersionedExpMapEntry(bool) : ExpMapEntry(true) {}
+  explicit VersionedExpMapEntry(bool) : ExpMapEntry(true) {}
 
   virtual ~VersionedExpMapEntry() {}
 

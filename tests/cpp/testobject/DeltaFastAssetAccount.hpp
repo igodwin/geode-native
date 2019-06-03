@@ -52,7 +52,7 @@ class TESTOBJECT_EXPORT DeltaFastAssetAccount : public DataSerializable,
   uint64_t timestamp;
   bool getBeforeUpdate;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

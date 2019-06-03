@@ -268,14 +268,14 @@ namespace Apache
         /// The managed wrapper object; null if the native pointer is null.
         /// </returns>
         //generic<class TKey, class TValue>
-        inline static IRegion<TKey, TValue>^
+        static IRegion<TKey, TValue>^
         Create( std::shared_ptr<native::Region> nativeptr )
         {
           return __nullptr == nativeptr ? nullptr :
             gcnew Region<TKey, TValue>( nativeptr );
         }
 
-        inline static IRegion<TKey, TValue>^
+        static IRegion<TKey, TValue>^
         Create(native::Region* nativeptr)
         {
           return __nullptr == nativeptr ? nullptr :
@@ -293,18 +293,18 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline Region( std::shared_ptr<native::Region> nativeptr )
+        Region( std::shared_ptr<native::Region> nativeptr )
         {
           m_nativeptr = gcnew native_conditional_shared_ptr<native::Region>(nativeptr);
         }
 
-        inline Region(native::Region* nativeptr)
+        Region(native::Region* nativeptr)
         {
           m_nativeptr = gcnew native_conditional_shared_ptr<native::Region>(nativeptr);
         }
 
-        inline std::shared_ptr<apache::geode::client::Serializable> get(std::shared_ptr<apache::geode::client::CacheableKey>& key, std::shared_ptr<apache::geode::client::Serializable>& callbackArg);
-        inline std::shared_ptr<apache::geode::client::Serializable> get(std::shared_ptr<apache::geode::client::CacheableKey>& key);
+        std::shared_ptr<apache::geode::client::Serializable> get(std::shared_ptr<apache::geode::client::CacheableKey>& key, std::shared_ptr<apache::geode::client::Serializable>& callbackArg);
+        std::shared_ptr<apache::geode::client::Serializable> get(std::shared_ptr<apache::geode::client::CacheableKey>& key);
         bool isPoolInMultiuserMode();
         
         native_conditional_shared_ptr<native::Region>^ m_nativeptr;

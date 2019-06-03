@@ -75,13 +75,13 @@ class PdxRemotePreservedData : public PdxUnreadFields {
     m_expiryTakId = 0;
   }
 
-  inline int32_t getMergedTypeId() { return m_mergedTypeId; }
+  int32_t getMergedTypeId() { return m_mergedTypeId; }
 
-  inline void setPreservedDataExpiryTaskId(ExpiryTaskManager::id_type expId) {
+  void setPreservedDataExpiryTaskId(ExpiryTaskManager::id_type expId) {
     m_expiryTakId = expId;
   }
 
-  inline ExpiryTaskManager::id_type getPreservedDataExpiryTaskId() {
+  ExpiryTaskManager::id_type getPreservedDataExpiryTaskId() {
     return m_expiryTakId;
   }
 
@@ -89,11 +89,11 @@ class PdxRemotePreservedData : public PdxUnreadFields {
 
   void setOwner(std::shared_ptr<Serializable> val) { m_owner = val; }
 
-  inline std::vector<int8_t> getPreservedData(int32_t idx) {
+  std::vector<int8_t> getPreservedData(int32_t idx) {
     return m_preservedData[idx];
   }
 
-  inline void setPreservedData(std::vector<int8_t> inputVector) {
+  void setPreservedData(std::vector<int8_t> inputVector) {
     m_preservedData.push_back(inputVector);
   }
 

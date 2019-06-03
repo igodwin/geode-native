@@ -271,7 +271,7 @@ class Gfsh {
 };
 
 template <>
-inline void Gfsh::Command<void>::execute() {
+void Gfsh::Command<void>::execute() {
   gfsh_.execute(command_);
 }
 

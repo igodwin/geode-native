@@ -150,7 +150,7 @@ namespace Apache
         /// </summary>
         property TManaged Value
         {
-          inline TManaged get()
+          TManaged get()
           {
             try
             {
@@ -194,11 +194,11 @@ namespace Apache
         /// Protected constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CacheableBuiltinKey(std::shared_ptr<native::Serializable> nativeptr)
+        CacheableBuiltinKey(std::shared_ptr<native::Serializable> nativeptr)
           : CacheableKey(nativeptr) { }
 
       private:
-        inline TNative* GetNative()
+        TNative* GetNative()
         {
           return dynamic_cast<TNative*>(m_nativeptr->get());
         }
@@ -252,7 +252,7 @@ namespace Apache
         /// </summary>
         property array<TManaged>^ Value
         {
-          inline array<TManaged>^ get()
+          array<TManaged>^ get()
           {
             return m_value;
           }
@@ -263,7 +263,7 @@ namespace Apache
         /// </summary>
         property System::Int32 Length
         {
-          inline System::Int32 get()
+          System::Int32 get()
           {
             return m_value->Length;
           }
@@ -279,7 +279,7 @@ namespace Apache
         /// </summary>
         property TManaged GFINDEXER(System::Int32)
         {
-          inline TManaged get(System::Int32 index)
+          TManaged get(System::Int32 index)
           {
             return m_value[index];
           }
@@ -292,7 +292,7 @@ namespace Apache
         /// <summary>
         /// Protected constructor 
         /// </summary>
-        inline CacheableBuiltinArray()
+        CacheableBuiltinArray()
         {
           //TODO:
           //native::Serializable* sp = TNative::createDeserializable();
@@ -303,7 +303,7 @@ namespace Apache
         /// Protected constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CacheableBuiltinArray(std::shared_ptr<native::Serializable> nptr)
+        CacheableBuiltinArray(std::shared_ptr<native::Serializable> nptr)
         {
           auto nativeptr = std::dynamic_pointer_cast<TNative>(nptr);
           System::Int32 len = nativeptr->length();
@@ -372,21 +372,21 @@ namespace Apache
          *  </summary>
          *  <param name="value">the value of the new instance</param>
          */                                                                   \
-         inline m()                                                            \
+         m()                                                            \
          : CacheableBuiltinKey() { }                                         \
          /** <summary>
           *  Allocates a new instance with the given value.
           *  </summary>
           *  <param name="value">the value of the new instance</param>
           */                                                                   \
-          inline m(mt value)                                                    \
+          m(mt value)                                                    \
           : CacheableBuiltinKey(value) { }                                    \
           /** <summary>
            *  Static function to create a new instance given value.
            *  </summary>
            *  <param name="value">the value of the new instance</param>
            */                                                                   \
-           inline static m^ Create(mt value)                                     \
+           static m^ Create(mt value)                                     \
            {                                                                     \
            return gcnew m(value);                                              \
            }                                                                     \
@@ -394,7 +394,7 @@ namespace Apache
             * Explicit conversion operator to contained value type.
             * </summary>
             */                                                                   \
-            inline static explicit operator mt (m^ value)                         \
+            static explicit operator mt (m^ value)                         \
            {                                                                     \
            return value->Value;                                                \
            }                                                                     \
@@ -415,7 +415,7 @@ namespace Apache
            }                                                                     \
            \
            private:                                                                \
-             inline m(std::shared_ptr<native::Serializable> nativeptr)                            \
+             m(std::shared_ptr<native::Serializable> nativeptr)                            \
               : CacheableBuiltinKey(nativeptr) { }                                \
       };
 
@@ -496,7 +496,7 @@ namespace Apache
           *  </remarks>
           *  <param name="value">the array to create the new instance</param>
           */
-          inline static CacheableArray^ Create(array<ManagedType>^ value)
+          static CacheableArray^ Create(array<ManagedType>^ value)
           {
               return (value != nullptr /*&& value->Length > 0*/ ?
                   gcnew CacheableArray(value) : nullptr);
@@ -510,7 +510,7 @@ namespace Apache
           *  </remarks>
           *  <param name="value">the array to create the new instance</param>
           */
-          inline static CacheableArray^ Create(array<ManagedType>^ value, System::Int32 length)
+          static CacheableArray^ Create(array<ManagedType>^ value, System::Int32 length)
           {
               return (value != nullptr && value->Length > 0 ?
                   gcnew CacheableArray(value, length) : nullptr);
@@ -519,7 +519,7 @@ namespace Apache
           * Explicit conversion operator to contained array type.
           * </summary>
           */
-          inline static explicit operator array<ManagedType> ^ (CacheableArray^ value)
+          static explicit operator array<ManagedType> ^ (CacheableArray^ value)
           {
               return (value != nullptr ? value->Value : nullptr);
           }
@@ -541,7 +541,7 @@ namespace Apache
           * Allocates a new instance
           *  </summary>
           */
-          inline CacheableArray() : CacheableBuiltinArray() { }
+          CacheableArray() : CacheableBuiltinArray() { }
           /** <summary>
           * Allocates a new instance copying from the given array.
           *  </summary>
@@ -550,7 +550,7 @@ namespace Apache
           *  </remarks>
           *  <param name="value">the array to create the new instance</param>
           */
-          inline CacheableArray(array<ManagedType>^ value) : CacheableBuiltinArray(value) { }
+          CacheableArray(array<ManagedType>^ value) : CacheableBuiltinArray(value) { }
           /** <summary>
           * Allocates a new instance copying given length from the
           * start of given array.
@@ -560,9 +560,9 @@ namespace Apache
           *  </remarks>
           *  <param name="value">the array to create the new instance</param>
           */
-          inline CacheableArray(array<ManagedType>^ value, System::Int32 length)
+          CacheableArray(array<ManagedType>^ value, System::Int32 length)
             : CacheableBuiltinArray(value, length) { }
-          inline CacheableArray(std::shared_ptr<native::Serializable> nativeptr)
+          CacheableArray(std::shared_ptr<native::Serializable> nativeptr)
             : CacheableBuiltinArray(nativeptr) { }
       };
 

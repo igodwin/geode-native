@@ -35,7 +35,7 @@ namespace chrono {
  * @param time to get local time for
  * @return local time
  */
-inline std::tm localtime(const time_t& time) {
+std::tm localtime(const time_t& time) {
   std::tm localtime;
 #if defined(_WIN32)
   localtime_s(&localtime, &time);
@@ -50,8 +50,7 @@ inline std::tm localtime(const time_t& time) {
  * @param time to get local time for
  * @return local time
  */
-inline std::tm localtime(
-    const std::chrono::system_clock::time_point& time_point) {
+std::tm localtime(const std::chrono::system_clock::time_point& time_point) {
   return localtime(std::chrono::system_clock::to_time_t(time_point));
 }
 
@@ -60,7 +59,7 @@ inline std::tm localtime(
  * @param time to get string for
  * @return string representation of given time
  */
-inline std::string to_string(const time_t& time) {
+std::string to_string(const time_t& time) {
   std::stringstream stringstream;
   const auto local = localtime(time);
 
@@ -89,8 +88,7 @@ inline std::string to_string(const time_t& time) {
  * @param time_point to get string for
  * @return string representation of given time_point
  */
-inline std::string to_string(
-    const std::chrono::system_clock::time_point& time_point) {
+std::string to_string(const std::chrono::system_clock::time_point& time_point) {
   return to_string(std::chrono::system_clock::to_time_t(time_point));
 }
 

@@ -87,7 +87,7 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CqEvent( const native::CqEvent* nativeptr )
+        CqEvent( const native::CqEvent* nativeptr )
           : m_nativeptr(nativeptr)
         {
         }

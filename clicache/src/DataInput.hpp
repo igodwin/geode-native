@@ -335,7 +335,7 @@ namespace Apache
           obj = (Char)ReadUInt16();
         }
 
-        inline Char decodeChar( )
+        Char decodeChar( )
         {
           Char retChar;
           int b = m_buffer[ m_cursor++ ] & 0xff;
@@ -556,7 +556,7 @@ namespace Apache
           SetBuffer();
         }
 
-        inline array<Byte>^ ReadReverseBytesOnly(int len);
+        array<Byte>^ ReadReverseBytesOnly(int len);
 
         void SetBuffer()
         {
@@ -651,7 +651,7 @@ namespace Apache
         /// Internal constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline DataInput( apache::geode::client::DataInput* nativeptr, bool managedObject, Apache::Geode::Client::Cache^ cache )
+        DataInput( apache::geode::client::DataInput* nativeptr, bool managedObject, Apache::Geode::Client::Cache^ cache )
         { 
           m_nativeptr = gcnew native_conditional_unique_ptr<native::DataInput>(nativeptr);
           m_ispdxDesrialization = false;

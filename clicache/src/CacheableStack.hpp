@@ -43,7 +43,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableStack(System::Collections::ICollection^ stack)
+        CacheableStack(System::Collections::ICollection^ stack)
         { 
           m_stack = stack;
         }
@@ -51,7 +51,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableStack^ Create()
+        static CacheableStack^ Create()
         {
           return gcnew CacheableStack(gcnew System::Collections::Generic::Stack<Object^>());
         }
@@ -59,7 +59,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableStack^ Create(System::Collections::ICollection^ stack)
+        static CacheableStack^ Create(System::Collections::ICollection^ stack)
         {
           return gcnew CacheableStack(stack);
         }

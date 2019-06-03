@@ -69,7 +69,7 @@ namespace Apache
         /// <summary>
         /// Constructor to wrap the given managed delegate.
         /// </summary>
-        inline DelegateWrapperGeneric( TypeFactoryMethod^ typeDelegate )
+        DelegateWrapperGeneric( TypeFactoryMethod^ typeDelegate )
           : m_delegate( typeDelegate ) { }
 
         /// <summary>

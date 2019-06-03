@@ -112,7 +112,7 @@ class TESTOBJECT_EXPORT PdxVersioned1 : public PdxSerializable {
   PdxVersioned1() { init("def"); }
   explicit PdxVersioned1(const char* key);
   void init(const char* key);
-  inline bool compareBool(bool b, bool b2) {
+  bool compareBool(bool b, bool b2) {
     if (b == b2) return b;
     throw IllegalStateException("Not got expected value for bool type: ");
   }

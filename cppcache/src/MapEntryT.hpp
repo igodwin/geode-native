@@ -91,7 +91,7 @@ class MapEntryST<TBase, 0, UPDATE_COUNT> {
 template <typename TBase, int NUM_TRACKERS, int UPDATE_COUNT>
 class MapEntryT final : public TBase {
  public:
-  inline explicit MapEntryT(bool) : TBase(true) {}
+  explicit MapEntryT(bool) : TBase(true) {}
 
   ~MapEntryT() final = default;
 
@@ -116,21 +116,20 @@ class MapEntryT final : public TBase {
 
   int getUpdateCount() const final { return UPDATE_COUNT; }
 
-  inline static std::shared_ptr<MapEntryT> create(
+  static std::shared_ptr<MapEntryT> create(
       const std::shared_ptr<CacheableKey>& key) {
     return std::make_shared<MapEntryT>(key);
   }
 
-  inline static std::shared_ptr<MapEntryT> create(
+  static std::shared_ptr<MapEntryT> create(
       ExpiryTaskManager* expiryTaskManager,
       const std::shared_ptr<CacheableKey>& key) {
     return std::make_shared<MapEntryT>(expiryTaskManager, key);
   }
 
-  inline explicit MapEntryT(const std::shared_ptr<CacheableKey>& key)
-      : TBase(key) {}
-  inline MapEntryT(ExpiryTaskManager* expiryTaskManager,
-                   const std::shared_ptr<CacheableKey>& key)
+  explicit MapEntryT(const std::shared_ptr<CacheableKey>& key) : TBase(key) {}
+  MapEntryT(ExpiryTaskManager* expiryTaskManager,
+            const std::shared_ptr<CacheableKey>& key)
       : TBase(expiryTaskManager, key) {}
 };
 
@@ -139,7 +138,7 @@ class MapEntryT final : public TBase {
 template <typename TBase, int NUM_TRACKERS>
 class MapEntryT<TBase, NUM_TRACKERS, GF_UPDATE_MAX> final : public TBase {
  public:
-  inline explicit MapEntryT(bool) : TBase(true) {}
+  explicit MapEntryT(bool) : TBase(true) {}
 
   ~MapEntryT() final = default;
 
@@ -173,7 +172,7 @@ class MapEntryT<TBase, NUM_TRACKERS, GF_UPDATE_MAX> final : public TBase {
 template <typename TBase, int UPDATE_COUNT>
 class MapEntryT<TBase, GF_TRACK_MAX, UPDATE_COUNT> final : public TBase {
  public:
-  inline explicit MapEntryT(bool) : TBase(true) {}
+  explicit MapEntryT(bool) : TBase(true) {}
 
   ~MapEntryT() final = default;
 
@@ -207,7 +206,7 @@ class MapEntryT<TBase, GF_TRACK_MAX, UPDATE_COUNT> final : public TBase {
 template <typename TBase>
 class MapEntryT<TBase, GF_TRACK_MAX, GF_UPDATE_MAX> final : public TBase {
  public:
-  inline explicit MapEntryT(bool) : TBase(true) {}
+  explicit MapEntryT(bool) : TBase(true) {}
 
   ~MapEntryT() final = default;
 
@@ -240,8 +239,7 @@ class MapEntryT<TBase, GF_TRACK_MAX, GF_UPDATE_MAX> final : public TBase {
 };
 
 template <typename TBase, int NUM_TRACKERS, int UPDATE_COUNT>
-inline int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::addTracker(
-    TBase* loc) {
+int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::addTracker(TBase* loc) {
   // use placement new to make vptr point to class that shall have
   // tracking number incremented by one
   // invoke the constructor that will avoid initializing *any* data
@@ -250,8 +248,7 @@ inline int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::addTracker(
 }
 
 template <typename TBase, int NUM_TRACKERS, int UPDATE_COUNT>
-inline int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::removeTracker(
-    TBase* loc) {
+int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::removeTracker(TBase* loc) {
   // use placement new to make vptr point to class that shall have
   // tracking number decremented by one
   // invoke the constructor that will avoid initializing *any* data
@@ -266,8 +263,7 @@ inline int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::removeTracker(
 }
 
 template <typename TBase, int NUM_TRACKERS, int UPDATE_COUNT>
-inline int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::incUpdateCount(
-    TBase* loc) {
+int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::incUpdateCount(TBase* loc) {
   // use placement new to make vptr point to class that shall have
   // update number incremented by one
   // invoke the constructor that will avoid initializing *any* data
@@ -276,7 +272,7 @@ inline int MapEntryST<TBase, NUM_TRACKERS, UPDATE_COUNT>::incUpdateCount(
 }
 
 template <typename TBase, int UPDATE_COUNT>
-inline int MapEntryST<TBase, 0, UPDATE_COUNT>::addTracker(TBase* loc) {
+int MapEntryST<TBase, 0, UPDATE_COUNT>::addTracker(TBase* loc) {
   // use placement new to make vptr point to class that shall have
   // tracking number incremented by one
   // invoke the constructor that will avoid initializing *any* data
@@ -285,12 +281,12 @@ inline int MapEntryST<TBase, 0, UPDATE_COUNT>::addTracker(TBase* loc) {
 }
 
 template <typename TBase, int UPDATE_COUNT>
-inline int MapEntryST<TBase, 0, UPDATE_COUNT>::removeTracker(TBase*) {
+int MapEntryST<TBase, 0, UPDATE_COUNT>::removeTracker(TBase*) {
   return 0;
 }
 
 template <typename TBase, int UPDATE_COUNT>
-inline int MapEntryST<TBase, 0, UPDATE_COUNT>::incUpdateCount(TBase*) {
+int MapEntryST<TBase, 0, UPDATE_COUNT>::incUpdateCount(TBase*) {
   return UPDATE_COUNT;
 }
 }  // namespace client

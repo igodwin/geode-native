@@ -45,11 +45,11 @@ class EventIdTSS {
     m_eidSeqTSS = 0;
   }
 
-  inline int64_t getEidThr() { return m_eidThrTSS; }
+  int64_t getEidThr() { return m_eidThrTSS; }
 
-  inline int64_t getAndIncEidSeq() { return m_eidSeqTSS++; }
+  int64_t getAndIncEidSeq() { return m_eidSeqTSS++; }
 
-  inline int64_t getSeqNum() { return m_eidSeqTSS - 1; }
+  int64_t getSeqNum() { return m_eidSeqTSS - 1; }
 
   static thread_local EventIdTSS s_eventId;
 

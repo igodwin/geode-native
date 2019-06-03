@@ -94,19 +94,19 @@ class TcrEndpoint {
   void stopNotifyReceiverAndCleanup();
   void stopNoBlock();
 
-  bool inline connected() const { return m_connected; }
+  bool connected() const { return m_connected; }
 
-  int inline numRegions() const { return m_numRegions; }
+  int numRegions() const { return m_numRegions; }
 
-  void inline setNumRegions(int numRegions) { m_numRegions = numRegions; }
+  void setNumRegions(int numRegions) { m_numRegions = numRegions; }
 
-  inline const std::string& name() const { return m_name; }
+  const std::string& name() const { return m_name; }
 
   //  setConnectionStatus is now a public method, as it is used by
   //  TcrDistributionManager.
   void setConnectionStatus(bool status);
 
-  inline int getNumRegionListeners() const { return m_numRegionListener; }
+  int getNumRegionListeners() const { return m_numRegionListener; }
 
   // TODO: for single user mode only
   void setUniqueId(int64_t uniqueId) {
@@ -141,13 +141,13 @@ class TcrEndpoint {
                                               TcrConnection*& statusConn);
 
   //  TESTING: return true or false
-  bool inline getServerQueueStatusTEST() {
+  bool getServerQueueStatusTEST() {
     return (m_serverQueueStatus == REDUNDANT_SERVER ||
             m_serverQueueStatus == PRIMARY_SERVER);
   }
 
   // Get cached server queue props.
-  int32_t inline getServerQueueSize() { return m_queueSize; }
+  int32_t getServerQueueSize() { return m_queueSize; }
   ServerQueueStatus getServerQueueStatus() { return m_serverQueueStatus; }
 
   // Set server queue props.

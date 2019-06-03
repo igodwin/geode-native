@@ -103,7 +103,7 @@ class ClientMetadataService : private NonCopyable, private NonAssignable {
  public:
   ClientMetadataService() = delete;
   explicit ClientMetadataService(ThinClientPoolDM* pool);
-  inline ~ClientMetadataService() noexcept = default;
+  ~ClientMetadataService() noexcept = default;
 
   void start();
 

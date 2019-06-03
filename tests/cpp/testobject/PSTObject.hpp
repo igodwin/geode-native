@@ -48,7 +48,7 @@ class TESTOBJECT_EXPORT PSTObject : public TimestampedObject {
   int8_t field2;
   std::shared_ptr<CacheableBytes> valueData;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

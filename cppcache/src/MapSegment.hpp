@@ -76,8 +76,8 @@ class APACHE_GEODE_EXPORT MapSegment {
 
   // increment update counter of the given entry and return true if entry
   // was rebound
-  inline bool incrementUpdateCount(const std::shared_ptr<CacheableKey>& key,
-                                   std::shared_ptr<MapEntry>& entry) {
+  bool incrementUpdateCount(const std::shared_ptr<CacheableKey>& key,
+                            std::shared_ptr<MapEntry>& entry) {
     // This function is disabled if concurrency checks are enabled. The
     // versioning
     // changes takes care of the version and no need for tracking the entry
@@ -93,9 +93,9 @@ class APACHE_GEODE_EXPORT MapSegment {
   }
 
   // remove a tracker for the given entry
-  inline void removeTrackerForEntry(const std::shared_ptr<CacheableKey>& key,
-                                    std::shared_ptr<MapEntry>& entry,
-                                    std::shared_ptr<MapEntryImpl>& entryImpl) {
+  void removeTrackerForEntry(const std::shared_ptr<CacheableKey>& key,
+                             std::shared_ptr<MapEntry>& entry,
+                             std::shared_ptr<MapEntryImpl>& entryImpl) {
     // This function is disabled if concurrency checks are enabled. The
     // versioning
     // changes takes care of the version and no need for tracking the entry
@@ -119,12 +119,12 @@ class APACHE_GEODE_EXPORT MapSegment {
     }
   }
 
-  inline GfErrType putNoEntry(const std::shared_ptr<CacheableKey>& key,
-                              const std::shared_ptr<Cacheable>& newValue,
-                              std::shared_ptr<MapEntryImpl>& newEntry,
-                              int updateCount, int destroyTracker,
-                              std::shared_ptr<VersionTag> versionTag,
-                              VersionStamp* versionStamp = nullptr) {
+  GfErrType putNoEntry(const std::shared_ptr<CacheableKey>& key,
+                       const std::shared_ptr<Cacheable>& newValue,
+                       std::shared_ptr<MapEntryImpl>& newEntry, int updateCount,
+                       int destroyTracker,
+                       std::shared_ptr<VersionTag> versionTag,
+                       VersionStamp* versionStamp = nullptr) {
     if (!m_concurrencyChecksEnabled) {
       if (updateCount >= 0) {
         // entry was removed while being tracked
@@ -267,7 +267,7 @@ class APACHE_GEODE_EXPORT MapSegment {
    */
   void getValues(std::vector<std::shared_ptr<Cacheable>>& result);
 
-  inline uint32_t rehashCount() { return m_rehashCount; }
+  uint32_t rehashCount() { return m_rehashCount; }
 
   int addTrackerForEntry(const std::shared_ptr<CacheableKey>& key,
                          std::shared_ptr<Cacheable>& oldValue, bool addIfAbsent,

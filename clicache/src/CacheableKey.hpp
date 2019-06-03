@@ -125,14 +125,14 @@ namespace Apache
         /// <summary>
         /// Default constructor.
         /// </summary>
-        inline CacheableKey()
+        CacheableKey()
           : Client::Serializable() { }
 
         /// <summary>
         /// Internal constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline CacheableKey(std::shared_ptr<apache::geode::client::Serializable> nativeptr)
+        CacheableKey(std::shared_ptr<apache::geode::client::Serializable> nativeptr)
           : Client::Serializable(nativeptr) { }
       };
     }  // namespace Client

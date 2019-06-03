@@ -50,13 +50,12 @@ class APACHE_GEODE_EXPORT NoResult final : public ResultCollector {
     throw UnsupportedOperationException("can not close on NoResult");
   }
 
-  inline std::shared_ptr<CacheableVector> getResult(
-      std::chrono::milliseconds) final {
+  std::shared_ptr<CacheableVector> getResult(std::chrono::milliseconds) final {
     throw FunctionExecutionException(
         "Cannot return any result, as Function.hasResult() is false");
   }
 
-  inline void clearResults() final {
+  void clearResults() final {
     throw UnsupportedOperationException("can not clear results on NoResult");
   }
 };

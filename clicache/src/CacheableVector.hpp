@@ -49,7 +49,7 @@ namespace Apache
         /// <summary>
         /// Allocates a new empty instance.
         /// </summary>
-        inline CacheableVector(System::Collections::IList^ arrayList)
+        CacheableVector(System::Collections::IList^ arrayList)
         {
           m_arrayList = arrayList;
         }
@@ -58,7 +58,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableVector^ Create()
+        static CacheableVector^ Create()
         {
           return gcnew CacheableVector(gcnew System::Collections::ArrayList());
         }
@@ -66,7 +66,7 @@ namespace Apache
         /// <summary>
         /// Static function to create a new empty instance.
         /// </summary>
-        inline static CacheableVector^ Create(System::Collections::IList^ list)
+        static CacheableVector^ Create(System::Collections::IList^ list)
         {
           return gcnew CacheableVector(list);
         }

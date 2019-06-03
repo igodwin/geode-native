@@ -52,7 +52,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the unsigned byte to be written
    */
-  inline void write(uint8_t value) {
+  void write(uint8_t value) {
     ensureCapacity(1);
     writeNoCheck(value);
   }
@@ -62,14 +62,14 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the signed byte to be written
    */
-  inline void write(int8_t value) { write(static_cast<uint8_t>(value)); }
+  void write(int8_t value) { write(static_cast<uint8_t>(value)); }
 
   /**
    * Write a boolean value to the <code>DataOutput</code>.
    *
    * @param value the boolean value to be written
    */
-  inline void writeBoolean(bool value) { write(static_cast<uint8_t>(value)); }
+  void writeBoolean(bool value) { write(static_cast<uint8_t>(value)); }
 
   /**
    * Write an array of unsigned bytes to the <code>DataOutput</code>.
@@ -77,7 +77,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param value the array of unsigned bytes to be written
    * @param len the number of bytes from the start of array to be written
    */
-  inline void writeBytes(const uint8_t* bytes, int32_t len) {
+  void writeBytes(const uint8_t* bytes, int32_t len) {
     if (len >= 0) {
       ensureCapacity(len + 5);
       writeArrayLen(bytes == nullptr ? 0 : len);  // length of bytes...
@@ -96,7 +96,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param value the array of signed bytes to be written
    * @param len the number of bytes from the start of array to be written
    */
-  inline void writeBytes(const int8_t* bytes, int32_t len) {
+  void writeBytes(const int8_t* bytes, int32_t len) {
     writeBytes(reinterpret_cast<const uint8_t*>(bytes), len);
   }
 
@@ -111,7 +111,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param value the array of unsigned bytes to be written
    * @param len the number of bytes from the start of array to be written
    */
-  inline void writeBytesOnly(const uint8_t* bytes, size_t len) {
+  void writeBytesOnly(const uint8_t* bytes, size_t len) {
     ensureCapacity(len);
     std::memcpy(m_buf, bytes, len);
     m_buf += len;
@@ -128,7 +128,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param value the array of signed bytes to be written
    * @param len the number of bytes from the start of array to be written
    */
-  inline void writeBytesOnly(const int8_t* bytes, size_t len) {
+  void writeBytesOnly(const int8_t* bytes, size_t len) {
     writeBytesOnly(reinterpret_cast<const uint8_t*>(bytes), len);
   }
 
@@ -137,7 +137,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the 16-bit unsigned integer value to be written
    */
-  inline void writeInt(uint16_t value) {
+  void writeInt(uint16_t value) {
     ensureCapacity(2);
     *(m_buf++) = static_cast<uint8_t>(value >> 8);
     *(m_buf++) = static_cast<uint8_t>(value);
@@ -148,7 +148,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the 16-bit wchar_t value to be written
    */
-  inline void writeChar(uint16_t value) {
+  void writeChar(uint16_t value) {
     ensureCapacity(2);
     *(m_buf++) = static_cast<uint8_t>(value >> 8);
     *(m_buf++) = static_cast<uint8_t>(value);
@@ -159,7 +159,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the 32-bit unsigned integer value to be written
    */
-  inline void writeInt(uint32_t value) {
+  void writeInt(uint32_t value) {
     ensureCapacity(4);
     *(m_buf++) = static_cast<uint8_t>(value >> 24);
     *(m_buf++) = static_cast<uint8_t>(value >> 16);
@@ -172,7 +172,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the 64-bit unsigned integer value to be written
    */
-  inline void writeInt(uint64_t value) {
+  void writeInt(uint64_t value) {
     ensureCapacity(8);
     *(m_buf++) = static_cast<uint8_t>(value >> 56);
     *(m_buf++) = static_cast<uint8_t>(value >> 48);
@@ -189,27 +189,21 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the 16-bit signed integer value to be written
    */
-  inline void writeInt(int16_t value) {
-    writeInt(static_cast<uint16_t>(value));
-  }
+  void writeInt(int16_t value) { writeInt(static_cast<uint16_t>(value)); }
 
   /**
    * Write a 32-bit signed integer value to the <code>DataOutput</code>.
    *
    * @param value the 32-bit signed integer value to be written
    */
-  inline void writeInt(int32_t value) {
-    writeInt(static_cast<uint32_t>(value));
-  }
+  void writeInt(int32_t value) { writeInt(static_cast<uint32_t>(value)); }
 
   /**
    * Write a 64-bit signed integer value to the <code>DataOutput</code>.
    *
    * @param value the 64-bit signed integer value to be written
    */
-  inline void writeInt(int64_t value) {
-    writeInt(static_cast<uint64_t>(value));
-  }
+  void writeInt(int64_t value) { writeInt(static_cast<uint64_t>(value)); }
 
   /**
    * Write a 32-bit signed integer array length value to the
@@ -218,7 +212,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the 32-bit signed integer array length to be written
    */
-  inline void writeArrayLen(int32_t len) {
+  void writeArrayLen(int32_t len) {
     if (len == -1) {
       write(static_cast<int8_t>(-1));
     } else if (len <= 252) {  // 252 is java's ((byte)-4 && 0xFF)
@@ -237,7 +231,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the float value to be written
    */
-  inline void writeFloat(float value) {
+  void writeFloat(float value) {
     union float_uint32_t {
       float f;
       uint32_t u;
@@ -251,7 +245,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    *
    * @param value the double precision real number to be written
    */
-  inline void writeDouble(double value) {
+  void writeDouble(double value) {
     union double_uint64_t {
       double d;
       uint64_t ll;
@@ -261,7 +255,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   }
 
   template <class _CharT>
-  inline void writeString(const _CharT* value) {
+  void writeString(const _CharT* value) {
     // TODO string should we convert to empty string?
     if (nullptr == value) {
       write(static_cast<uint8_t>(DSCode::CacheableNullString));
@@ -271,7 +265,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   }
 
   template <class _CharT, class... _Tail>
-  inline void writeString(const std::basic_string<_CharT, _Tail...>& value) {
+  void writeString(const std::basic_string<_CharT, _Tail...>& value) {
     // without scanning string, making worst case choices.
     // TODO constexp for each string type to jmutf8 length conversion
     if (value.length() * 3 <= std::numeric_limits<uint16_t>::max()) {
@@ -284,7 +278,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   }
 
   template <class _CharT>
-  inline void writeUTF(const _CharT* value) {
+  void writeUTF(const _CharT* value) {
     if (nullptr == value) {
       throw NullPointerException("Parameter value must not be null.");
     }
@@ -292,7 +286,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   }
 
   template <class _CharT, class... Tail>
-  inline void writeUTF(const std::basic_string<_CharT, Tail...>& value) {
+  void writeUTF(const std::basic_string<_CharT, Tail...>& value) {
     writeJavaModifiedUtf8(value);
   }
 
@@ -306,7 +300,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param value string to write as UTF-16 units
    */
   template <class _CharT, class... _Tail>
-  inline void writeChars(const std::basic_string<_CharT, _Tail...>& value) {
+  void writeChars(const std::basic_string<_CharT, _Tail...>& value) {
     writeUtf16(value);
   }
 
@@ -323,7 +317,7 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param value NULL (\u0000) terminated string to write as UTF-16 units
    */
   template <class _CharT>
-  inline void writeChars(const _CharT* value) {
+  void writeChars(const _CharT* value) {
     writeChars(std::basic_string<_CharT>(value));
   }
 
@@ -370,7 +364,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   /**
    * Get a pointer to the internal buffer of <code>DataOutput</code>.
    */
-  inline const uint8_t* getBuffer() const {
+  const uint8_t* getBuffer() const {
     // GF_R_ASSERT(!((uint32_t)(m_bytes) % 4));
     return m_bytes.get();
   }
@@ -378,7 +372,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   /**
    * Get a pointer to the internal buffer of <code>DataOutput</code>.
    */
-  inline size_t getRemainingBufferLength() const {
+  size_t getRemainingBufferLength() const {
     // GF_R_ASSERT(!((uint32_t)(m_bytes) % 4));
     return m_size - getBufferLength();
   }
@@ -389,13 +383,13 @@ class APACHE_GEODE_EXPORT DataOutput {
    * @param rsize the size of buffer is filled in this output parameter;
    *   should not be nullptr
    */
-  inline const uint8_t* getBuffer(size_t* rsize) const {
+  const uint8_t* getBuffer(size_t* rsize) const {
     *rsize = m_buf - m_bytes.get();
     // GF_R_ASSERT(!((uint32_t)(m_bytes) % 4));
     return m_bytes.get();
   }
 
-  inline uint8_t* getBufferCopy() {
+  uint8_t* getBufferCopy() {
     size_t size = m_buf - m_bytes.get();
     auto result = static_cast<uint8_t*>(std::malloc(size * sizeof(uint8_t)));
     if (result == nullptr) {
@@ -409,12 +403,12 @@ class APACHE_GEODE_EXPORT DataOutput {
    * Get the length of current data in the internal buffer of
    * <code>DataOutput</code>.
    */
-  inline size_t getBufferLength() const { return m_buf - m_bytes.get(); }
+  size_t getBufferLength() const { return m_buf - m_bytes.get(); }
 
   /**
    * Reset the internal cursor to the start of the buffer.
    */
-  inline void reset() {
+  void reset() {
     if (m_haveBigBuffer) {
       // create smaller buffer
       m_bytes.reset(
@@ -432,7 +426,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   }
 
   // make sure there is room left for the requested size item.
-  inline void ensureCapacity(size_t size) {
+  void ensureCapacity(size_t size) {
     size_t offset = m_buf - m_bytes.get();
     if ((m_size - offset) < size) {
       size_t newSize = m_size * 2 + (8192 * (size / 8192));
@@ -511,7 +505,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   const CacheImpl* m_cache;
   Pool* m_pool;
 
-  inline void writeAscii(const std::string& value) {
+  void writeAscii(const std::string& value) {
     uint16_t len = static_cast<uint16_t>(
         std::min<size_t>(value.length(), std::numeric_limits<uint16_t>::max()));
     writeInt(len);
@@ -521,7 +515,7 @@ class APACHE_GEODE_EXPORT DataOutput {
     }
   }
 
-  inline void writeAsciiHuge(const std::string& value) {
+  void writeAsciiHuge(const std::string& value) {
     uint32_t len = static_cast<uint32_t>(
         std::min<size_t>(value.length(), std::numeric_limits<uint32_t>::max()));
     writeInt(static_cast<uint32_t>(len));
@@ -546,7 +540,7 @@ class APACHE_GEODE_EXPORT DataOutput {
       const std::basic_string<char32_t, _Traits, _Allocator>& value);
 
   template <class _Traits, class _Allocator>
-  inline void writeJavaModifiedUtf8(
+  void writeJavaModifiedUtf8(
       const std::basic_string<wchar_t, _Traits, _Allocator>& value) {
     typedef std::conditional<
         sizeof(wchar_t) == sizeof(char16_t), char16_t,
@@ -556,7 +550,7 @@ class APACHE_GEODE_EXPORT DataOutput {
                           value.length());
   }
 
-  inline void writeJavaModifiedUtf8(const char16_t* data, size_t len) {
+  void writeJavaModifiedUtf8(const char16_t* data, size_t len) {
     if (0 == len) {
       writeInt(static_cast<uint16_t>(0));
     } else {
@@ -576,7 +570,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   void writeJavaModifiedUtf8(const char32_t* data, size_t len);
 
   template <class _CharT, class _Traits, class _Allocator>
-  inline void writeUtf16Huge(
+  void writeUtf16Huge(
       const std::basic_string<_CharT, _Traits, _Allocator>& value) {
     writeUtf16Huge(value.data(), value.length());
   }
@@ -590,7 +584,7 @@ class APACHE_GEODE_EXPORT DataOutput {
       const std::basic_string<char32_t, _Traits, _Allocator>& value);
 
   template <class _Traits, class _Allocator>
-  inline void writeUtf16Huge(
+  void writeUtf16Huge(
       const std::basic_string<wchar_t, _Traits, _Allocator>& value) {
     typedef std::conditional<
         sizeof(wchar_t) == sizeof(char16_t), char16_t,
@@ -600,7 +594,7 @@ class APACHE_GEODE_EXPORT DataOutput {
                    value.length());
   }
 
-  inline void writeUtf16Huge(const char16_t* data, size_t length) {
+  void writeUtf16Huge(const char16_t* data, size_t length) {
     uint32_t len = static_cast<uint32_t>(
         std::min<size_t>(length, std::numeric_limits<uint32_t>::max()));
     writeInt(len);
@@ -610,8 +604,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   void writeUtf16Huge(const char32_t* data, size_t len);
 
   template <class _CharT, class _Traits, class _Allocator>
-  inline void writeUtf16(
-      const std::basic_string<_CharT, _Traits, _Allocator>& value) {
+  void writeUtf16(const std::basic_string<_CharT, _Traits, _Allocator>& value) {
     writeUtf16(value.data(), value.length());
   }
 
@@ -623,7 +616,7 @@ class APACHE_GEODE_EXPORT DataOutput {
       const std::basic_string<char32_t, _Traits, _Allocator>& value);
 
   template <class _Traits, class _Allocator>
-  inline void writeUtf16(
+  void writeUtf16(
       const std::basic_string<wchar_t, _Traits, _Allocator>& value) {
     typedef std::conditional<
         sizeof(wchar_t) == sizeof(char16_t), char16_t,
@@ -632,7 +625,7 @@ class APACHE_GEODE_EXPORT DataOutput {
     writeUtf16(reinterpret_cast<const _Convert*>(value.data()), value.length());
   }
 
-  inline void writeUtf16(const char16_t* data, size_t length) {
+  void writeUtf16(const char16_t* data, size_t length) {
     ensureCapacity(length * 2);
     for (; length > 0; length--, data++) {
       writeNoCheck(static_cast<uint8_t>(*data >> 8));
@@ -645,7 +638,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   static size_t getJavaModifiedUtf8EncodedLength(const char16_t* data,
                                                  size_t length);
 
-  inline static void getEncodedLength(const char val, int32_t& encodedLen) {
+  static void getEncodedLength(const char val, int32_t& encodedLen) {
     if ((val == 0) || (val & 0x80)) {
       // two byte.
       encodedLen += 2;
@@ -655,7 +648,7 @@ class APACHE_GEODE_EXPORT DataOutput {
     }
   }
 
-  inline static void getEncodedLength(const wchar_t val, int32_t& encodedLen) {
+  static void getEncodedLength(const wchar_t val, int32_t& encodedLen) {
     if (val == 0) {
       encodedLen += 2;
     } else if (val < 0x80)  // ASCII character
@@ -668,7 +661,7 @@ class APACHE_GEODE_EXPORT DataOutput {
     }
   }
 
-  inline void encodeChar(const char value) {
+  void encodeChar(const char value) {
     uint8_t tmp = static_cast<uint8_t>(value);
     if ((tmp == 0) || (tmp & 0x80)) {
       // two byte.
@@ -681,7 +674,7 @@ class APACHE_GEODE_EXPORT DataOutput {
   }
 
   // this will lose the character set encoding.
-  inline void encodeChar(const wchar_t value) {
+  void encodeChar(const wchar_t value) {
     uint16_t c = static_cast<uint16_t>(value);
     if (c == 0) {
       *(m_buf++) = 0xc0;
@@ -698,7 +691,7 @@ class APACHE_GEODE_EXPORT DataOutput {
     }
   }
 
-  inline void encodeJavaModifiedUtf8(const char16_t c) {
+  void encodeJavaModifiedUtf8(const char16_t c) {
     if (c == 0) {
       // NUL
       *(m_buf++) = 0xc0;
@@ -716,11 +709,9 @@ class APACHE_GEODE_EXPORT DataOutput {
     }
   }
 
-  inline void writeNoCheck(uint8_t value) { *(m_buf++) = value; }
+  void writeNoCheck(uint8_t value) { *(m_buf++) = value; }
 
-  inline void writeNoCheck(int8_t value) {
-    writeNoCheck(static_cast<uint8_t>(value));
-  }
+  void writeNoCheck(int8_t value) { writeNoCheck(static_cast<uint8_t>(value)); }
 
   Pool* getPool() const { return m_pool; }
 

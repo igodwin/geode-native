@@ -62,7 +62,7 @@ namespace Apache
         /// <summary>
         /// True if the current policy is <c>Overflows</c>.
         /// </summary>
-        inline static bool IsOverflow( DiskPolicyType type )
+        static bool IsOverflow( DiskPolicyType type )
         {
           return (type == DiskPolicyType::Overflows);
         }
@@ -70,7 +70,7 @@ namespace Apache
         /// <summary>
         /// True if the current policy is <c>None</c>.
         /// </summary>
-        inline static bool IsNone( DiskPolicyType type )
+        static bool IsNone( DiskPolicyType type )
         {
           return (type == DiskPolicyType::None);
         }
@@ -78,7 +78,7 @@ namespace Apache
         ///// <summary>
         ///// True if the current policy is <c>Persist</c>.
         ///// </summary> -- Persist is NOT YET IMPLEMENTED IN C++
-        //inline static bool IsPersist( DiskPolicyType type )
+        //static bool IsPersist( DiskPolicyType type )
         //{
         //  return (type == DiskPolicyType::Persist);
         //}

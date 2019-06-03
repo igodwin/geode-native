@@ -149,12 +149,12 @@ class TestDataInput {
   void setBuffer() { m_dataInput.setBuffer(); }
 
   template <class CharT = char, class... Tail>
-  inline std::basic_string<CharT, Tail...> readUTF() {
+  std::basic_string<CharT, Tail...> readUTF() {
     return m_dataInput.readUTF<CharT, Tail...>();
   }
 
   template <class CharT = char, class... Tail>
-  inline std::basic_string<CharT, Tail...> readString() {
+  std::basic_string<CharT, Tail...> readString() {
     return m_dataInput.readString<CharT, Tail...>();
   }
 

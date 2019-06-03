@@ -53,7 +53,7 @@ namespace apache {
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedTransactionWriterGeneric(Object^ userptr )
+        ManagedTransactionWriterGeneric(Object^ userptr )
           : m_userptr( userptr ) { }
 
         static apache::geode::client::TransactionWriter* create( const char* assemblyPath,
@@ -63,17 +63,17 @@ namespace apache {
 
         virtual void beforeCommit(std::shared_ptr<apache::geode::client::TransactionEvent>& te);
 
-        inline Apache::Geode::Client::ITransactionWriter^ ptr( ) const
+        Apache::Geode::Client::ITransactionWriter^ ptr( ) const
         {
           return m_managedptr;
         }
 
-        inline void setptr( Apache::Geode::Client::ITransactionWriter^ managedptr )
+        void setptr( Apache::Geode::Client::ITransactionWriter^ managedptr )
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr( ) const
+        Object^ userptr( ) const
         {
           return m_userptr;
         }

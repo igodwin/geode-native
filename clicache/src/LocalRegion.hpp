@@ -236,7 +236,7 @@ namespace Apache
         /// The managed wrapper object; null if the native pointer is null.
         /// </returns>
         //generic<class TKey, class TValue>
-        inline static IRegion<TKey, TValue>^ Create( std::shared_ptr<native::Region> nativeptr )
+        static IRegion<TKey, TValue>^ Create( std::shared_ptr<native::Region> nativeptr )
         {
           return __nullptr == nativeptr ? nullptr :
             gcnew LocalRegion<TKey, TValue>( nativeptr );
@@ -251,13 +251,13 @@ namespace Apache
         /// Private constructor to wrap a native object pointer
         /// </summary>
         /// <param name="nativeptr">The native object pointer</param>
-        inline LocalRegion( std::shared_ptr<native::Region> nativeptr )
+        LocalRegion( std::shared_ptr<native::Region> nativeptr )
 				{
           m_nativeptr = gcnew native_shared_ptr<native::Region>(nativeptr);
         }
 
         private:        
-        inline std::shared_ptr<apache::geode::client::Serializable> getRegionEntryValue(std::shared_ptr<apache::geode::client::CacheableKey>& key);
+        std::shared_ptr<apache::geode::client::Serializable> getRegionEntryValue(std::shared_ptr<apache::geode::client::CacheableKey>& key);
 
         native_shared_ptr<native::Region>^ m_nativeptr;   
       };

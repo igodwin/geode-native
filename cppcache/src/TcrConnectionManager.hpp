@@ -77,8 +77,8 @@ class TcrConnectionManager {
   void setClientCrashTEST() { TEST_DURABLE_CLIENT_CRASH = true; }
   volatile static bool TEST_DURABLE_CLIENT_CRASH;
 
-  inline synchronized_map<std::unordered_map<std::string, TcrEndpoint*>,
-                          std::recursive_mutex>&
+  synchronized_map<std::unordered_map<std::string, TcrEndpoint*>,
+                   std::recursive_mutex>&
   getGlobalEndpoints() {
     return m_endpoints;
   }
@@ -115,14 +115,14 @@ class TcrConnectionManager {
       TcrHADistributionManager* theHADM = nullptr,
       ThinClientRegion* region = nullptr);
 
-  inline void triggerRedundancyThread() { m_redundancySema.release(); }
+  void triggerRedundancyThread() { m_redundancySema.release(); }
 
-  inline void acquireRedundancyLock() {
+  void acquireRedundancyLock() {
     m_redundancyManager->acquireRedundancyLock();
     m_distMngrsLock.lock();
   }
 
-  inline void releaseRedundancyLock() {
+  void releaseRedundancyLock() {
     m_redundancyManager->releaseRedundancyLock();
     m_distMngrsLock.unlock();
   }

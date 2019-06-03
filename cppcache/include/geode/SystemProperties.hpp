@@ -303,7 +303,7 @@ class APACHE_GEODE_EXPORT SystemProperties {
   /** Checks whether list of endpoint is shuffled or not.
    * @return  bool value.
    */
-  inline bool isEndpointShufflingDisabled() const {
+  bool isEndpointShufflingDisabled() const {
     return m_disableShufflingEndpoint;
   }
 
@@ -322,7 +322,7 @@ class APACHE_GEODE_EXPORT SystemProperties {
    * whether the client is initialized programmatically or declaratively.
    * @return the value of the property.
    */
-  inline bool autoReadyForEvents() const { return m_autoReadyForEvents; }
+  bool autoReadyForEvents() const { return m_autoReadyForEvents; }
 
   /**
    * Returns the timeout after which suspended transactions are rolled back.

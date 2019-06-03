@@ -262,12 +262,12 @@ class APACHE_GEODE_EXPORT TcrConnection {
   void close();
 
   //  Durable clients: return true if server has HA queue.
-  ServerQueueStatus inline getServerQueueStatus(int32_t& queueSize) {
+  ServerQueueStatus getServerQueueStatus(int32_t& queueSize) {
     queueSize = m_queueSize;
     return m_hasServerQueue;
   }
 
-  uint16_t inline getPort() { return m_port; }
+  uint16_t getPort() { return m_port; }
 
   TcrEndpoint* getEndpointObject() const { return m_endpointObj; }
   bool isBeingUsed() { return m_isBeingUsed; }

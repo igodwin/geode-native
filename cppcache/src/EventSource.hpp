@@ -63,33 +63,30 @@ class APACHE_GEODE_EXPORT EventSource {
   int64_t getThrId();
 
   struct hash {
-    inline std::size_t operator()(const EventSource &val) const {
+    std::size_t operator()(const EventSource &val) const {
       return val.hashcode();
     }
 
-    inline std::size_t operator()(const EventSource *val) const {
+    std::size_t operator()(const EventSource *val) const {
       return val->hashcode();
     }
 
-    inline std::size_t operator()(
-        const std::shared_ptr<EventSource> &val) const {
+    std::size_t operator()(const std::shared_ptr<EventSource> &val) const {
       return val->hashcode();
     }
   };
 
   struct equal_to {
-    inline bool operator()(const EventSource &lhs,
-                           const EventSource &rhs) const {
+    bool operator()(const EventSource &lhs, const EventSource &rhs) const {
       return lhs == rhs;
     }
 
-    inline bool operator()(const EventSource *lhs,
-                           const EventSource *rhs) const {
+    bool operator()(const EventSource *lhs, const EventSource *rhs) const {
       return (*lhs) == (*rhs);
     }
 
-    inline bool operator()(const std::shared_ptr<EventSource> &lhs,
-                           const std::shared_ptr<EventSource> &rhs) const {
+    bool operator()(const std::shared_ptr<EventSource> &lhs,
+                    const std::shared_ptr<EventSource> &rhs) const {
       return (*lhs) == (*rhs);
     }
   };

@@ -53,7 +53,7 @@ namespace Apache
       /// Helper function to convert native <c>apache::geode::client::Serializable</c> object
       /// to managed <see cref="ISerializable" /> object.
       /// </summary>
-      inline static Apache::Geode::Client::ISerializable^
+      static Apache::Geode::Client::ISerializable^
         SafeUMSerializableConvertGeneric(std::shared_ptr<native::Serializable> serializableObject)
       {
         if (serializableObject == nullptr) return nullptr;
@@ -93,7 +93,7 @@ namespace Apache
         return gcnew Apache::Geode::Client::Serializable( serializableObject );
       }
 
-      inline static native::Serializable* GetNativeWrapperForManagedIDataSerializable( IDataSerializable^ mg_obj )
+      static native::Serializable* GetNativeWrapperForManagedIDataSerializable( IDataSerializable^ mg_obj )
       {
         if (mg_obj == nullptr) return __nullptr;
         
@@ -108,13 +108,13 @@ namespace Apache
       }
 
       template<typename NativeType, typename ManagedType>
-      inline static NativeType* GetNativePtr( ManagedType^ mg_obj )
+      static NativeType* GetNativePtr( ManagedType^ mg_obj )
       {
         return (mg_obj != nullptr ? mg_obj->_NativePtr : NULL);
       }
 
       generic<class TValue>
-      inline static TValue SafeGenericUMSerializableConvert( std::shared_ptr<native::Serializable> obj)
+      static TValue SafeGenericUMSerializableConvert( std::shared_ptr<native::Serializable> obj)
       {
         auto converted = SafeUMSerializableConvertGeneric(obj);
 
@@ -123,7 +123,7 @@ namespace Apache
         return safe_cast<TValue>(converted);
       }
 
-      inline static native::Serializable* GetNativeWrapperForManagedObject(Object^ managedObject)
+      static native::Serializable* GetNativeWrapperForManagedObject(Object^ managedObject)
       {
         if (managedObject == nullptr) return __nullptr;
 
@@ -151,7 +151,7 @@ namespace Apache
         return new native::PdxManagedCacheableKey(gcnew PdxWrapper(managedObject));
       }
 
-      inline static IPdxSerializable^ SafeUMSerializablePDXConvert( std::shared_ptr<native::Serializable> obj )
+      static IPdxSerializable^ SafeUMSerializablePDXConvert( std::shared_ptr<native::Serializable> obj )
       {
          if(auto mg_obj = std::dynamic_pointer_cast<native::PdxManagedCacheableKey>( obj ))
            return mg_obj->ptr();
@@ -164,7 +164,7 @@ namespace Apache
       /// to managed <see cref="ICacheableKey" /> object.
       /// </summary>
       generic<class TKey>
-      inline static Client::ICacheableKey^ SafeGenericUMKeyConvert( std::shared_ptr<native::CacheableKey> obj )
+      static Client::ICacheableKey^ SafeGenericUMKeyConvert( std::shared_ptr<native::CacheableKey> obj )
       {
         //All cacheables will be ManagedCacheableKey only
         if (obj == nullptr) return nullptr;
@@ -186,7 +186,7 @@ namespace Apache
       }
 
       template<typename NativeType, typename ManagedType>
-      inline static NativeType* GetNativePtr2( ManagedType^ mg_obj )
+      static NativeType* GetNativePtr2( ManagedType^ mg_obj )
       {
         if (mg_obj == nullptr) return NULL;
         //for cacheables types

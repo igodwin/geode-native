@@ -46,73 +46,71 @@ class APACHE_GEODE_EXPORT RegionStats {
 
   void close() { m_regionStats->close(); }
 
-  inline void incDestroys() { m_regionStats->incInt(m_destroysId, 1); }
+  void incDestroys() { m_regionStats->incInt(m_destroysId, 1); }
 
-  inline void incCreates() { m_regionStats->incInt(m_createsId, 1); }
+  void incCreates() { m_regionStats->incInt(m_createsId, 1); }
 
-  inline void incPuts() { m_regionStats->incInt(m_putsId, 1); }
+  void incPuts() { m_regionStats->incInt(m_putsId, 1); }
 
-  inline void incGets() { m_regionStats->incInt(m_getsId, 1); }
+  void incGets() { m_regionStats->incInt(m_getsId, 1); }
 
-  inline void incGetAll() { m_regionStats->incInt(m_getAllId, 1); }
+  void incGetAll() { m_regionStats->incInt(m_getAllId, 1); }
 
-  inline void incPutAll() { m_regionStats->incInt(m_putAllId, 1); }
+  void incPutAll() { m_regionStats->incInt(m_putAllId, 1); }
 
-  inline void incRemoveAll() { m_regionStats->incInt(m_removeAllId, 1); }
+  void incRemoveAll() { m_regionStats->incInt(m_removeAllId, 1); }
 
-  inline void incHits() { m_regionStats->incInt(m_hitsId, 1); }
+  void incHits() { m_regionStats->incInt(m_hitsId, 1); }
 
-  inline void incMisses() { m_regionStats->incInt(m_missesId, 1); }
+  void incMisses() { m_regionStats->incInt(m_missesId, 1); }
 
-  inline void incOverflows() { m_regionStats->incInt(m_overflowsId, 1); }
+  void incOverflows() { m_regionStats->incInt(m_overflowsId, 1); }
 
-  inline void incRetrieves() { m_regionStats->incInt(m_retrievesId, 1); }
+  void incRetrieves() { m_regionStats->incInt(m_retrievesId, 1); }
 
-  inline void incMetaDataRefreshCount() {
+  void incMetaDataRefreshCount() {
     m_regionStats->incInt(m_metaDataRefreshId, 1);
   }
 
-  inline void setEntries(int32_t entries) {
+  void setEntries(int32_t entries) {
     m_regionStats->setInt(m_entriesId, entries);
   }
 
-  inline void incLoaderCallsCompleted() {
+  void incLoaderCallsCompleted() {
     m_regionStats->incInt(m_LoaderCallsCompletedId, 1);
   }
 
-  inline void incWriterCallsCompleted() {
+  void incWriterCallsCompleted() {
     m_regionStats->incInt(m_WriterCallsCompletedId, 1);
   }
 
-  inline void incListenerCallsCompleted() {
+  void incListenerCallsCompleted() {
     m_regionStats->incInt(m_ListenerCallsCompletedId, 1);
   }
 
-  inline void incClears() { m_regionStats->incInt(m_clearsId, 1); }
+  void incClears() { m_regionStats->incInt(m_clearsId, 1); }
 
-  inline void updateGetTime() { m_regionStats->incInt(m_clearsId, 1); }
+  void updateGetTime() { m_regionStats->incInt(m_clearsId, 1); }
 
-  inline apache::geode::statistics::Statistics* getStat() {
-    return m_regionStats;
-  }
+  apache::geode::statistics::Statistics* getStat() { return m_regionStats; }
 
-  inline int32_t getGetTimeId() { return m_getTimeId; }
+  int32_t getGetTimeId() { return m_getTimeId; }
 
-  inline int32_t getPutTimeId() { return m_putTimeId; }
+  int32_t getPutTimeId() { return m_putTimeId; }
 
-  inline int32_t getGetAllTimeId() { return m_getAllTimeId; }
+  int32_t getGetAllTimeId() { return m_getAllTimeId; }
 
-  inline int32_t getPutAllTimeId() { return m_putAllTimeId; }
+  int32_t getPutAllTimeId() { return m_putAllTimeId; }
 
-  inline int32_t getRemoveAllTimeId() { return m_removeAllTimeId; }
+  int32_t getRemoveAllTimeId() { return m_removeAllTimeId; }
 
-  inline int32_t getLoaderCallTimeId() { return m_LoaderCallTimeId; }
+  int32_t getLoaderCallTimeId() { return m_LoaderCallTimeId; }
 
-  inline int32_t getWriterCallTimeId() { return m_WriterCallTimeId; }
+  int32_t getWriterCallTimeId() { return m_WriterCallTimeId; }
 
-  inline int32_t getListenerCallTimeId() { return m_ListenerCallTimeId; }
+  int32_t getListenerCallTimeId() { return m_ListenerCallTimeId; }
 
-  inline int32_t getClearsId() { return m_clearsId; }
+  int32_t getClearsId() { return m_clearsId; }
 
  private:
   apache::geode::statistics::Statistics* m_regionStats;

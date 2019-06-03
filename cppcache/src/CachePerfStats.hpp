@@ -213,59 +213,49 @@ class APACHE_GEODE_EXPORT CachePerfStats {
     m_cachePerfStats->close();
   }
 
-  inline void incDestroys() { m_cachePerfStats->incInt(m_destroysId, 1); }
+  void incDestroys() { m_cachePerfStats->incInt(m_destroysId, 1); }
 
-  inline void incCreates() { m_cachePerfStats->incInt(m_createsId, 1); }
+  void incCreates() { m_cachePerfStats->incInt(m_createsId, 1); }
 
-  inline void incPuts() { m_cachePerfStats->incInt(m_putsId, 1); }
+  void incPuts() { m_cachePerfStats->incInt(m_putsId, 1); }
 
-  inline void incGets() { m_cachePerfStats->incInt(m_getsId, 1); }
+  void incGets() { m_cachePerfStats->incInt(m_getsId, 1); }
 
-  inline void incHits() { m_cachePerfStats->incInt(m_hitsId, 1); }
+  void incHits() { m_cachePerfStats->incInt(m_hitsId, 1); }
 
-  inline void incMisses() { m_cachePerfStats->incInt(m_missesId, 1); }
+  void incMisses() { m_cachePerfStats->incInt(m_missesId, 1); }
 
-  inline void incOverflows() { m_cachePerfStats->incInt(m_overflowsId, 1); }
+  void incOverflows() { m_cachePerfStats->incInt(m_overflowsId, 1); }
 
-  inline void incRetrieves() { m_cachePerfStats->incInt(m_retrievesId, 1); }
+  void incRetrieves() { m_cachePerfStats->incInt(m_retrievesId, 1); }
 
-  inline void incEntries(int32_t delta) {
+  void incEntries(int32_t delta) {
     m_cachePerfStats->incInt(m_entriesId, delta);
   }
 
-  inline void incListenerCalls() {
-    m_cachePerfStats->incInt(m_numListeners, 1);
-  }
+  void incListenerCalls() { m_cachePerfStats->incInt(m_numListeners, 1); }
 
-  inline void incDeltaPut() { m_cachePerfStats->incInt(m_deltaPut, 1); }
+  void incDeltaPut() { m_cachePerfStats->incInt(m_deltaPut, 1); }
 
-  inline void incDeltaReceived() {
-    m_cachePerfStats->incInt(m_deltaReceived, 1);
-  }
+  void incDeltaReceived() { m_cachePerfStats->incInt(m_deltaReceived, 1); }
 
-  inline void incFailureOnDeltaReceived() {
+  void incFailureOnDeltaReceived() {
     m_cachePerfStats->incInt(m_deltaFailedOnReceive, 1);
   }
 
-  inline void incTimeSpentOnDeltaApplication(int32_t time) {
+  void incTimeSpentOnDeltaApplication(int32_t time) {
     m_cachePerfStats->incInt(m_processedDeltaMessagesTime, time);
   }
 
-  inline void incTombstoneCount() {
-    m_cachePerfStats->incInt(m_tombstoneCount, 1);
-  }
-  inline void decTombstoneCount() {
-    m_cachePerfStats->incInt(m_tombstoneCount, -1);
-  }
-  inline void incTombstoneSize(int64_t size) {
+  void incTombstoneCount() { m_cachePerfStats->incInt(m_tombstoneCount, 1); }
+  void decTombstoneCount() { m_cachePerfStats->incInt(m_tombstoneCount, -1); }
+  void incTombstoneSize(int64_t size) {
     m_cachePerfStats->incLong(m_tombstoneSize, size);
   }
-  inline void decTombstoneSize(int64_t size) {
+  void decTombstoneSize(int64_t size) {
     m_cachePerfStats->incLong(m_tombstoneSize, -size);
   }
-  inline void incConflatedEvents() {
-    m_cachePerfStats->incInt(m_conflatedEvents, 1);
-  }
+  void incConflatedEvents() { m_cachePerfStats->incInt(m_conflatedEvents, 1); }
   int64_t getTombstoneSize() {
     return m_cachePerfStats->getLong(m_tombstoneSize);
   }
@@ -276,55 +266,55 @@ class APACHE_GEODE_EXPORT CachePerfStats {
     return m_cachePerfStats->getInt(m_conflatedEvents);
   }
 
-  inline void incPdxInstanceDeserializations() {
+  void incPdxInstanceDeserializations() {
     m_cachePerfStats->incInt(m_pdxInstanceDeserializationsId, 1);
   }
 
-  inline Statistics* getStat() { return m_cachePerfStats; }
+  Statistics* getStat() { return m_cachePerfStats; }
 
-  inline int32_t getPdxInstanceDeserializationTimeId() {
+  int32_t getPdxInstanceDeserializationTimeId() {
     return m_pdxInstanceDeserializationTimeId;
   }
 
-  inline void incPdxInstanceCreations() {
+  void incPdxInstanceCreations() {
     m_cachePerfStats->incInt(m_pdxInstanceCreationsId, 1);
   }
 
-  inline int32_t getPdxInstanceDeserializations() {
+  int32_t getPdxInstanceDeserializations() {
     return m_cachePerfStats->getInt(m_pdxInstanceDeserializationsId);
   }
 
-  inline int32_t getPdxInstanceDeserializationTime() {
+  int32_t getPdxInstanceDeserializationTime() {
     return m_cachePerfStats->getInt(m_pdxInstanceDeserializationTimeId);
   }
 
-  inline int32_t getPdxInstanceCreations() {
+  int32_t getPdxInstanceCreations() {
     return m_cachePerfStats->getInt(m_pdxInstanceCreationsId);
   }
 
-  inline void incPdxSerialization(int32_t bytes) {
+  void incPdxSerialization(int32_t bytes) {
     m_cachePerfStats->incInt(m_pdxSerializationsId, 1);
     m_cachePerfStats->incLong(m_pdxSerializedBytesId, bytes);
   }
 
-  inline int32_t getPdxSerializations() {
+  int32_t getPdxSerializations() {
     return m_cachePerfStats->getInt(m_pdxSerializationsId);
   }
 
-  inline int64_t getPdxSerializationBytes() {
+  int64_t getPdxSerializationBytes() {
     return m_cachePerfStats->getLong(m_pdxSerializedBytesId);
   }
 
-  inline void incPdxDeSerialization(int32_t bytes) {
+  void incPdxDeSerialization(int32_t bytes) {
     m_cachePerfStats->incInt(m_pdxDeserializationsId, 1);
     m_cachePerfStats->incLong(m_pdxDeserializedBytesId, bytes);
   }
 
-  inline int32_t getPdxDeSerializations() {
+  int32_t getPdxDeSerializations() {
     return m_cachePerfStats->getInt(m_pdxDeserializationsId);
   }
 
-  inline int64_t getPdxDeSerializationBytes() {
+  int64_t getPdxDeSerializationBytes() {
     return m_cachePerfStats->getLong(m_pdxDeserializedBytesId);
   }
 

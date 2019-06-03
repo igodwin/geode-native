@@ -44,7 +44,7 @@ namespace apache {
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedTransactionListenerGeneric(Object^ userptr )
+        ManagedTransactionListenerGeneric(Object^ userptr )
           : m_userptr( userptr ) { }
 
         static apache::geode::client::TransactionListener* create( const char* assemblyPath,
@@ -60,17 +60,17 @@ namespace apache {
 
         virtual void close();
 
-        inline Apache::Geode::Client::ITransactionListener^ ptr( ) const
+        Apache::Geode::Client::ITransactionListener^ ptr( ) const
         {
           return m_managedptr;
         }
 
-        inline void setptr( Apache::Geode::Client::ITransactionListener^ managedptr )
+        void setptr( Apache::Geode::Client::ITransactionListener^ managedptr )
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr( ) const
+        Object^ userptr( ) const
         {
           return m_userptr;
         }

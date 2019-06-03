@@ -45,7 +45,7 @@ namespace apache {
         /// <param name="userptr">
         /// The managed object.
         /// </param>
-        inline ManagedCacheListenerGeneric(
+        ManagedCacheListenerGeneric(
           /*Apache::Geode::Client::ICacheListener^ managedptr,*/ Object^ userptr)
           : /*m_managedptr( managedptr ),*/ m_userptr(userptr) { }
 
@@ -200,17 +200,17 @@ namespace apache {
         /// <summary>
         /// Returns the wrapped managed object reference.
         /// </summary>
-        inline Apache::Geode::Client::ICacheListener<Object^, Object^>^ ptr() const
+        Apache::Geode::Client::ICacheListener<Object^, Object^>^ ptr() const
         {
           return m_managedptr;
         }
 
-        inline void setptr(Apache::Geode::Client::ICacheListener<Object^, Object^>^ managedptr)
+        void setptr(Apache::Geode::Client::ICacheListener<Object^, Object^>^ managedptr)
         {
           m_managedptr = managedptr;
         }
 
-        inline Object^ userptr() const
+        Object^ userptr() const
         {
           return m_userptr;
         }

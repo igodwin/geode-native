@@ -51,7 +51,7 @@ class TcrChunkedResult {
                            const CacheImpl* cacheImpl) = 0;
 
  public:
-  inline TcrChunkedResult()
+  TcrChunkedResult()
       : m_finalizeSema(nullptr),
         m_ex(nullptr),
         m_inSameThread(false),
@@ -106,13 +106,13 @@ class TcrChunkedResult {
 
   // getters/setters for the exception, if any, during chunk processing
 
-  inline bool exceptionOccurred() const { return (m_ex != nullptr); }
+  bool exceptionOccurred() const { return (m_ex != nullptr); }
 
-  inline void setException(std::shared_ptr<Exception> ex) { m_ex = ex; }
+  void setException(std::shared_ptr<Exception> ex) { m_ex = ex; }
 
-  inline std::shared_ptr<Exception>& getException() { return m_ex; }
+  std::shared_ptr<Exception>& getException() { return m_ex; }
 
-  inline void clearException() { m_ex = nullptr; }
+  void clearException() { m_ex = nullptr; }
 };
 
 /**
@@ -128,21 +128,19 @@ class TcrChunkedContext {
   TcrChunkedResult* m_result;
 
  public:
-  inline TcrChunkedContext(const uint8_t* bytes, int32_t len,
-                           TcrChunkedResult* result,
-                           uint8_t isLastChunkWithSecurity,
-                           const CacheImpl* cacheImpl)
+  TcrChunkedContext(const uint8_t* bytes, int32_t len, TcrChunkedResult* result,
+                    uint8_t isLastChunkWithSecurity, const CacheImpl* cacheImpl)
       : m_bytes(bytes),
         m_len(len),
         m_isLastChunkWithSecurity(isLastChunkWithSecurity),
         m_cache(cacheImpl),
         m_result(result) {}
 
-  inline ~TcrChunkedContext() { _GEODE_SAFE_DELETE_ARRAY(m_bytes); }
+  ~TcrChunkedContext() { _GEODE_SAFE_DELETE_ARRAY(m_bytes); }
 
-  inline const uint8_t* getBytes() const { return m_bytes; }
+  const uint8_t* getBytes() const { return m_bytes; }
 
-  inline int32_t getLen() const { return m_len; }
+  int32_t getLen() const { return m_len; }
 
   void handleChunk(bool inSameThread) {
     if (m_bytes == nullptr) {

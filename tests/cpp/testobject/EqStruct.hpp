@@ -91,7 +91,7 @@ class TESTOBJECT_EXPORT EqStruct : public TimestampedObject {
   std::string var8;
   std::string var9;
 
-  inline size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
+  size_t getObjectSize(const std::shared_ptr<Serializable>& obj) const {
     return (obj == nullptr ? 0 : obj->objectSize());
   }
 

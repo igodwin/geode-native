@@ -571,7 +571,7 @@ Connector* TcrConnection::createConnection(
  *           that is used instead
  *   Body: default timeout
  */
-inline ConnErrType TcrConnection::receiveData(
+ConnErrType TcrConnection::receiveData(
     char* buffer, size_t length, std::chrono::microseconds receiveTimeoutSec,
     bool checkConnected, bool isNotificationMessage) {
   std::chrono::microseconds defaultWaitSecs =
@@ -616,16 +616,17 @@ inline ConnErrType TcrConnection::receiveData(
                       : (length == startLen ? CONN_NODATA : CONN_TIMEOUT));
 }
 
-inline ConnErrType TcrConnection::sendData(
-    const char* buffer, size_t length, std::chrono::microseconds sendTimeout,
-    bool checkConnected) {
+ConnErrType TcrConnection::sendData(const char* buffer, size_t length,
+                                    std::chrono::microseconds sendTimeout,
+                                    bool checkConnected) {
   std::chrono::microseconds dummy{0};
   return sendData(dummy, buffer, length, sendTimeout, checkConnected);
 }
 
-inline ConnErrType TcrConnection::sendData(
-    std::chrono::microseconds& timeSpent, const char* buffer, size_t length,
-    std::chrono::microseconds sendTimeout, bool checkConnected) {
+ConnErrType TcrConnection::sendData(std::chrono::microseconds& timeSpent,
+                                    const char* buffer, size_t length,
+                                    std::chrono::microseconds sendTimeout,
+                                    bool checkConnected) {
   std::chrono::microseconds defaultWaitSecs = std::chrono::seconds(2);
   if (defaultWaitSecs > sendTimeout) defaultWaitSecs = sendTimeout;
   LOGDEBUG(

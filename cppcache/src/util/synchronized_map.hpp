@@ -56,10 +56,10 @@ class synchronized_map {
   typedef typename Map::difference_type difference_type;
   typedef typename Map::size_type size_type;
 
-  inline mutex_type& mutex() const noexcept { return mutex_; }
+  mutex_type& mutex() const noexcept { return mutex_; }
 
-  inline map_type& map() noexcept { return map_; }
-  inline const map_type& map() const noexcept { return map_; }
+  map_type& map() noexcept { return map_; }
+  const map_type& map() const noexcept { return map_; }
 
   /**
    * Allocates a Lock object around the Mutex and locks the Mutex.
@@ -79,7 +79,7 @@ class synchronized_map {
    * @throws Any exception throws by Mutex::lock()
    */
   template <template <class...> class Lock = std::lock_guard>
-  inline Lock<Mutex> make_lock() const {
+  Lock<Mutex> make_lock() const {
     mutex_.lock();
     return {mutex_, std::adopt_lock};
   }
@@ -105,55 +105,55 @@ class synchronized_map {
    * @throws Any exception throws by Lock constructors.
    */
   template <template <class...> class Lock = std::lock_guard, class... Args>
-  inline Lock<Mutex> make_lock(Args&&... args) const {
+  Lock<Mutex> make_lock(Args&&... args) const {
     return {mutex_, std::forward<Args>(args)...};
   }
 
   template <class... Args>
-  inline std::pair<typename Map::iterator, bool> emplace(Args&&... args) {
+  std::pair<typename Map::iterator, bool> emplace(Args&&... args) {
     std::lock_guard<Mutex> lock(mutex_);
     return map_.emplace(std::forward<Args>(args)...);
   }
 
-  inline size_type erase(const key_type& key) {
+  size_type erase(const key_type& key) {
     std::lock_guard<Mutex> lock(mutex_);
     return map_.erase(key);
   }
 
-  inline bool empty() const noexcept {
+  bool empty() const noexcept {
     std::lock_guard<Mutex> lock(mutex_);
     return map_.empty();
   }
 
-  inline size_type size() const noexcept {
+  size_type size() const noexcept {
     std::lock_guard<Mutex> lock(mutex_);
     return map_.size();
   }
 
-  inline void clear() noexcept {
+  void clear() noexcept {
     std::lock_guard<Mutex> lock(mutex_);
     map_.clear();
   }
 
-  inline iterator find(const key_type& key) {
+  iterator find(const key_type& key) {
     //    std::lock_guard<Mutex> lock(mutex_);
     return map_.find(key);
   }
 
-  inline const_iterator find(const key_type& key) const {
+  const_iterator find(const key_type& key) const {
     //    std::lock_guard<Mutex> lock(mutex_);
     return map_.find(key);
   }
 
-  inline iterator begin() noexcept { return map_.begin(); }
-  inline iterator end() noexcept { return map_.end(); }
-  inline const_iterator begin() const noexcept { return map_.begin(); }
-  inline const_iterator end() const noexcept { return map_.end(); }
-  inline const_iterator cbegin() const noexcept { return map_.begin(); }
-  inline const_iterator cend() const noexcept { return map_.end(); }
+  iterator begin() noexcept { return map_.begin(); }
+  iterator end() noexcept { return map_.end(); }
+  const_iterator begin() const noexcept { return map_.begin(); }
+  const_iterator end() const noexcept { return map_.end(); }
+  const_iterator cbegin() const noexcept { return map_.begin(); }
+  const_iterator cend() const noexcept { return map_.end(); }
 
   template <class InputIterator>
-  inline void insert(InputIterator first, InputIterator last) {
+  void insert(InputIterator first, InputIterator last) {
     std::lock_guard<Mutex> lock(mutex_);
     map_.insert(first, last);
   }
