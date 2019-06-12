@@ -183,7 +183,6 @@ class Cluster {
     jmxManagerPort_ = Framework::getAvailablePort();
 
     removeServerDirectory();
-    start();
   }
 
   ~Cluster() noexcept {
