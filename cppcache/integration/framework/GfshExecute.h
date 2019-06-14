@@ -59,16 +59,6 @@ class GfshExecute : public Gfsh {
   GfshExecute() = default;
   virtual ~GfshExecute() override = default;
 
-  class Connect : public Command<void> {
-   public:
-    explicit Connect(Gfsh &gfsh) : Command{gfsh, "connect"} {}
-
-    Connect &withJmxManager(const std::string &jmxManager) {
-      command_ += " --jmx-manager=" + jmxManager;
-      return *this;
-    };
-  };
-
  protected:
   void execute(const std::string &command) override;
 
@@ -80,26 +70,6 @@ class GfshExecute : public Gfsh {
   void extractConnectionCommand(const std::string &command) {
     if (starts_with(command, std::string("connect"))) {
       connection_ = command;
-    } else if (starts_with(command, std::string("start locator"))) {
-      auto jmxManagerHost = std::string("localhost");
-      auto jmxManagerPort = std::string("1099");
-
-      std::regex jmxManagerHostRegex("bind-address=([^\\s]+)");
-      std::smatch jmxManagerHostMatch;
-      if (std::regex_search(command, jmxManagerHostMatch,
-                            jmxManagerHostRegex)) {
-        jmxManagerHost = jmxManagerHostMatch[1];
-      }
-
-      std::regex jmxManagerPortRegex("jmx-manager-port=(\\d+)");
-      std::smatch jmxManagerPortMatch;
-      if (std::regex_search(command, jmxManagerPortMatch,
-                            jmxManagerPortRegex)) {
-        jmxManagerPort = jmxManagerPortMatch[1];
-      }
-
-      connection_ = "connect --jmx-manager=" + jmxManagerHost + "[" +
-                    jmxManagerPort + "]";
     }
   }
 
