@@ -36,6 +36,7 @@ void Locator::start() {
   auto locator = cluster_.getGfsh()
       .start()
       .locator()
+      .withLogLevel("INFO")
       .withDir(name_)
       .withName(safeName)
       .withBindAddress(locatorAddress_.address)
@@ -44,8 +45,6 @@ void Locator::start() {
       .withJmxManagerPort(jmxManagerPort_)
       .withHttpServicePort(0)
       .withJmxManagerStart(true);
-//      .withConnect(false);
-
 
   if (cluster_.useSsl()) {
     locator.withConnect(false)
