@@ -31,6 +31,7 @@ target_include_directories(cpp-integration-test
 target_link_libraries(cpp-integration-test
   PUBLIC
     apache-geode
+    cryptoImpl
     integration-framework
     testobject
     ACE::ACE
