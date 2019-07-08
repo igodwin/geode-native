@@ -138,7 +138,6 @@ class Server {
         name_(move.name_) {
     move.started_ = false;
   };
-  //  Server &operator=(Server &&other) = default;
 
   void start();
 
